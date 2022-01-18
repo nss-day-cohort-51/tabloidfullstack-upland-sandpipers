@@ -61,8 +61,7 @@ namespace Tabloid.Repositories
             }
         }
 
-        public Category GetCategor
-            yById(int id)
+        public Category GetCategoryById(int id)
         {
             using (SqlConnection conn = Connection)
             {
