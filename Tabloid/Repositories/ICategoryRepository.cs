@@ -3,7 +3,7 @@ using Tabloid.Models;
 
 namespace Tabloid.Repositories
 {
-    internal interface ICategoryRepository
+    public interface ICategoryRepository
     {
         void CreateCategory(Category category);
         void Delete(int id);

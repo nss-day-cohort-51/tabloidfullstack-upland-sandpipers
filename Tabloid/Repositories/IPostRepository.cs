@@ -3,7 +3,7 @@ using Tabloid.Models;
 
 namespace Tabloid.Repositories
 {
-    internal interface IPostRepository
+    public interface IPostRepository
     {
         void Add(Post post);
         void Delete(int id);
