@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import Login from "./Login";
 import Register from "./Register";
 import PostList from "./PostList";
+import CategoryList from "./CategoryList";
 
 export default function ApplicationViews({ isLoggedIn }) {
     return (
@@ -21,6 +22,10 @@ export default function ApplicationViews({ isLoggedIn }) {
 
                 <Route path="/register">
                     <Register />
+                </Route>
+
+                <Route path="/categories">
+                    <CategoryList />
                 </Route>
             </Switch>
         </main>
