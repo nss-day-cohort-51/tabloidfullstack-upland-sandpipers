@@ -19,9 +19,12 @@ const MyPostsList = () => {
     return (
         <div className="container">
             <div className="row justify-content-center">
-                {posts.map((post) => (
-                    <Post post={post} key={post.id} />
-                ))}
+
+                {posts.length < 1 ? <h1>You have no  posts</h1> :
+                    posts.map((post) => (
+                        <Post post={post} key={post.id} />
+                    ))
+                }
             </div>
         </div>
     );
