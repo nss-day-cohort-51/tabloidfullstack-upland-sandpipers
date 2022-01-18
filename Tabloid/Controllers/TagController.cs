@@ -5,8 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Tabloid.Repositories;
 
+
 namespace Tabloid.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class TagController : Controller
     {
         private readonly ITagRepository _tagRepository;
@@ -16,9 +19,11 @@ namespace Tabloid.Controllers
             _tagRepository = tagRepository;
 
         }
-        public IActionResult Index()
+        [HttpGet]
+        public ActionResult Index()
         {
-            return View();
+            var tags = _tagRepository.GetAllTags();
+            return Ok(tags);
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Tabloid.Models;
 
-namespace TabloidMVC.Repositories
+namespace Tabloid.Repositories
 {
     public interface ITagRepository
     {
