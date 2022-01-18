@@ -6,8 +6,7 @@ import { Table } from 'reactstrap';
     return (
         <tbody>
           <tr>
-            <th scope="row">{tag.id}</th>
-            <td>{tag.name}</td>
+            <th scope="row">{tag.name}</th>
             <td>edit</td>
             <td>delete</td>
           </tr>

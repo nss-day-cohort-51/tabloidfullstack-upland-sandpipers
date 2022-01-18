@@ -19,10 +19,9 @@ const TagList = () => {
             <Table>
             <thead>
           <tr>
-            <th>#</th>
             <th>Tag Name</th>
-            <th>edit</th>
-            <th>delete</th>
+            <th></th>
+            <th></th>
           </tr>
         </thead>          
                
