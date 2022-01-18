@@ -22,7 +22,11 @@ namespace Tabloid
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<IPostRepository, PostRepository>();
+            services.AddTransient<IPostTagRepository, PostTagRepository>();
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();
+            services.AddTransient<ICommentRepository, CommentRepository>();
 
             var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
             var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";

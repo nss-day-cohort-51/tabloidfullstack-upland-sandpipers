@@ -3,7 +3,7 @@ using Tabloid.Models;
 
 namespace Tabloid.Repositories
 {
-    internal interface ICommentRepository
+    public interface ICommentRepository
     {
         void Add(Comment comment);
         void Delete(int id);
