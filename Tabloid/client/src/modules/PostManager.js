@@ -33,7 +33,7 @@ export const getBySearch = (q, isSort) => {
 };
 
 export const getPostById = (postId) => {
-    return fetch(baseUrl + `/GetPostByIdWithComments/${postId}`, {
+    return fetch(baseUrl + `/${postId}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
