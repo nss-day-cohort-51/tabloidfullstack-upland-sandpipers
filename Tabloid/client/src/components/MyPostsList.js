@@ -6,8 +6,10 @@ const MyPostsList = () => {
     const [posts, setPosts] = useState([]);
 
     const getPosts = () => {
+
         let userId = parseInt(sessionStorage.getItem("LoggedInUserId"));
         getPostsByUserId(userId).then(resp => setPosts(resp));
+
     };
 
     useEffect(() => {
