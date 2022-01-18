@@ -1,16 +1,16 @@
-const baseUrl = "/api/post";
+const baseUrl = "/api/category";
 
-export const getAllPosts = () => {
+export const getAllCategories = () => {
     return fetch(baseUrl).then((res) => res.json());
 };
 
-export const addPost = (post) => {
+export const addCategory = (category) => {
     return fetch(baseUrl, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(post),
+        body: JSON.stringify(category),
     });
 };
 
@@ -32,8 +32,8 @@ export const getBySearch = (q, isSort) => {
     }).then((res) => res.json());
 };
 
-export const getPostById = (postId) => {
-    return fetch(baseUrl + `/${postId}`, {
+export const getCategoryById = (categoryId) => {
+    return fetch(baseUrl + `/GetCategoryByIdWithComments/${categoryId}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
