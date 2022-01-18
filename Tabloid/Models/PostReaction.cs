@@ -15,8 +15,9 @@ namespace Tabloid.Models
         public int ReactionId { get; set; }
         [Required]
         [DisplayName("Reaction")]
-        public int PostId { get; set; }
         public Reaction Reaction { get; set; }
+        public int PostId { get; set; }
+        public Post Post { get; set; }
 
     }
 }
