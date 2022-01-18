@@ -3,7 +3,7 @@ using Tabloid.Models;
 
 namespace Tabloid.Repositories
 {
-    internal interface IPostTagRepository
+    public interface IPostTagRepository
     {
         void Delete(int id);
         PostTag GetById(int id);
