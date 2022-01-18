@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Tag from "./Tag";
 import { getAllTags } from "../modules/TagManager";
+import { Table } from "reactstrap";
 
 const TagList = () => {
     const [tags, setTags] = useState([]);
