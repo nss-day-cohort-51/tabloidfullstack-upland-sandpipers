@@ -29,10 +29,7 @@ const Post = () => {
         <Card>
             {post.imageLocation ? (
                 <div className="postDetails__headerImage">
-                    <img
-                        src={"http://via.placeholder.com/640x360"}
-                        alt="profile"
-                    ></img>
+                    <img src={post.imageLocation} alt="profile"></img>
                 </div>
             ) : (
                 <></>
