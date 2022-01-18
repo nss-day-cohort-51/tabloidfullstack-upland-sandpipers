@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
+using System;
+using System.Collections.Generic;
 using Tabloid.Models;
 using Tabloid.Utils;
 
@@ -79,6 +81,45 @@ namespace Tabloid.Repositories
                     userProfile.Id = (int)cmd.ExecuteScalar();
                 }
             }
+        }
+        public List<UserProfile> GetAllUserProfiles()
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT Id, 
+                        FirebaseUserId, 
+                        DisplayName, 
+                        FirstName, 
+                        LastName,
+                        Email, 
+                        CreateDateTime, 
+                        ImageLocation,
+                        UserTypeId
+                        FROM UserProfile
+                        ";
+                    var reader = cmd.ExecuteReader();
+
+                    var posts = new List<UserProfile>();
+
+                    while (reader.Read())
+                    {
+                        posts.Add(NewPostFromReader(reader));
+                    }
+
+                    reader.Close();
+
+                    return posts;
+                }
+            }
+        }
+
+        private object NewPostFromReader(Microsoft.Data.SqlClient.SqlDataReader reader)
+        {
+            throw new NotImplementedException();
         }
 
         /*
