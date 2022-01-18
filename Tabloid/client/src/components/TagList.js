@@ -15,11 +15,22 @@ const TagList = () => {
 
     return (
         <div className="container">
-            <div className="row justify-content-center">
-                {tags.map((post) => (
-                    <Tag post={post} key={post.id} />
+            <Table>
+            <thead>
+          <tr>
+            <th>#</th>
+            <th>Tag Name</th>
+            <th>edit</th>
+            <th>delete</th>
+          </tr>
+        </thead>          
+               
+                {tags.map((tag) => (
+                    <Tag tag={tag} key={tag.id} />
                 ))}
-            </div>
+          
+            </Table>
+
         </div>
     );
 };
