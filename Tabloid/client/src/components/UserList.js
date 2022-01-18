@@ -1,27 +1,27 @@
 import React, { useEffect, useState } from "react";
-import Post from "./Post";
-import { getAllPosts } from "../modules/PostManager";
+import User from "./User";
+import { GetAllUsers } from "../modules/UserManager";
 
-const PostList = () => {
-    const [posts, setPosts] = useState([]);
+const UserList = () => {
+    const [users, setUsers] = useState([]);
 
-    const getPosts = () => {
-        getAllPosts().then((posts) => setPosts(posts));
+    const getUsers = () => {
+        GetAllUsers().then((users) => setUsers(users));
     };
 
     useEffect(() => {
-        getPosts();
+        getUsers();
     }, []);
 
     return (
         <div className="container">
             <div className="row justify-content-center">
-                {posts.map((post) => (
-                    <Post post={post} key={post.id} />
+                {users.map((user) => (
+                    <User user={user} key={user.id} />
                 ))}
             </div>
         </div>
     );
 };
 
-export default PostList;
+export default UserList;

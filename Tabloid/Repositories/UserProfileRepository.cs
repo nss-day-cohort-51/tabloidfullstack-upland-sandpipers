@@ -103,21 +103,21 @@ namespace Tabloid.Repositories
                         ";
                     var reader = cmd.ExecuteReader();
 
-                    var posts = new List<UserProfile>();
+                    var users = new List<UserProfile>();
 
                     while (reader.Read())
                     {
-                        posts.Add(NewPostFromReader(reader));
+                        users.Add(NewPostFromReader(reader));
                     }
 
                     reader.Close();
 
-                    return posts;
+                    return users;
                 }
             }
         }
 
-        private object NewPostFromReader(Microsoft.Data.SqlClient.SqlDataReader reader)
+        private UserProfile NewPostFromReader(Microsoft.Data.SqlClient.SqlDataReader reader)
         {
             throw new NotImplementedException();
         }

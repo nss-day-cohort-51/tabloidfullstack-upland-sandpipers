@@ -1,16 +1,26 @@
 import firebase from "firebase/app";
 import "firebase/auth";
+import { getUserByFireBaseUserId } from "./UserManager";
 
 const _apiUrl = "/api/userprofile";
 
 const _doesUserExist = (firebaseUserId) => {
+
+  getUserByFireBaseUserId(firebaseUserId).then(user => {
+    sessionStorage.setItem("LoggedInUserId", user.id);
+    sessionStorage.setItem("LoggedInUserType", user.userTypeId);
+
+
+  });
+
   return getToken().then((token) =>
     fetch(`${_apiUrl}/DoesUserExist/${firebaseUserId}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`
       }
-    }).then(resp => resp.ok));
+    }).then(resp => resp.ok
+    ));
 };
 
 const _saveUser = (userProfile) => {
@@ -67,3 +77,5 @@ export const onLoginStatusChange = (onLoginStatusChangeHandler) => {
     onLoginStatusChangeHandler(!!user);
   });
 };
+
+
