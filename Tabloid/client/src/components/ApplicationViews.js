@@ -4,6 +4,7 @@ import Login from "./Login";
 import Register from "./Register";
 import PostList from "./PostList";
 import CategoryList from "./CategoryList";
+import MyPostsList from "./MyPostsList";
 
 export default function ApplicationViews({ isLoggedIn }) {
     return (
@@ -26,6 +27,10 @@ export default function ApplicationViews({ isLoggedIn }) {
 
                 <Route path="/categories">
                     <CategoryList />
+                </Route>
+
+                <Route path="/myPosts">
+                    <MyPostsList />
                 </Route>
             </Switch>
         </main>

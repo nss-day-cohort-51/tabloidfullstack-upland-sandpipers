@@ -40,3 +40,12 @@ export const getPostById = (postId) => {
         },
     }).then((resp) => resp.json());
 };
+
+export const getPostsByUserId = (userId) => {
+    return fetch(baseUrl + `/GetPostByUserId/${userId}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    }).then((resp) => resp.json());
+};

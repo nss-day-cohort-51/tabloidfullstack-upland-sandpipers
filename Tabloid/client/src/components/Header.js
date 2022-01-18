@@ -42,6 +42,11 @@ export default function Header({ isLoggedIn }) {
                                         Manage Categories
                                     </NavLink>
                                 </NavItem>
+                                <NavItem>
+                                    <NavLink tag={RRNavLink} to="/myPosts">
+                                        My Posts
+                                    </NavLink>
+                                </NavItem>
                             </>
                         )}
                     </Nav>
