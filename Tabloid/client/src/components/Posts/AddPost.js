@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
-import { addPost } from "../modules/PostManager";
+import { addPost } from "../../modules/PostManager";
 import { useParams } from "react-router-dom";
-import { getAllCategories } from "../modules/CategoryManager";
+import { getAllCategories } from "../../modules/CategoryManager";
 
 
 const AddPost = () => {
