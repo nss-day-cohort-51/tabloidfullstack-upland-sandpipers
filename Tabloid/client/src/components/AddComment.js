@@ -30,7 +30,7 @@ const AddComment = () => {
 
     return (
         <form className="main-content">
-            <h2 className="_title">New Vehicle:</h2>
+            <h2 className="_title">New Comment:</h2>
             <fieldset className="fieldset">
                 <div className="form-group">
                     <textarea
