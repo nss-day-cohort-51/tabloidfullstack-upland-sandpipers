@@ -9,11 +9,11 @@ import PostDetails from "./PostDetails";
 import CategoryList from "./CategoryList";
 import MyPostsList from "./MyPostsList";
 import { AddTag } from "./AddTag";
+import { useState } from "react";
+import { useEffect } from "react";
 
-export default function ApplicationViews({ isLoggedIn }) {
+export default function ApplicationViews({ isLoggedIn, isAdmin }) {
 
-    const loggedInUser = localStorage.getItem("LoggedInUserType");
-    console.log(loggedInUser);
     return (
         <main>
             <Switch>
@@ -25,7 +25,7 @@ export default function ApplicationViews({ isLoggedIn }) {
                     {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
                 </Route>
                 <Route path="/users" exact>
-                    {loggedInUser == 1 ? <UserList /> : <Redirect to="/login" />}
+                    {isAdmin ? <UserList /> : <Redirect to="/login" />}
                 </Route>
 
                 <Route path="/tags" exact>

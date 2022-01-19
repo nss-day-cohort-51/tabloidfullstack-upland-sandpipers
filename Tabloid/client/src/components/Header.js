@@ -12,20 +12,11 @@ import {
 } from "reactstrap";
 import { logout } from "../modules/authManager";
 
-export default function Header({ isLoggedIn }) {
+export default function Header({ isLoggedIn, isAdmin }) {
     const [isOpen, setIsOpen] = useState(false);
-    const [isAdmin, setAdmin] = useState(false);
 
     const toggle = () => setIsOpen(!isOpen);
 
-    useEffect(() => {
-        setTimeout(
-            () => {
-                const checkIsAdmin = parseInt(localStorage.getItem("LoggedInUserType")) == 1
-
-                setAdmin(checkIsAdmin)
-            }, 300)
-    }, [isLoggedIn])
 
 
     return (
