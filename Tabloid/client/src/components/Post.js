@@ -1,6 +1,11 @@
 import React from "react";
-import { Card, CardBody } from "reactstrap";
+import { Card, CardBody, Button } from "reactstrap";
 import { Link } from "react-router-dom";
+import DeletePost from "./DeletePost";
+
+
+let userId = parseInt(localStorage.getItem("LoggedInUserId"));
+
 
 const Post = ({ post }) => {
     return (
@@ -18,6 +23,8 @@ const Post = ({ post }) => {
                     </p>
                     <p>{post.content}</p>
                     <br></br>
+                    {userId == post.userProfile.id ? <Button onClick={<DeletePost />}>Delete</Button>
+                        : <></>}
                 </CardBody>
             </Link>
         </Card>
