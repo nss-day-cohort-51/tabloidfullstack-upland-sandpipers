@@ -10,6 +10,45 @@ namespace Tabloid.Repositories
     {
         public UserProfileRepository(IConfiguration configuration) : base(configuration) { }
 
+        public List<UserProfile> GetAllUserProfiles()
+        {
+            {
+                using (var conn = Connection)
+                {
+                    conn.Open();
+                    using (var cmd = conn.CreateCommand())
+                    {
+                        cmd.CommandText = @"
+                      Select * from UserProfile";
+
+
+                        var users = new List<UserProfile>();
+
+                        var reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            users.Add(new UserProfile()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                                FirebaseUserId = reader.GetString(reader.GetOrdinal("firebaseUserId")),
+                                DisplayName = reader.GetString(reader.GetOrdinal("displayName")),
+                                FirstName = reader.GetString(reader.GetOrdinal("firstName")),
+                                LastName = reader.GetString(reader.GetOrdinal("lastName")),
+                                Email = reader.GetString(reader.GetOrdinal("email")),
+                                CreateDateTime = reader.GetDateTime(reader.GetOrdinal("createDateTime")),
+                                ImageLocation = reader.GetString(reader.GetOrdinal("imageLocation")),
+                                UserTypeId = reader.GetInt32(reader.GetOrdinal("userTypeId"))
+                            });
+                        }
+
+                        reader.Close();
+
+                        return users;
+                    }
+                }
+            }
+        }
+
         public UserProfile GetByFirebaseUserId(string firebaseUserId)
         {
             using (var conn = Connection)
@@ -82,45 +121,9 @@ namespace Tabloid.Repositories
                 }
             }
         }
-        public List<UserProfile> GetAllUserProfiles()
-        {
-            using (var conn = Connection)
-            {
-                conn.Open();
-                using (var cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = @"
-                        SELECT Id, 
-                        FirebaseUserId, 
-                        DisplayName, 
-                        FirstName, 
-                        LastName,
-                        Email, 
-                        CreateDateTime, 
-                        ImageLocation,
-                        UserTypeId
-                        FROM UserProfile
-                        ";
-                    var reader = cmd.ExecuteReader();
+        
 
-                    var users = new List<UserProfile>();
-
-                    while (reader.Read())
-                    {
-                        users.Add(NewPostFromReader(reader));
-                    }
-
-                    reader.Close();
-
-                    return users;
-                }
-            }
-        }
-
-        private UserProfile NewPostFromReader(Microsoft.Data.SqlClient.SqlDataReader reader)
-        {
-            throw new NotImplementedException();
-        }
+           
 
         /*
         public UserProfile GetByFirebaseUserId(string firebaseUserId)

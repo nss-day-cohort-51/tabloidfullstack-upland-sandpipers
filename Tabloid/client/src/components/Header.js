@@ -61,6 +61,14 @@ export default function Header({ isLoggedIn }) {
                     <Nav navbar>
                         {isLoggedIn && (
                             <>
+                                {loggedInUser == 1 ?
+                                    <NavItem>
+                                        <NavLink tag={RRNavLink} to="/users">
+                                            Users
+                                        </NavLink>
+                                    </NavItem> :
+                                    <></>
+                                }
                                 <NavItem>
                                     <a
                                         aria-current="page"
@@ -71,14 +79,7 @@ export default function Header({ isLoggedIn }) {
                                         Logout
                                     </a>
                                 </NavItem>
-                                {loggedInUser == 1 ?
-                                    <NavItem>
-                                        <NavLink tag={RRNavLink} to="/users">
-                                            Users
-                                        </NavLink>
-                                    </NavItem> :
-                                    <></>
-                                }
+
                             </>
                         )}
                         {!isLoggedIn && (

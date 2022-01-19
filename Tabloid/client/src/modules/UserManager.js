@@ -1,12 +1,12 @@
-const baseUrl = "/api/userprofile";
+const userUrl = "/api/UserProfile";
 
 
 export const GetAllUsers = () => {
-    return fetch(baseUrl).then((res) => res.json());
+    return fetch(userUrl).then((res) => res.json());
 };
 
 export const getUserByFireBaseUserId = (fireId) => {
-    return fetch(baseUrl + `/${fireId}`, {
+    return fetch(userUrl + `/${fireId}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",

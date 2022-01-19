@@ -17,18 +17,18 @@ const TagList = () => {
     return (
         <div className="container">
             <Table>
-            <thead>
-          <tr>
-            <th>Tag Name</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>          
-               
+                <thead>
+                    <tr>
+                        <th>Tag Name</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+
                 {tags.map((tag) => (
                     <Tag tag={tag} key={tag.id} />
                 ))}
-          
+
             </Table>
 
         </div>

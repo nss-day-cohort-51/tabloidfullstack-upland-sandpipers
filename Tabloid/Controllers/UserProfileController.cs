@@ -18,8 +18,8 @@ namespace Tabloid.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var posts = _userProfileRepository.GetAllUserProfiles();
-            return Ok(posts);
+            var users = _userProfileRepository.GetAllUserProfiles();
+            return Ok(users);
         }
 
         [HttpGet("{firebaseUserId}")]
