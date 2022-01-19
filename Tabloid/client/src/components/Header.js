@@ -15,7 +15,7 @@ export default function Header({ isLoggedIn }) {
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
 
-    const loggedInUser = sessionStorage.getItem("LoggedInUserType");
+    const loggedInUser = localStorage.getItem("LoggedInUserType");
 
     return (
         <div>
@@ -46,14 +46,7 @@ export default function Header({ isLoggedIn }) {
                                 </NavItem>
                             </>
                         )}
-                        {loggedInUser == 1 ?
-                            <NavItem>
-                                <NavLink tag={RRNavLink} to="/posts">
-                                    Posts
-                                </NavLink>
-                            </NavItem> :
-                            <></>
-                        }
+
                     </Nav>
                     <Nav navbar>
                         {isLoggedIn && (
@@ -68,6 +61,14 @@ export default function Header({ isLoggedIn }) {
                                         Logout
                                     </a>
                                 </NavItem>
+                                {loggedInUser == 1 ?
+                                    <NavItem>
+                                        <NavLink tag={RRNavLink} to="/users">
+                                            Users
+                                        </NavLink>
+                                    </NavItem> :
+                                    <></>
+                                }
                             </>
                         )}
                         {!isLoggedIn && (

@@ -6,7 +6,7 @@ export const GetAllUsers = () => {
 };
 
 export const getUserByFireBaseUserId = (fireId) => {
-    return fetch(baseUrl + `/getbyfirebaseuserid/${fireId}`, {
+    return fetch(baseUrl + `/${fireId}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",

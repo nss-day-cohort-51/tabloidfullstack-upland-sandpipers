@@ -2,17 +2,16 @@ import React from "react";
 import { ListGroup, ListGroupItem } from "reactstrap";
 import { Link } from "react-router-dom";
 
-const Post = ({ post }) => {
+const User = ({ user }) => {
     return (
         <ListGroup>
-            <p className="text-left px-2">
-                Posted by: {post.userProfile.displayName}
-            </p>
             <ListGroupItem>
-
+                <p className="text-left px-2">
+                    Name: {User.name}
+                </p>
             </ListGroupItem>
         </ListGroup>
     );
 };
 
-export default Post;
+export default User;

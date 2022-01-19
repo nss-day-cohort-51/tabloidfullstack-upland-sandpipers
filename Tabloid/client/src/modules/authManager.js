@@ -7,9 +7,9 @@ const _apiUrl = "/api/userprofile";
 const _doesUserExist = (firebaseUserId) => {
 
   getUserByFireBaseUserId(firebaseUserId).then(user => {
-    sessionStorage.setItem("LoggedInUserId", user.id);
-    sessionStorage.setItem("LoggedInUserType", user.userTypeId);
-
+    localStorage.setItem("LoggedInUserId", user.id);
+    localStorage.setItem("LoggedInUserType", user.userTypeId);
+    console.log(user);
 
   });
 

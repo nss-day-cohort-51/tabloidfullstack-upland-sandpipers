@@ -9,8 +9,8 @@ import CategoryList from "./CategoryList";
 
 export default function ApplicationViews({ isLoggedIn }) {
 
-    const loggedInUser = sessionStorage.getItem("LoggedInUserType");
-
+    const loggedInUser = localStorage.getItem("LoggedInUserType");
+    console.log(loggedInUser);
     return (
         <main>
             <Switch>
@@ -22,7 +22,7 @@ export default function ApplicationViews({ isLoggedIn }) {
                     {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
                 </Route>
                 <Route path="/users" exact>
-                    {loggedInUser === 1 ? <UserList /> : <Redirect to="/login" />}
+                    {loggedInUser == 1 ? <UserList /> : <Redirect to="/login" />}
                 </Route>
 
                 <Route path="/posts/:id">
