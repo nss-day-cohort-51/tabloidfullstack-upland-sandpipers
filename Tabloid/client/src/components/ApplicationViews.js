@@ -7,10 +7,10 @@ import TagList from "./TagList";
 import PostDetails from "./PostDetails";
 import CategoryList from "./CategoryList";
 import MyPostsList from "./MyPostsList";
+import AddComment from "./AddComment";
 import { AddTag } from "./AddTag";
 
 export default function ApplicationViews({ isLoggedIn }) {
-
     return (
         <main>
             <Switch>
@@ -51,6 +51,9 @@ export default function ApplicationViews({ isLoggedIn }) {
 
                 <Route path="/myPosts">
                     <MyPostsList />
+                </Route>
+                <Route path="/newComment/:id">
+                    <AddComment userparams />
                 </Route>
             </Switch>
         </main>
