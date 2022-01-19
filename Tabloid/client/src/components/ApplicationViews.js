@@ -6,6 +6,7 @@ import PostList from "./PostList";
 import TagList from "./TagList";
 import PostDetails from "./PostDetails";
 import CategoryList from "./CategoryList";
+import MyPostsList from "./MyPostsList";
 
 export default function ApplicationViews({ isLoggedIn }) {
 
@@ -41,6 +42,10 @@ export default function ApplicationViews({ isLoggedIn }) {
 
                 <Route path="/categories">
                     <CategoryList />
+                </Route>
+
+                <Route path="/myPosts">
+                    <MyPostsList />
                 </Route>
             </Switch>
         </main>
