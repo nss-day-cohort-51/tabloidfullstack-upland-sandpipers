@@ -27,16 +27,16 @@ export const AddCategory = () => {
         event.preventDefault() //Prevents the browser from submitting the form
         console.log(category);
         addCategory(category)
-            .then(() => history.push("/tags"))
+            .then(() => history.push("/categories"))
 
     }
 
     return (
         <form className="main-content">
-            <h2 className="_title">New Vehicle:</h2>
+            <h2 className="_title">New Category:</h2>
             <fieldset className="fieldset">
                 <div className="form-group">
-                    <label htmlFor="name">Category name:</label>
+                    <label htmlFor="name">Name:</label>
                     <input type="text" id="name" onChange={handleControlledInputChange} required autoFocus className="form-control" placeholder="Name" value={category.name} />
                 </div>
             </fieldset>
@@ -45,7 +45,7 @@ export const AddCategory = () => {
                 Save Category
             </button>
             <button className="btn-add-edit"
-                onClick={() => history.push("/tags")}>
+                onClick={() => history.push("/categories")}>
                 Cancel
             </button>
         </form>

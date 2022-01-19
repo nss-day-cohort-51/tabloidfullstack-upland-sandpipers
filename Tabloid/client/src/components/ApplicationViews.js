@@ -7,6 +7,7 @@ import TagList from "./TagList";
 import PostDetails from "./PostDetails";
 import CategoryList from "./CategoryList";
 import MyPostsList from "./MyPostsList";
+import { AddCategory } from "./AddCategory";
 
 export default function ApplicationViews({ isLoggedIn }) {
 
@@ -42,6 +43,9 @@ export default function ApplicationViews({ isLoggedIn }) {
 
                 <Route path="/categories">
                     <CategoryList />
+                </Route>
+                <Route path="/addCategory">
+                    <AddCategory />
                 </Route>
 
                 <Route path="/myPosts">
