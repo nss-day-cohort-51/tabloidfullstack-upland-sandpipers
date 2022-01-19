@@ -7,6 +7,7 @@ import TagList from "./TagList";
 import PostDetails from "./PostDetails";
 import CategoryList from "./CategoryList";
 import MyPostsList from "./MyPostsList";
+import { AddTag } from "./AddTag";
 
 export default function ApplicationViews({ isLoggedIn }) {
 
@@ -20,8 +21,12 @@ export default function ApplicationViews({ isLoggedIn }) {
                 <Route path="/posts" exact>
                     {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
                 </Route>
+
                 <Route path="/tags" exact>
                     {isLoggedIn ? <TagList /> : <Redirect to="/login" />}
+                </Route>
+                <Route path="/addTag">
+                    <AddTag />
                 </Route>
 
                 <Route path="/posts/:id">
