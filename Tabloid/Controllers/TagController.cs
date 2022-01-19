@@ -33,5 +33,24 @@ namespace Tabloid.Controllers
             _tagRepository.CreateTag(tag);
             return NoContent();
         }
+
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, Video video)
+        {
+            if (id != video.Id)
+            {
+                return BadRequest();
+            }
+
+            _videoRepository.Update(video);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _videoRepository.Delete(id);
+            return NoContent();
+        }
     }
 }
