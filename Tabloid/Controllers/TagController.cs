@@ -20,11 +20,19 @@ namespace Tabloid.Controllers
             _tagRepository = tagRepository;
 
         }
+
         [HttpGet]
         public ActionResult Index()
         {
             var tags = _tagRepository.GetAllTags();
             return Ok(tags);
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult Index(int id)
+        {
+            var tag = _tagRepository.GetTagById(id);
+            return Ok(tag);
         }
 
         [HttpPost]
@@ -35,21 +43,21 @@ namespace Tabloid.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, Video video)
+        public IActionResult Put(int id, Tag tag)
         {
-            if (id != video.Id)
+            if (id != tag.Id)
             {
                 return BadRequest();
             }
 
-            _videoRepository.Update(video);
+            _tagRepository.Update(tag);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            _videoRepository.Delete(id);
+            _tagRepository.Delete(id);
             return NoContent();
         }
     }

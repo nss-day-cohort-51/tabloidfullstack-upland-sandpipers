@@ -9,6 +9,8 @@ import PostDetails from "./PostDetails";
 import CategoryList from "./CategoryList";
 import MyPostsList from "./MyPostsList";
 import AddComment from "./AddComment";
+import EditTag from "./EditTag";
+import DeleteTag from "./DeleteTag";
 import { AddTag } from "./AddTag";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -60,6 +62,12 @@ export default function ApplicationViews({ isLoggedIn, isAdmin }) {
                 </Route>
                 <Route path="/newComment/:id">
                     <AddComment userparams />
+                </Route>
+                <Route path="/editTag/:id">
+                    <EditTag userparams />
+                </Route>
+                <Route path="/deleteTag/:id">
+                    <DeleteTag userparams />
                 </Route>
             </Switch>
         </main>
