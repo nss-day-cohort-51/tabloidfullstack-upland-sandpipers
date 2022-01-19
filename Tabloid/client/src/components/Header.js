@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { NavLink as RRNavLink, Redirect } from "react-router-dom";
 import {
     Collapse,
@@ -13,9 +14,19 @@ import { logout } from "../modules/authManager";
 
 export default function Header({ isLoggedIn }) {
     const [isOpen, setIsOpen] = useState(false);
+    const [isAdmin, setAdmin] = useState(false);
+
     const toggle = () => setIsOpen(!isOpen);
 
-    const loggedInUser = localStorage.getItem("LoggedInUserType");
+    useEffect(() => {
+        setTimeout(
+            () => {
+                const checkIsAdmin = parseInt(localStorage.getItem("LoggedInUserType")) == 1
+
+                setAdmin(checkIsAdmin)
+            }, 300)
+    }, [isLoggedIn])
+
 
     return (
         <div>
@@ -34,21 +45,25 @@ export default function Header({ isLoggedIn }) {
                                         Home
                                     </NavLink>
                                 </NavItem>
+
                                 <NavItem>
                                     <NavLink tag={RRNavLink} to="/posts">
                                         Posts
                                     </NavLink>
                                 </NavItem>
+
                                 <NavItem>
                                     <NavLink tag={RRNavLink} to="/tags">
                                         Tags
                                     </NavLink>
                                 </NavItem>
-                                <NavItem>
+
+                                {isAdmin ? <NavItem>
                                     <NavLink tag={RRNavLink} to="/categories">
                                         Manage Categories
                                     </NavLink>
-                                </NavItem>
+                                </NavItem> : null}
+
                                 <NavItem>
                                     <NavLink tag={RRNavLink} to="/myPosts">
                                         My Posts
@@ -61,7 +76,7 @@ export default function Header({ isLoggedIn }) {
                     <Nav navbar>
                         {isLoggedIn && (
                             <>
-                                {loggedInUser == 1 ?
+                                {isAdmin ?
                                     <NavItem>
                                         <NavLink tag={RRNavLink} to="/users">
                                             Users
