@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Tabloid.Models;
 using Tabloid.Repositories;
 
 
@@ -24,6 +25,13 @@ namespace Tabloid.Controllers
         {
             var tags = _tagRepository.GetAllTags();
             return Ok(tags);
+        }
+
+        [HttpPost]
+        public IActionResult Post(Tag tag)
+        {
+            _tagRepository.CreateTag(tag);
+            return NoContent();
         }
     }
 }
