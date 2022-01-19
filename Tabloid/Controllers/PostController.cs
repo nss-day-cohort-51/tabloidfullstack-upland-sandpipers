@@ -69,6 +69,7 @@ namespace Tabloid.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            _postRepository.Delete(id);
         }
     }
 }

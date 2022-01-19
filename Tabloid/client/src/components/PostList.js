@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Post from "./Post";
+import DeletePost from "./DeletePost";
 import { getAllPosts } from "../modules/PostManager";
 
 const PostList = () => {

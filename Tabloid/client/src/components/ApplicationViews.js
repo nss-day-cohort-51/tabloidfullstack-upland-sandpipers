@@ -11,6 +11,7 @@ import MyPostsList from "./MyPostsList";
 import { AddTag } from "./AddTag";
 import { useState } from "react";
 import { useEffect } from "react";
+import DeletePost from "./DeletePost";
 
 export default function ApplicationViews({ isLoggedIn, isAdmin }) {
 
@@ -45,6 +46,13 @@ export default function ApplicationViews({ isLoggedIn, isAdmin }) {
 
                 <Route path="/login">
                     <Login />
+                </Route>
+                <Route path="/deletepost/:id">
+                    {isLoggedIn ? (
+                        <DeletePost useparams />
+                    ) : (
+                        <Redirect to="/login" />
+                    )}
                 </Route>
 
                 <Route path="/register">
