@@ -4,15 +4,15 @@ export const getAllTags = () => {
     return fetch(baseUrl).then((res) => res.json());
 };
 
-// export const addPost = (post) => {
-//     return fetch(baseUrl, {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify(post),
-//     });
-// };
+export const addTag = (tag) => {
+    return fetch(baseUrl, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(tag),
+    });
+};
 
 // export const getWithComments = () => {
 //     return fetch(baseUrl + "/getwithcomments", {
