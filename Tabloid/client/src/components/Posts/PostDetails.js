@@ -70,6 +70,13 @@ const Post = () => {
             <Button
                 className="mt-2"
                 color="success"
+                onClick={() => history.push(`../manageTags/${id}`)}
+            >
+                Manage Tags
+            </Button>
+            <Button
+                className="mt-2"
+                color="success"
                 onClick={() => history.push(`../newComment/${id}`)}
             >
                 Add Comment

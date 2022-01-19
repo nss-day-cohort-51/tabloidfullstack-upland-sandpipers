@@ -88,6 +88,11 @@ namespace Tabloid.Repositories
             }
         }
 
+        public int Add(PostTag postTag)
+        {
+
+        }
+
         public void Delete(int id)
         {
             using (SqlConnection conn = Connection)

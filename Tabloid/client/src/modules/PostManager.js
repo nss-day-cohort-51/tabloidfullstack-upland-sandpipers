@@ -49,3 +49,12 @@ export const getPostsByUserId = (userId) => {
         },
     }).then((resp) => resp.json());
 };
+
+export const getPostTagsByPostId = (postId) => {
+    return fetch(baseUrl + `/GetPostTags/${postId}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    }).then((resp) => resp.json());
+};
