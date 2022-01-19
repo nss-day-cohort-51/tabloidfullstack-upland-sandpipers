@@ -1,11 +1,15 @@
 import React from "react";
 import { Card, CardBody } from "reactstrap";
-import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getPostById } from "../modules/PostManager";
+import { Table, Button } from "reactstrap";
+
+import { useHistory } from "react-router";
 
 const Post = () => {
+    const history = useHistory();
+
     const [post, setPost] = useState([]);
     const { id } = useParams();
 
@@ -63,6 +67,13 @@ const Post = () => {
                     <strong>{post.title}</strong>
                 </Link> */}
             </CardBody>
+            <Button
+                className="mt-2"
+                color="success"
+                onClick={() => history.push(`../newComment/${id}`)}
+            >
+                Add Comment
+            </Button>
         </Card>
     );
 };
