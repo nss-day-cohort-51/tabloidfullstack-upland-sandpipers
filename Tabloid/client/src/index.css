@@ -1,6 +1,7 @@
 main {
   margin: 2em;
 }
+
 .app-spinner {
   position: fixed;
   top: 50%;
@@ -8,15 +9,28 @@ main {
   margin-top: -16px;
   margin-left: -16px;
 }
- 
+
 p {
-    line-height: 2rem;
+  line-height: 2rem;
 }
 
+
 .post p {
-    white-space: pre-wrap;
+  white-space: pre-wrap;
+
+}
+
+.post {
+  width: 100%;
+  margin-top: 8px;
 }
 
 .categoriesUL {
   list-style: none;
+}
+
+
+.PostList__NewPost--container {
+  display: flex;
+  justify-content: flex-end;
 }
