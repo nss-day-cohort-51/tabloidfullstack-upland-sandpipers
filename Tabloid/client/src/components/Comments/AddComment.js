@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
-import { addComment } from "../modules/CommentManager";
+import { addComment } from "../../modules/CommentManager";
 import { useParams } from "react-router-dom";
 
 const AddComment = () => {

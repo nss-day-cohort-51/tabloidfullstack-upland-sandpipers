@@ -2,15 +2,17 @@ import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import Login from "./Login";
 import Register from "./Register";
-import PostList from "./PostList";
-import UserList from "./UserList";
-import TagList from "./TagList";
-import PostDetails from "./PostDetails";
-import CategoryList from "./CategoryList";
-import MyPostsList from "./MyPostsList";
-import { AddCategory } from "./AddCategory";
-import AddComment from "./AddComment";
-import { AddTag } from "./AddTag";
+import PostList from "./Posts/PostList";
+import UserList from "./Users/UserList";
+import TagList from "./Tags/TagList";
+import PostDetails from "./Posts/PostDetails";
+import CategoryList from "./Categories/CategoryList";
+import MyPostsList from "./Posts/MyPostsList";
+import AddComment from "./Comments/AddComment";
+import AddCategory from "./Categories/AddCategory";
+import EditTag from "./Tags/EditTag";
+import DeleteTag from "./Tags/DeleteTag";
+import { AddTag } from "./Tags/AddTag";
 import { useState } from "react";
 import { useEffect } from "react";
 import RemoveCategory from "./RemoveCategory";
@@ -69,6 +71,12 @@ export default function ApplicationViews({ isLoggedIn, isAdmin }) {
 
                 <Route path="/removeCategory/:catId">
                     <RemoveCategory userparams />
+                </Route>
+                <Route path="/editTag/:id">
+                    <EditTag userparams />
+                </Route>
+                <Route path="/deleteTag/:id">
+                    <DeleteTag userparams />
                 </Route>
             </Switch>
         </main>

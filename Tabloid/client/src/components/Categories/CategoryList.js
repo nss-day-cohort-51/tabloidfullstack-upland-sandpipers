@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Category from "./Category";
-import { getAllCategories } from "../modules/CategoryManager";
+import { getAllCategories } from "../../modules/CategoryManager";
 import { Button } from "reactstrap";
 import { useHistory } from "react-router-dom";
 import { Table } from "reactstrap";
