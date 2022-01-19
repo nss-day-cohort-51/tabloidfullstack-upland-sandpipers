@@ -49,3 +49,12 @@ export const getPostsByUserId = (userId) => {
         },
     }).then((resp) => resp.json());
 };
+
+export const deletePostById = (postId) => {
+    return fetch(baseUrl + `/${postId}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    }).then((res) => res.json())
+}

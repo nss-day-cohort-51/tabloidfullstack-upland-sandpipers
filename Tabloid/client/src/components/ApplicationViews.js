@@ -15,6 +15,7 @@ import DeleteTag from "./Tags/DeleteTag";
 import { AddTag } from "./Tags/AddTag";
 import { useState } from "react";
 import { useEffect } from "react";
+import DeletePost from "./DeletePost";
 import RemoveCategory from "./RemoveCategory";
 
 export default function ApplicationViews({ isLoggedIn, isAdmin }) {
@@ -49,6 +50,13 @@ export default function ApplicationViews({ isLoggedIn, isAdmin }) {
 
                 <Route path="/login">
                     <Login />
+                </Route>
+                <Route path="/deletepost/:id">
+                    {isLoggedIn ? (
+                        <DeletePost useparams />
+                    ) : (
+                        <Redirect to="/login" />
+                    )}
                 </Route>
 
                 <Route path="/register">
