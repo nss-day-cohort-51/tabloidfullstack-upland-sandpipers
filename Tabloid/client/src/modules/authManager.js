@@ -5,12 +5,13 @@ import { getUserByFireBaseUserId } from "./UserManager";
 
 const _apiUrl = "/api/userprofile";
 
+
 const _doesUserExist = (firebaseUserId) => {
 
   getUserByFireBaseUserId(firebaseUserId).then(testresp => {
 
-    sessionStorage.setItem("LoggedInUserId", testresp.id);
-    sessionStorage.setItem("LoggedInUserType", testresp.userTypeId);
+    localStorage.setItem("LoggedInUserId", testresp.id);
+    localStorage.setItem("LoggedInUserType", testresp.userTypeId);
 
   });
 
@@ -61,6 +62,7 @@ export const login = (email, pw) => {
 
 export const logout = () => {
   firebase.auth().signOut()
+  localStorage.clear();
 };
 
 
