@@ -7,9 +7,19 @@ import { onLoginStatusChange } from "./modules/authManager";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
+  const [isAdmin, setAdmin] = useState(false);
 
   useEffect(() => {
-    onLoginStatusChange(setIsLoggedIn);
+    setTimeout(
+      () => {
+        const checkIsAdmin = parseInt(localStorage.getItem("LoggedInUserType")) == 1
+
+        setAdmin(checkIsAdmin)
+      }, 400)
+  }, [isLoggedIn])
+
+  useEffect(() => {
+    onLoginStatusChange(setIsLoggedIn)
   }, []);
 
   if (isLoggedIn === null) {
@@ -18,8 +28,8 @@ function App() {
 
   return (
     <Router>
-      <Header isLoggedIn={isLoggedIn}/>
-      <ApplicationViews isLoggedIn={isLoggedIn}/>
+      <Header isLoggedIn={isLoggedIn} isAdmin={isAdmin} />
+      <ApplicationViews isLoggedIn={isLoggedIn} isAdmin={isAdmin} />
     </Router>
   );
 }

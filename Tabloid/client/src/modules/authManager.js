@@ -5,12 +5,12 @@ import { getUserByFireBaseUserId } from "./UserManager";
 
 const _apiUrl = "/api/userprofile";
 
+
 const _doesUserExist = (firebaseUserId) => {
 
-  getUserByFireBaseUserId(firebaseUserId).then(testresp => {
-
-    localStorage.setItem("LoggedInUserId", testresp.id);
-    localStorage.setItem("LoggedInUserType", testresp.userTypeId);
+  getUserByFireBaseUserId(firebaseUserId).then(user => {
+    localStorage.setItem("LoggedInUserId", user.id);
+    localStorage.setItem("LoggedInUserType", user.userTypeId);
 
   });
 
@@ -79,3 +79,5 @@ export const onLoginStatusChange = (onLoginStatusChangeHandler) => {
     onLoginStatusChangeHandler(!!user);
   });
 };
+
+

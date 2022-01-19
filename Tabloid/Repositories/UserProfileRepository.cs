@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
+using System;
+using System.Collections.Generic;
 using Tabloid.Models;
 using Tabloid.Utils;
 
@@ -7,6 +9,55 @@ namespace Tabloid.Repositories
     public class UserProfileRepository : BaseRepository, IUserProfileRepository
     {
         public UserProfileRepository(IConfiguration configuration) : base(configuration) { }
+
+        public List<UserProfile> GetAllUserProfiles()
+        {
+            {
+                using (var conn = Connection)
+                {
+                    conn.Open();
+                    using (var cmd = conn.CreateCommand())
+                    {
+                        cmd.CommandText = @"
+                      Select * from UserProfile";
+
+
+                        var users = new List<UserProfile>();
+
+                        var reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            int id = reader.GetInt32(reader.GetOrdinal("Id"));
+                            string fireId = reader.GetString(reader.GetOrdinal("firebaseUserId"));
+                            string display = reader.GetString(reader.GetOrdinal("displayName"));
+                            string fName = reader.GetString(reader.GetOrdinal("firstName"));
+                            string lName = reader.GetString(reader.GetOrdinal("lastName"));
+                            string email = reader.GetString(reader.GetOrdinal("email"));
+                            DateTime cDT = reader.GetDateTime(reader.GetOrdinal("createDateTime"));
+                            string imgLoc = reader.GetString(reader.GetOrdinal("imageLocation"));
+                            int UTI = reader.GetInt32(reader.GetOrdinal("userTypeId"));
+
+                            users.Add(new UserProfile()
+                            {
+                                Id = id,
+                                FirebaseUserId = fireId,
+                                DisplayName = display,
+                                FirstName = fName,
+                                LastName = lName,
+                                Email = email,
+                                CreateDateTime = cDT,
+                                ImageLocation = imgLoc,
+                                UserTypeId = UTI
+                            });
+                        }
+
+                        reader.Close();
+
+                        return users;
+                    }
+                }
+            }
+        }
 
         public UserProfile GetByFirebaseUserId(string firebaseUserId)
         {
@@ -80,6 +131,9 @@ namespace Tabloid.Repositories
                 }
             }
         }
+        
+
+           
 
         /*
         public UserProfile GetByFirebaseUserId(string firebaseUserId)

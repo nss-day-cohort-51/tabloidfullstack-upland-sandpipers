@@ -7,12 +7,17 @@ import {Button} from "reactstrap"
 const CategoryList = () => {
     const history = useHistory();
     const [categories, setCategories] = useState([]);
+
+    const checkIsAdmin = parseInt(localStorage.getItem("LoggedInUserType")) == 1
+
     const getCategories = () => {
         getAllCategories().then((category) => setCategories(category));
     };
 
     useEffect(() => {
-        getCategories();
+        if (checkIsAdmin) {
+            getCategories();
+        }
     }, []);
 
     return (

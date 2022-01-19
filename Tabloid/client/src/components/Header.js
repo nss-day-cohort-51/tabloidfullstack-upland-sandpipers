@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { NavLink as RRNavLink, Redirect } from "react-router-dom";
 import {
     Collapse,
@@ -11,9 +12,12 @@ import {
 } from "reactstrap";
 import { logout } from "../modules/authManager";
 
-export default function Header({ isLoggedIn }) {
+export default function Header({ isLoggedIn, isAdmin }) {
     const [isOpen, setIsOpen] = useState(false);
+
     const toggle = () => setIsOpen(!isOpen);
+
+
 
     return (
         <div>
@@ -32,21 +36,25 @@ export default function Header({ isLoggedIn }) {
                                         Home
                                     </NavLink>
                                 </NavItem>
+
                                 <NavItem>
                                     <NavLink tag={RRNavLink} to="/posts">
                                         Posts
                                     </NavLink>
                                 </NavItem>
+
                                 <NavItem>
                                     <NavLink tag={RRNavLink} to="/tags">
                                         Tags
                                     </NavLink>
                                 </NavItem>
-                                <NavItem>
+
+                                {isAdmin ? <NavItem>
                                     <NavLink tag={RRNavLink} to="/categories">
                                         Manage Categories
                                     </NavLink>
-                                </NavItem>
+                                </NavItem> : null}
+
                                 <NavItem>
                                     <NavLink tag={RRNavLink} to="/myPosts">
                                         My Posts
@@ -54,10 +62,19 @@ export default function Header({ isLoggedIn }) {
                                 </NavItem>
                             </>
                         )}
+
                     </Nav>
                     <Nav navbar>
                         {isLoggedIn && (
                             <>
+                                {isAdmin ?
+                                    <NavItem>
+                                        <NavLink tag={RRNavLink} to="/users">
+                                            Users
+                                        </NavLink>
+                                    </NavItem> :
+                                    <></>
+                                }
                                 <NavItem>
                                     <a
                                         aria-current="page"
@@ -68,6 +85,7 @@ export default function Header({ isLoggedIn }) {
                                         Logout
                                     </a>
                                 </NavItem>
+
                             </>
                         )}
                         {!isLoggedIn && (
