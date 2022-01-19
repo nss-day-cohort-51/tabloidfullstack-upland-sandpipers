@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardBody } from "reactstrap";
 import { Link } from "react-router-dom";
-import { deleteCategory } from "../modules/CategoryManager";
+import { deleteCategory } from "../../modules/CategoryManager";
 import { useHistory } from "react-router-dom";
 import { Button } from "reactstrap";
 import { useParams } from "react-router-dom";

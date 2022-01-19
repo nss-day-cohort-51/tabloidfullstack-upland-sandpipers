@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardBody, Button } from "reactstrap";
 import { useHistory } from "react-router-dom";
-import { deletePostById } from "../modules/PostManager";
+import { deletePostById } from "../../modules/PostManager";
 import { useParams } from "react-router-dom";
 
 
