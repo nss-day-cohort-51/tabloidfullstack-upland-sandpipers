@@ -5,6 +5,7 @@ import { getUserByFireBaseUserId } from "./UserManager";
 
 const _apiUrl = "/api/userprofile";
 
+
 const _doesUserExist = (firebaseUserId) => {
 
   getUserByFireBaseUserId(firebaseUserId).then(testresp => {
