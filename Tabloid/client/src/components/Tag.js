@@ -1,17 +1,17 @@
 import React from 'react';
-import { Table } from 'reactstrap';
+import { Button } from 'reactstrap';
 
- const Tag = ({tag}) => {
- 
-    return (
-        <tbody>
-          <tr>
-            <th scope="row">{tag.name}</th>
-            <td>edit</td>
-            <td>delete</td>
-          </tr>
-        </tbody>
-    );
-  }
+const Tag = ({ tag }) => {
+  return (
+    <tr>
+      <th scope="row">{tag.name}</th>
+      <td>
+        <Button color="primary">edit</Button>{' '}
+        <Button color="danger">delete</Button>{' '}
+      </td>
 
-  export default Tag;
+    </tr>
+  );
+}
+
+export default Tag;
