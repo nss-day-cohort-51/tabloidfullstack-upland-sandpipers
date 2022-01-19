@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
-import { addTag } from "../modules/TagManager";
+import { addTag } from "../../modules/TagManager";
 
 export const AddTag = () => {
     const [tag, setTag] = useState({

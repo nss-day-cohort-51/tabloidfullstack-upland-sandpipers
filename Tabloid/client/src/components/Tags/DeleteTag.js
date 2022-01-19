@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
-import { getTag, deleteTag } from "../modules/TagManager";
+import { getTag, deleteTag } from "../../modules/TagManager";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 

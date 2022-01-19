@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Tag from "./Tag";
-import { getAllTags } from "../modules/TagManager";
+import { getAllTags } from "../../modules/TagManager";
 import { Table, Button } from "reactstrap";
 import { useHistory } from "react-router";
 
 const TagList = () => {
-
     const history = useHistory();
 
     const [tags, setTags] = useState([]);
-    let isAdmin = localStorage.getItem("LoggedInUserType") == 1
+    let isAdmin = localStorage.getItem("LoggedInUserType") == 1;
     const getTags = () => {
         getAllTags().then((tags) => setTags(tags));
     };
@@ -21,7 +20,11 @@ const TagList = () => {
     return (
         <div className="container">
             <h1>Tags</h1>
-            <Button className="mt-2" color="success" onClick={() => history.push("/addTag")}>
+            <Button
+                className="mt-2"
+                color="success"
+                onClick={() => history.push("/addTag")}
+            >
                 New Tag
             </Button>{" "}
             <Table className="mt-2">
@@ -37,7 +40,7 @@ const TagList = () => {
                     ))}
                 </tbody>
             </Table>
-        </div >
+        </div>
     );
 };
 
