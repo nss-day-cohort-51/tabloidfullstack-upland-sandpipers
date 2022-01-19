@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardBody, Button } from "reactstrap";
 import { Link } from "react-router-dom";
-import DeletePost from "./DeletePost";
+import DeletePost from "../DeletePost";
 import { useHistory } from "react-router-dom";
 
 
