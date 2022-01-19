@@ -15,8 +15,9 @@ import DeleteTag from "./Tags/DeleteTag";
 import { AddTag } from "./Tags/AddTag";
 import { useState } from "react";
 import { useEffect } from "react";
-import DeletePost from "./DeletePost";
-import RemoveCategory from "./RemoveCategory";
+import AddPost from "./Posts/AddPost";
+import DeletePost from "./Posts/DeletePost";
+import RemoveCategory from "./Categories/RemoveCategory";
 
 export default function ApplicationViews({ isLoggedIn, isAdmin }) {
     return (
@@ -72,6 +73,9 @@ export default function ApplicationViews({ isLoggedIn, isAdmin }) {
 
                 <Route path="/myPosts">
                     <MyPostsList />
+                </Route>
+                <Route path="/addPost">
+                    <AddPost />
                 </Route>
                 <Route path="/newComment/:id">
                     <AddComment userparams />

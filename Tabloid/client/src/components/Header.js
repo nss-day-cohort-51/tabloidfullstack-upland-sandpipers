@@ -43,11 +43,11 @@ export default function Header({ isLoggedIn, isAdmin }) {
                                     </NavLink>
                                 </NavItem>
 
-                                <NavItem>
+                                {isAdmin ? <NavItem>
                                     <NavLink tag={RRNavLink} to="/tags">
                                         Tags
                                     </NavLink>
-                                </NavItem>
+                                </NavItem> : null}
 
                                 {isAdmin ? <NavItem>
                                     <NavLink tag={RRNavLink} to="/categories">
