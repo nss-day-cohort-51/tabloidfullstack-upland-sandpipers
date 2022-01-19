@@ -14,15 +14,6 @@ export const addPost = (post) => {
     });
 };
 
-export const getWithComments = () => {
-    return fetch(baseUrl + "/getwithcomments", {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-        },
-    }).then((res) => res.json());
-};
-
 export const getBySearch = (q, isSort) => {
     return fetch(baseUrl + `/search?q=${q}&sortDesc=${isSort}`, {
         method: "GET",
