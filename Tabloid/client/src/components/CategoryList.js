@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import Category from "./Category";
 import { getAllCategories } from "../modules/CategoryManager";
 import { useHistory } from "react-router-dom";
+import {Button} from "reactstrap"
 
 const CategoryList = () => {
+    const history = useHistory();
     const [categories, setCategories] = useState([]);
-
     const getCategories = () => {
         getAllCategories().then((category) => setCategories(category));
     };
