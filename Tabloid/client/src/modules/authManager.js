@@ -1,16 +1,27 @@
 import firebase from "firebase/app";
 import "firebase/auth";
+import { Redirect } from "react-router-dom";
+import { getUserByFireBaseUserId } from "./UserManager";
 
 const _apiUrl = "/api/userprofile";
 
 const _doesUserExist = (firebaseUserId) => {
+
+  getUserByFireBaseUserId(firebaseUserId).then(testresp => {
+
+    localStorage.setItem("LoggedInUserId", testresp.id);
+    localStorage.setItem("LoggedInUserType", testresp.userTypeId);
+
+  });
+
   return getToken().then((token) =>
     fetch(`${_apiUrl}/DoesUserExist/${firebaseUserId}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`
       }
-    }).then(resp => resp.ok));
+    }).then(resp => resp.ok
+    ));
 };
 
 const _saveUser = (userProfile) => {
@@ -50,14 +61,15 @@ export const login = (email, pw) => {
 
 export const logout = () => {
   firebase.auth().signOut()
+  localStorage.clear();
 };
 
 
 export const register = (userProfile, password) => {
   return firebase.auth().createUserWithEmailAndPassword(userProfile.email, password)
-    .then((createResponse) => _saveUser({ 
-      ...userProfile, 
-      firebaseUserId: createResponse.user.uid 
+    .then((createResponse) => _saveUser({
+      ...userProfile,
+      firebaseUserId: createResponse.user.uid
     }));
 };
 

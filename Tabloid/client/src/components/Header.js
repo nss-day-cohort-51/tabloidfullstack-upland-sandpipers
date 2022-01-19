@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink as RRNavLink } from "react-router-dom";
+import { NavLink as RRNavLink, Redirect } from "react-router-dom";
 import {
     Collapse,
     Navbar,
@@ -38,8 +38,18 @@ export default function Header({ isLoggedIn }) {
                                     </NavLink>
                                 </NavItem>
                                 <NavItem>
+                                    <NavLink tag={RRNavLink} to="/tags">
+                                        Tags
+                                    </NavLink>
+                                </NavItem>
+                                <NavItem>
                                     <NavLink tag={RRNavLink} to="/categories">
                                         Manage Categories
+                                    </NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink tag={RRNavLink} to="/myPosts">
+                                        My Posts
                                     </NavLink>
                                 </NavItem>
                             </>
