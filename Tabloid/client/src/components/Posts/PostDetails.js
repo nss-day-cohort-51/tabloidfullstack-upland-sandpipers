@@ -2,7 +2,7 @@ import React from "react";
 import { Card, CardBody } from "reactstrap";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getPostById } from "../modules/PostManager";
+import { getPostById } from "../../modules/PostManager";
 import { Table, Button } from "reactstrap";
 
 import { useHistory } from "react-router";

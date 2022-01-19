@@ -14,14 +14,33 @@ export const addTag = (tag) => {
     });
 };
 
-// export const getWithComments = () => {
-//     return fetch(baseUrl + "/getwithcomments", {
-//         method: "GET",
-//         headers: {
-//             "Content-Type": "application/json",
-//         },
-//     }).then((res) => res.json());
-// };
+export const updateTag = (tag) => {
+    return fetch(`${baseUrl}/${tag.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(tag),
+    });
+};
+
+export const deleteTag = (tag) => {
+    return fetch(`${baseUrl}/${tag.id}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+};
+
+export const getTag = (id) => {
+    return fetch(`${baseUrl}/${id}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    }).then((res) => res.json());
+};
 
 // export const getBySearch = (q, isSort) => {
 //     return fetch(baseUrl + `/search?q=${q}&sortDesc=${isSort}`, {
