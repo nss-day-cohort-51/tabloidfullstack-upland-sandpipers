@@ -3,18 +3,18 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import Login from "./Login";
 import Register from "./Register";
 import PostList from "./PostList";
-import UserList from "./UserList"
+import UserList from "./UserList";
 import TagList from "./TagList";
 import PostDetails from "./PostDetails";
 import CategoryList from "./CategoryList";
 import MyPostsList from "./MyPostsList";
 import { AddCategory } from "./AddCategory";
+import AddComment from "./AddComment";
 import { AddTag } from "./AddTag";
 import { useState } from "react";
 import { useEffect } from "react";
 
 export default function ApplicationViews({ isLoggedIn, isAdmin }) {
-
     return (
         <main>
             <Switch>
@@ -61,6 +61,9 @@ export default function ApplicationViews({ isLoggedIn, isAdmin }) {
 
                 <Route path="/myPosts">
                     <MyPostsList />
+                </Route>
+                <Route path="/newComment/:id">
+                    <AddComment userparams />
                 </Route>
             </Switch>
         </main>
