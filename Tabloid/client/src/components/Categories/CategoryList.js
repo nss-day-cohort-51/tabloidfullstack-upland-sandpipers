@@ -1,19 +1,25 @@
 import React, { useEffect, useState } from "react";
 import Category from "./Category";
 import { getAllCategories } from "../../modules/CategoryManager";
-import { useHistory } from "react-router-dom";
 import { Button } from "reactstrap";
+import { useHistory } from "react-router-dom";
+import { Table } from "reactstrap";
 
 const CategoryList = () => {
+
     const history = useHistory();
+
     const [categories, setCategories] = useState([]);
 
-    const checkIsAdmin =
-        parseInt(localStorage.getItem("LoggedInUserType")) == 1;
+    const checkIsAdmin = parseInt(localStorage.getItem("LoggedInUserType")) == 1
 
     const getCategories = () => {
         getAllCategories().then((category) => setCategories(category));
     };
+
+    const handleDeleteClick = (id) => {
+        history.push(`/removeCategory/${id}`)
+    }
 
     useEffect(() => {
         if (checkIsAdmin) {
@@ -22,44 +28,25 @@ const CategoryList = () => {
     }, []);
 
     return (
-        // <div className="container">
-        //     {checkIsAdmin ? (
-        //         <>
-        //             <h1>Categories</h1>
-        //             <div className="row justify-content-center">
-        //                 <ul className="categoriesUL">
-        //                     {categories.map((category) => (
-        //                         <li>
-        //                             <Category
-        //                                 category={category}
-        //                                 key={category.Id}
-        //                             />
-        //                         </li>
-        //                     ))}
-        //                 </ul>
-        //             </div>
-        //         </>
-        //     ) : null}
-
         <div className="container">
             <h1>Categories</h1>
-            <Button
-                className="mt-2"
-                color="success"
-                onClick={() => history.push("/addCategory")}
-            >
+            <Button className="mt-2" color="success" onClick={() => history.push("/addCategory")}>
                 New Category
             </Button>{" "}
-            <div className="row justify-content-center">
-                <ul className="categoriesUL">
+            <Table className="mt-2">
+                <thead>
+                    <tr>
+                        <th>Category Name</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
                     {categories.map((category) => (
-                        <li>
-                            <Category category={category} key={category.Id} />
-                        </li>
+                        <Category category={category} handleDeleteClick={handleDeleteClick} key={category.id} />
                     ))}
-                </ul>
-            </div>
-        </div>
+                </tbody>
+            </Table>
+        </div >
     );
 };
 
