@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Post from "./Post";
 import { Table, Button } from "reactstrap";
-import { getAllPosts } from "../modules/PostManager";
+import { getAllPosts } from "../../modules/PostManager";
 import { useHistory } from "react-router";
 
 const PostList = () => {

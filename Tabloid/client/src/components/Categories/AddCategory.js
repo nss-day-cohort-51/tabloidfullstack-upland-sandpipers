@@ -1,35 +1,38 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
-import { addTag } from "../modules/TagManager";
+import { addCategory } from "../../modules/CategoryManager";
 
-export const AddTag = () => {
-    const [tag, setTag] = useState({
+export const AddCategory = () => {
+    const [category, setCategory] = useState({
         name: "",
     });
 
     const history = useHistory();
 
     const handleControlledInputChange = (event) => {
-        const newTag = { ...tag };
+        const newCategory = { ...category };
         let selectedVal = event.target.value;
-
-        newTag[event.target.id] = selectedVal;
+        // forms always provide values as strings. But we want to save the ids as numbers.
+        if (event.target.id.includes("Id")) {
+            selectedVal = parseInt(selectedVal);
+        }
+        newCategory[event.target.id] = selectedVal;
         // update state
-        setTag(newTag);
+        setCategory(newCategory);
     };
 
-    const handleClickSaveTag = (event) => {
+    const handleClickSaveCategory = (event) => {
         event.preventDefault(); //Prevents the browser from submitting the form
-        console.log(tag);
-        addTag(tag).then(() => history.push("/tags"));
+        console.log(category);
+        addCategory(category).then(() => history.push("/categories"));
     };
 
     return (
         <form className="main-content">
-            <h2 className="_title">New Vehicle:</h2>
+            <h2 className="_title">New Category:</h2>
             <fieldset className="fieldset">
                 <div className="form-group">
-                    <label htmlFor="name">Tag name:</label>
+                    <label htmlFor="name">Name:</label>
                     <input
                         type="text"
                         id="name"
@@ -38,19 +41,21 @@ export const AddTag = () => {
                         autoFocus
                         className="form-control"
                         placeholder="Name"
-                        value={tag.name}
+                        value={category.name}
                     />
                 </div>
             </fieldset>
-            <button className="btn-add-save" onClick={handleClickSaveTag}>
-                Save Tag
+            <button className="btn-add-save" onClick={handleClickSaveCategory}>
+                Save Category
             </button>
             <button
                 className="btn-add-edit"
-                onClick={() => history.push("/tags")}
+                onClick={() => history.push("/categories")}
             >
                 Cancel
             </button>
         </form>
     );
 };
+
+export default AddCategory;

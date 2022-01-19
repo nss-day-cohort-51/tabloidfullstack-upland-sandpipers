@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import User from "./User";
-import { GetAllUsers } from "../modules/UserManager";
+import { GetAllUsers } from "../../modules/UserManager";
 import { Table } from "reactstrap";
 
 const UserList = () => {
