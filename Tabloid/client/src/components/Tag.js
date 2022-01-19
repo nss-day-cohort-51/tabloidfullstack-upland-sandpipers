@@ -1,16 +1,16 @@
 import React from 'react';
-import { Table } from 'reactstrap';
+import { Button } from 'reactstrap';
 
  const Tag = ({tag}) => {
- 
     return (
-        <tbody>
           <tr>
             <th scope="row">{tag.name}</th>
-            <td>edit</td>
-            <td>delete</td>
+            <td>
+            <Button color="primary">edit</Button>{' '}
+            <Button color="danger">delete</Button>{' '}
+            </td>
+           
           </tr>
-        </tbody>
     );
   }
 

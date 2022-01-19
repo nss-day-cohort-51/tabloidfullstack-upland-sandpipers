@@ -9,7 +9,7 @@ import CategoryList from "./CategoryList";
 import MyPostsList from "./MyPostsList";
 
 export default function ApplicationViews({ isLoggedIn }) {
-
+let isAdmin = localStorage.getItem("LoggedInUserType") == 1
     return (
         <main>
             <Switch>
@@ -21,7 +21,7 @@ export default function ApplicationViews({ isLoggedIn }) {
                     {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
                 </Route>
                 <Route path="/tags" exact>
-                    {isLoggedIn ? <TagList /> : <Redirect to="/login" />}
+                    {isAdmin ? <TagList /> : <Redirect to="/login" />}
                 </Route>
 
                 <Route path="/posts/:id">
