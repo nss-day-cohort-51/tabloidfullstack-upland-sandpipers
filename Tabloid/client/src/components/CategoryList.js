@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Category from "./Category";
 import { getAllCategories } from "../modules/CategoryManager";
+import { useHistory } from "react-router-dom";
 
 const CategoryList = () => {
     const [categories, setCategories] = useState([]);
@@ -14,8 +15,12 @@ const CategoryList = () => {
     }, []);
 
     return (
+        
         <div className="container">
             <h1>Categories</h1>
+            <Button className="mt-2" color="success" onClick={() => history.push("/addCategory")}>
+                New Category
+            </Button>{" "}
             <div className="row justify-content-center">
                 <ul className="categoriesUL">
                     {categories.map((category) => (
