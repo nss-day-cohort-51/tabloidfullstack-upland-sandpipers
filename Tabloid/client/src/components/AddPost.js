@@ -15,8 +15,7 @@ const AddPost = () => {
     content: "",
     imageLocation: "",
     categoryId: "",
-    CreateDateTime: Date.now(),
-    PublishDateTime: Date.now(),
+    isApproved: true,
     userProfileId: localStorage.getItem("LoggedInUserId"),
   });
 
@@ -33,7 +32,7 @@ const AddPost = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault(); //Prevents the browser from submitting the form
-    addPost(post).then(() => history.push(`/posts/${id}`));
+    addPost(post).then(() => history.push(`/posts`));
   };
 
   useEffect(() => {
@@ -45,6 +44,7 @@ const AddPost = () => {
       <h2 className="_title">Add Post:</h2>
       <fieldset className="fieldset">
         <div className="form-group">
+        <label htmlFor="title">Title:</label>
           <input
             type="text"
             id="title"
@@ -58,7 +58,7 @@ const AddPost = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="title">Content:</label>
+          <label htmlFor="content">Content:</label>
           <textarea
             type="text"
             id="content"
@@ -106,7 +106,7 @@ const AddPost = () => {
       </button>
       <button
         className="btn-add-edit"
-        onClick={() => history.push(`/PostDetails/${id}`)}
+        onClick={() => history.push(`/myPosts`)}
       >
         Cancel
       </button>
