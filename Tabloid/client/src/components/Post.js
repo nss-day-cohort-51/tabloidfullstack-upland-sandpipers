@@ -17,7 +17,7 @@ const Post = ({ post }) => {
     }
 
     return (
-        <Card>
+        <Card className="post">
             <Link
                 to={`/posts/${post.id}`}
                 style={{ textDecoration: "none", color: "black" }}
