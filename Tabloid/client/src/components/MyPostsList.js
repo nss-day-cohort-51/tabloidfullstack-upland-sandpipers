@@ -7,7 +7,7 @@ const MyPostsList = () => {
 
     const getPosts = () => {
 
-        let userId = parseInt(sessionStorage.getItem("LoggedInUserId"));
+        let userId = parseInt(localStorage.getItem("LoggedInUserId"));
         getPostsByUserId(userId).then(resp => setPosts(resp));
 
     };
