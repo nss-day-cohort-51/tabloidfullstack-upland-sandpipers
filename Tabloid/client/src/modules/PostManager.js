@@ -56,5 +56,5 @@ export const deletePostById = (postId) => {
         headers: {
             "Content-Type": "application/json",
         },
-    }).then((res) => res.json())
+    })
 }
