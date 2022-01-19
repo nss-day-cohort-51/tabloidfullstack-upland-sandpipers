@@ -52,16 +52,18 @@ namespace Tabloid.Controllers
             return NoContent();
         }
 
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _categoryRepository.Delete(id);
+            return NoContent();
+        }
+
         // PUT api/<CategoryController>/5
         [HttpPut("{id}")]
             public void Put(int id, [FromBody] string value)
             {
             }
-
-            // DELETE api/<CategoryController>/5
-            [HttpDelete("{id}")]
-            public void Delete(int id)
-            {
-            }
+            
         }
     }

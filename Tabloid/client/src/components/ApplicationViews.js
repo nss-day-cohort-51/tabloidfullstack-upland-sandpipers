@@ -13,6 +13,7 @@ import AddComment from "./AddComment";
 import { AddTag } from "./AddTag";
 import { useState } from "react";
 import { useEffect } from "react";
+import RemoveCategory from "./RemoveCategory";
 
 export default function ApplicationViews({ isLoggedIn, isAdmin }) {
     return (
@@ -64,6 +65,10 @@ export default function ApplicationViews({ isLoggedIn, isAdmin }) {
                 </Route>
                 <Route path="/newComment/:id">
                     <AddComment userparams />
+                </Route>
+
+                <Route path="/removeCategory/:catId">
+                    <RemoveCategory userparams />
                 </Route>
             </Switch>
         </main>

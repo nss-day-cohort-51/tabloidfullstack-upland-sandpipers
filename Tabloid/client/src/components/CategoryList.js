@@ -18,8 +18,7 @@ const CategoryList = () => {
     };
 
     const handleDeleteClick = (id) => {
-        console.log(id);
-
+        history.push(`/removeCategory/${id}`)
     }
 
     useEffect(() => {
