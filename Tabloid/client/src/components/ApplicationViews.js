@@ -13,6 +13,7 @@ import AddComment from "./AddComment";
 import { AddTag } from "./AddTag";
 import { useState } from "react";
 import { useEffect } from "react";
+import AddPost from "./AddPost";
 
 export default function ApplicationViews({ isLoggedIn, isAdmin }) {
     return (
@@ -61,6 +62,9 @@ export default function ApplicationViews({ isLoggedIn, isAdmin }) {
 
                 <Route path="/myPosts">
                     <MyPostsList />
+                </Route>
+                <Route path="/addPost">
+                    <AddPost />
                 </Route>
                 <Route path="/newComment/:id">
                     <AddComment userparams />

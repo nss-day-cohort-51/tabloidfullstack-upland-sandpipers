@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import { addPost } from "../modules/PostManager";
 import { useParams } from "react-router-dom";
+import { getAllCategories } from "../modules/CategoryManager";
+
 
 const AddPost = () => {
   const [category, setCategories] = useState([]);
@@ -35,17 +37,15 @@ const AddPost = () => {
   };
 
   useEffect(() => {
-    if (checkIsAdmin) {
         getCategories();
-    }
-}, []);
+    }, []);
 
   return (
     <form className="main-content">
-      <h2 className="_title">Title:</h2>
+      <h2 className="_title">Add Post:</h2>
       <fieldset className="fieldset">
         <div className="form-group">
-          <textarea
+          <input
             type="text"
             id="title"
             onChange={handleControlledInputChange}
@@ -59,8 +59,8 @@ const AddPost = () => {
 
         <div className="form-group">
           <label htmlFor="title">Content:</label>
-          <input
-            type="textarea"
+          <textarea
+            type="text"
             id="content"
             onChange={handleControlledInputChange}
             required
