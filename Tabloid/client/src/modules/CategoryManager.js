@@ -40,3 +40,9 @@ export const getCategoryById = (categoryId) => {
         },
     }).then((resp) => resp.json());
 };
+
+export const deleteCategory = (categoryId) => {
+    return fetch(baseUrl + `/${categoryId}`, {
+        method: "DELETE"
+    })
+}
