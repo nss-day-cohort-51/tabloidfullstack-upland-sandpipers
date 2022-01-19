@@ -4,8 +4,10 @@ import Login from "./Login";
 import Register from "./Register";
 import PostList from "./PostList";
 import UserList from "./UserList"
+import TagList from "./TagList";
 import PostDetails from "./PostDetails";
 import CategoryList from "./CategoryList";
+import MyPostsList from "./MyPostsList";
 
 export default function ApplicationViews({ isLoggedIn }) {
 
@@ -23,6 +25,9 @@ export default function ApplicationViews({ isLoggedIn }) {
                 </Route>
                 <Route path="/users" exact>
                     {loggedInUser == 1 ? <UserList /> : <Redirect to="/login" />}
+                </Route>
+                <Route path="/tags" exact>
+                    {isLoggedIn ? <TagList /> : <Redirect to="/login" />}
                 </Route>
 
                 <Route path="/posts/:id">
@@ -43,6 +48,10 @@ export default function ApplicationViews({ isLoggedIn }) {
 
                 <Route path="/categories">
                     <CategoryList />
+                </Route>
+
+                <Route path="/myPosts">
+                    <MyPostsList />
                 </Route>
             </Switch>
         </main>

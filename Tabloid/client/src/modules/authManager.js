@@ -1,5 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/auth";
+import { Redirect } from "react-router-dom";
 import { getUserByFireBaseUserId } from "./UserManager";
 
 const _apiUrl = "/api/userprofile";
@@ -9,7 +10,6 @@ const _doesUserExist = (firebaseUserId) => {
   getUserByFireBaseUserId(firebaseUserId).then(user => {
     localStorage.setItem("LoggedInUserId", user.id);
     localStorage.setItem("LoggedInUserType", user.userTypeId);
-    console.log(user);
 
   });
 
@@ -60,6 +60,7 @@ export const login = (email, pw) => {
 
 export const logout = () => {
   firebase.auth().signOut()
+  localStorage.clear();
 };
 
 
