@@ -8,6 +8,7 @@ import TagList from "./TagList";
 import PostDetails from "./PostDetails";
 import CategoryList from "./CategoryList";
 import MyPostsList from "./MyPostsList";
+import { AddCategory } from "./AddCategory";
 import AddComment from "./AddComment";
 import { AddTag } from "./AddTag";
 import { useState } from "react";
@@ -53,6 +54,9 @@ export default function ApplicationViews({ isLoggedIn, isAdmin }) {
 
                 <Route path="/categories">
                     <CategoryList />
+                </Route>
+                <Route path="/addCategory">
+                    <AddCategory />
                 </Route>
 
                 <Route path="/myPosts">
