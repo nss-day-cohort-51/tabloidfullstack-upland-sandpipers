@@ -9,6 +9,7 @@ import PostDetails from "./Posts/PostDetails";
 import CategoryList from "./Categories/CategoryList";
 import MyPostsList from "./Posts/MyPostsList";
 import AddComment from "./Comments/AddComment";
+import AddCategory from "./Categories/AddCategory";
 import EditTag from "./Tags/EditTag";
 import DeleteTag from "./Tags/DeleteTag";
 import { AddTag } from "./Tags/AddTag";
@@ -55,6 +56,9 @@ export default function ApplicationViews({ isLoggedIn, isAdmin }) {
 
                 <Route path="/categories">
                     <CategoryList />
+                </Route>
+                <Route path="/addCategory">
+                    <AddCategory />
                 </Route>
 
                 <Route path="/myPosts">
