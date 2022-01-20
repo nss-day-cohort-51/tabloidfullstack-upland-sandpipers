@@ -227,10 +227,13 @@ namespace Tabloid.Repositories
 
                     cmd.CommandText = @"UPDATE Post 
                                            SET Title = @title,
+                                               Content = @content,
                                                ImageLocation = @imageLocation,
+                                               CreateDateTime = @createDateTime,
                                                PublishDateTime = @publishDateTime,
+                                               IsApproved = 1,
                                                CategoryId = @categoryId,
-                                               Content = @content
+                                               UserProfileId = @userProfileId
                                          WHERE id = @id";
 
                     cmd.Parameters.AddWithValue("@title", post.Title);
@@ -242,8 +245,10 @@ namespace Tabloid.Repositories
                     {
                         cmd.Parameters.AddWithValue("@imageLocation", DBNull.Value);
                     }
-                    cmd.Parameters.AddWithValue("@publishDateTime", post.PublishDateTime);
+                    cmd.Parameters.AddWithValue("@publishDateTime", DateTime.Now);
+                    cmd.Parameters.AddWithValue("@createDateTime", post.CreateDateTime);
                     cmd.Parameters.AddWithValue("@categoryId", post.CategoryId);
+                    cmd.Parameters.AddWithValue("@userProfileId", post.UserProfileId);
                     cmd.Parameters.AddWithValue("@content", post.Content);
                     cmd.Parameters.AddWithValue("@id", post.Id);
 
