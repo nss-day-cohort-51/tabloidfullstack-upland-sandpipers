@@ -4,15 +4,16 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getPostById } from "../../modules/PostManager";
 import { Table, Button } from "reactstrap";
-
+import DeleteComment from "../Comments/DeleteComment";
 import { useHistory } from "react-router";
 import { getCommentsByPostId } from "../../modules/CommentManager";
 
 const Post = () => {
     const history = useHistory();
-
+    const currentUser = localStorage.getItem("LoggedInUserId")
     const [post, setPost] = useState([]);
     const [comments, setComments] = useState([]);
+
 
     const { id } = useParams();
 
@@ -69,16 +70,18 @@ const Post = () => {
                 <ul>
                     {comments != null
                         ? comments.map((c) => (
-                              <li className="commentList">
-                                  <Card>
-                                      <h4>{c.subject}</h4>
-                                      <p>{c.content}</p>
-                                      <p>
-                                          Posted By: {c.userProfile.displayName}
-                                      </p>
-                                  </Card>
-                              </li>
-                          ))
+                            <li className="commentList">
+                                <Card>
+                                    <h4>{c.subject}</h4>
+                                    <p>{c.content}</p>
+                                    <p>
+                                        Posted By: {c.userProfile.displayName}
+                                    </p>
+                                    {c.userProfile.id == currentUser ? <Button color="danger" onClick={() => history.push(`/deletecomment/${c.id}`)}>Delete</Button> : <></>
+                                    }
+                                </Card>
+                            </li>
+                        ))
                         : null}
                 </ul>
                 {/* <br></br>

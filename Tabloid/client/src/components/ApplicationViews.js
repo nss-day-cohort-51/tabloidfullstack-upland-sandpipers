@@ -22,6 +22,7 @@ import RemoveCategory from "./Categories/RemoveCategory";
 import UserDetails from "./Users/UserDetails";
 import EditCategory from "./Categories/EditCategory";
 import EditPost from "./Posts/EditPost";
+import DeleteComment from "./Comments/DeleteComment";
 
 export default function ApplicationViews({ isLoggedIn, isAdmin }) {
     return (
@@ -104,7 +105,9 @@ export default function ApplicationViews({ isLoggedIn, isAdmin }) {
                 <Route path="/deleteTag/:id">
                     <DeleteTag userparams />
                 </Route>
-
+                <Route path="/deleteComment/:id">
+                    <DeleteComment userparams />
+                </Route>
                 <Route path="/editPost/:id">
                     <EditPost userparams />
                 </Route>
