@@ -23,12 +23,6 @@ const Post = () => {
         getPosts();
     }, []);
 
-    // Title
-    // Header image (if exists)
-    // Content
-    // Publication date (MM/DD/YYYY)
-    // Author's Display Name
-
     return (
         <Card>
             {post.imageLocation ? (
@@ -52,16 +46,12 @@ const Post = () => {
             <CardBody>
                 <p>{post?.content}</p>
                 <br></br>
-                {/* <h4>Categories</h4> */}
-                {/* <ul>
-                    {post.categories != null
-                        ? post.categories.map((c) => (
-                              <li>
-                                  {c.message} - Posted By: {c.userProfile.name}
-                              </li>
-                          ))
+                <h4>Tags</h4>
+                <ul>
+                    {post.tags != null
+                        ? post.tags.map((t) => <li>{t.name}</li>)
                         : null}
-                </ul> */}
+                </ul>
                 {/* <br></br> */}
                 {/* <Link to={`/posts/${post.id}`}>
                     <strong>{post.title}</strong>

@@ -7,12 +7,13 @@ import {
     clearPostTags,
 } from "../../modules/PostTagManager";
 import { Table } from "reactstrap";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { Button } from "reactstrap";
 
 const ManageTags = () => {
     const { id } = useParams();
 
+    const history = useHistory();
     const [tags, setTags] = useState([]);
     const [activeTagIds, setActiveTagIds] = useState([]);
 
@@ -36,6 +37,9 @@ const ManageTags = () => {
                 })
             );
         else clearPostTags(id);
+        setTimeout(() => {
+            history.push(`/posts/${id}`);
+        }, 500);
     };
 
     const handleTagSelected = (event) => {
