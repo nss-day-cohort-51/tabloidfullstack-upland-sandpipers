@@ -2,6 +2,7 @@
 using System;
 using Tabloid.Models;
 using Tabloid.Repositories;
+using System.Security.Claims;
 
 namespace Tabloid.Controllers
 {
@@ -50,5 +51,12 @@ namespace Tabloid.Controllers
                 new { firebaseUserId = userProfile.FirebaseUserId },
                 userProfile);
         }
+
+        private UserProfile GetCurrentUserProfile()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
+        }
+
     }
 }
