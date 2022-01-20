@@ -36,5 +36,6 @@ namespace Tabloid.Models
         [DisplayName("Author")]
         public int UserProfileId { get; set; }
         public UserProfile UserProfile { get; set; }
+        public List<Tag> Tags { get; internal set; }
     }
 }

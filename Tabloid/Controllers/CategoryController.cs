@@ -39,10 +39,11 @@ namespace Tabloid.Controllers
 
             // GET api/<CategoryController>/5
             [HttpGet("{id}")]
-            public string Get(int id)
+            public ActionResult Get(int id)
             {
-                return "value";
-            }
+            var category = _categoryRepository.GetCategoryById(id);
+            return Ok(category);
+        }
 
         // POST api/<CategoryController>
         [HttpPost]
@@ -61,9 +62,16 @@ namespace Tabloid.Controllers
 
         // PUT api/<CategoryController>/5
         [HttpPut("{id}")]
-            public void Put(int id, [FromBody] string value)
+            public IActionResult Put(int id, [FromBody] Category category)
             {
+            if (id != category.Id)
+            {
+                return BadRequest();
             }
+
+            _categoryRepository.Update(category);
+            return NoContent();
+        }
             
         }
     }

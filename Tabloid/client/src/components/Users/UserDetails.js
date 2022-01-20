@@ -41,10 +41,6 @@ const UserDetails = () => {
         <div className="text-left">Email: {user.email}</div>
         <div className="text-left">User Type: {user.userType?.name}</div>
       </div>
-
-      <Button className="mt-2" color="danger">
-        Deactivate User
-      </Button>
     </Card>
   );
 };

@@ -33,7 +33,7 @@ export const getPostById = (postId) => {
 };
 
 export const getPostsByUserId = (userId) => {
-    return fetch(baseUrl + `/GetPostByUserId/${userId}`, {
+    return fetch(baseUrl + `/GetPostsByUserId/${userId}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -48,4 +48,14 @@ export const deletePostById = (postId) => {
             "Content-Type": "application/json",
         },
     })
+}
+
+export const updatePost = (post) => {
+    return fetch(`${baseUrl}/${post.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(post),
+    });
 }
