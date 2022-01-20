@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { getCommentById } from "../../modules/CommentManager";
+import { getCommentById, updateComment } from "../../modules/CommentManager";
 
 export const EditComment = () => {
-    const [comment, setComment] = ({
+    const [comment, setComment] = useState({
         Content: "",
         Subject: ""
     })
@@ -12,8 +13,8 @@ export const EditComment = () => {
     const { id } = useParams();
 
     const history = useHistory();
-
-    useEffect(() => {
+    console.log(comment)
+    useEffect((event) => {
         getCommentById(id).then((res) => {
             setComment(res)
         })
@@ -33,15 +34,16 @@ export const EditComment = () => {
 
     const handleClickSaveComment = (e) => {
         e.preventDefault();
-
+        updateComment(comment).then(() => history.goBack());
     }
 
 
     return (
         <form className="main-content">
-            <h2 className="_title">New Comment:</h2>
+            <h2 className="_title">Edit Comment:</h2>
             <fieldset className="fieldset">
                 <div className="form-group">
+                    <label htmlFor="subject">Comment :</label>
                     <textarea
                         type="text"
                         id="content"
@@ -54,7 +56,7 @@ export const EditComment = () => {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="subject">Subject:</label>
+                    <label htmlFor="subject">Subject :</label>
                     <input
                         type="text"
                         id="subject"
@@ -66,12 +68,12 @@ export const EditComment = () => {
                     />
                 </div>
             </fieldset>
-            <button className="btn-add-save" onClick={handleSubmit}>
+            <button className="btn-add-save" onClick={handleClickSaveComment}>
                 Submit
             </button>
             <button
                 className="btn-add-edit"
-                onClick={() => history.push(`/PostDetails/${id}`)}
+                onClick={() => history.goBack()}
             >
                 Cancel
             </button>

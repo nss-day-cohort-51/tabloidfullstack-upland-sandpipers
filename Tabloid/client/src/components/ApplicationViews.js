@@ -14,8 +14,6 @@ import EditTag from "./Tags/EditTag";
 import DeleteTag from "./Tags/DeleteTag";
 import ManageTags from "./Tags/ManageTags";
 import { AddTag } from "./Tags/AddTag";
-import { useState } from "react";
-import { useEffect } from "react";
 import AddPost from "./Posts/AddPost";
 import DeletePost from "./Posts/DeletePost";
 import RemoveCategory from "./Categories/RemoveCategory";
@@ -23,6 +21,7 @@ import UserDetails from "./Users/UserDetails";
 import EditCategory from "./Categories/EditCategory";
 import EditPost from "./Posts/EditPost";
 import DeleteComment from "./Comments/DeleteComment";
+import EditComment from "./Comments/EditComment";
 
 export default function ApplicationViews({ isLoggedIn, isAdmin }) {
     return (
@@ -107,6 +106,9 @@ export default function ApplicationViews({ isLoggedIn, isAdmin }) {
                 </Route>
                 <Route path="/deleteComment/:id">
                     <DeleteComment userparams />
+                </Route>
+                <Route path="/editComment/:id">
+                    <EditComment userparams />
                 </Route>
                 <Route path="/editPost/:id">
                     <EditPost userparams />
