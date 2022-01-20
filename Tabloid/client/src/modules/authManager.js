@@ -1,7 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 import { Redirect } from "react-router-dom";
-import { getUserByFireBaseUserId, getUserById } from "./UserManager";
 import { getUserByFireBaseUserId } from "./UserManager";
 
 const _apiUrl = "/api/userprofile";

@@ -4,9 +4,7 @@ const userUrl = "/api/UserProfile";
 export const GetAllUsers = () => {
     return fetch(userUrl).then((res) => res.json());
 };
-export const getUserById = (id) => {
-    return fetch(userUrl+`/userBy/${id}`,).then((res) => res.json());
-};
+
 
 export const getUserByFireBaseUserId = (fireId) => {
     return fetch(userUrl + `/${fireId}`, {
