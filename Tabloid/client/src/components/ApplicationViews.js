@@ -12,6 +12,7 @@ import AddComment from "./Comments/AddComment";
 import AddCategory from "./Categories/AddCategory";
 import EditTag from "./Tags/EditTag";
 import DeleteTag from "./Tags/DeleteTag";
+import ManageTags from "./Tags/ManageTags";
 import { AddTag } from "./Tags/AddTag";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -94,6 +95,9 @@ export default function ApplicationViews({ isLoggedIn, isAdmin }) {
 
                 <Route path="/editPost/:id">
                     <EditPost userparams />
+                </Route>
+                <Route path="/manageTags/:id">
+                    <ManageTags userparams />
                 </Route>
             </Switch>
         </main>

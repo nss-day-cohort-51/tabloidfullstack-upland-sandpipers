@@ -33,7 +33,7 @@ export const getPostById = (postId) => {
 };
 
 export const getPostsByUserId = (userId) => {
-    return fetch(baseUrl + `/GetPostByUserId/${userId}`, {
+    return fetch(baseUrl + `/GetPostsByUserId/${userId}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",

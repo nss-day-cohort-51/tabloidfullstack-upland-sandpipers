@@ -29,7 +29,7 @@ namespace Tabloid.Controllers
             _commentRepository = commentRepository;
             _userProfileRepository = userProfileRepository;
         }
-        
+
         // GET: api/<PostController>
         [HttpGet]
         public IActionResult Index()
@@ -46,6 +46,7 @@ namespace Tabloid.Controllers
             return Ok(post);
         }
 
+
         [HttpPost]
         public IActionResult Post(Post post)
         {
@@ -55,7 +56,7 @@ namespace Tabloid.Controllers
             return NoContent();
         }
 
-        [HttpGet("GetPostByUserId/{id}")]
+        [HttpGet("GetPostsByUserId/{id}")]
         public IActionResult GetByUserId(int id)
         {
             var posts = _postRepository.GetPostsByUserId(id);

@@ -26,7 +26,7 @@ export const AddTag = () => {
 
     return (
         <form className="main-content">
-            <h2 className="_title">New Vehicle:</h2>
+            <h2 className="_title">New Tag</h2>
             <fieldset className="fieldset">
                 <div className="form-group">
                     <label htmlFor="name">Tag name:</label>
