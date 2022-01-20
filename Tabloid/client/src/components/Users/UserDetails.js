@@ -7,51 +7,45 @@ import { Button } from "reactstrap";
 // import { useHistory } from "react-router";
 
 const UserDetails = () => {
-    const [user, setUser] = useState([]);
+  const [user, setUser] = useState([]);
 
-    const { id } = useParams();
+  const { id } = useParams();
 
-const getUser = () => {
+  const getUser = () => {
     getUserById(id).then((user) => setUser(user));
-};
+  };
 
-useEffect(() => {
+  useEffect(() => {
     getUser();
-}, []);
+  }, []);
 
-    return (
-        <Card>
-            {user.imageLocation ? (
-                <div className="userDetails__headerImage">
-                    <img src={user.imageLocation} alt="profile"></img>
-                </div>
-            ) : (
-                <></>
-            )}
-            <p>
-                <strong>{user?.displayName}</strong>
-            </p>
-            <div className="userDetails__header">
-                <span className="text-left x-2">
-                    Full Name: {user?.firstName}
-                </span>
-                <span className="text-left px-2">
-                    Creation Date: {user?.CreateDate}
-                </span>
-                <span className="text-left px-2">
-                    Email: {user?.email}
-                </span>
-                <span className="text-left px-2">
-                   User Type: {user?.userType.name}
-                </span>
-            </div>
-            <Button
-                className="mt-2"
-                color="danger"
-            >
-               Deactivate User
-            </Button>
-        </Card>
-    );
+  return (
+    <Card className="d-flex justify-content-sm-around align-items-baseline p-5">
+      <div className="ImageDisplayName">
+        <p>
+          Display Name:
+          <strong>{user.displayName}</strong>
+        </p>
+        {user.imageLocation ? (
+          <div className="userDetails__headerImage">
+            <img src={user.imageLocation} alt="profile"></img>
+          </div>
+        ) : (
+          <></>
+        )}
+      </div>
+
+      <div className="userDetails__body">
+        <div className="text-left">Full Name:{user?.fullName}</div>
+        <div className="text-left ">Creation Date: {user.createDate}</div>
+        <div className="text-left">Email: {user.email}</div>
+        <div className="text-left">User Type: {user.userType?.name}</div>
+      </div>
+
+      <Button className="mt-2" color="danger">
+        Deactivate User
+      </Button>
+    </Card>
+  );
 };
 export default UserDetails;

@@ -39,15 +39,11 @@ namespace Tabloid.Controllers
             return Ok();
         }
 
-        [HttpGet("GetUserBy/{id}")]
+        [HttpGet("UserBy/{id}")]
         public IActionResult GetUserById(int id)
         {
             var userProfile = _userProfileRepository.GetUserById(id);
-            if (userProfile == null)
-            {
-                return NotFound();
-            }
-            return Ok();
+            return Ok(userProfile);
         }
 
         [HttpPost]
