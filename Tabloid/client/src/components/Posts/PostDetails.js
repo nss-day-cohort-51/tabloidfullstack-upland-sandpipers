@@ -24,22 +24,16 @@ const Post = () => {
     };
 
     const getComments = () => {
-        getCommentsByPostId(id).then(rsp => {
+        getCommentsByPostId(id).then((rsp) => {
             setComments(rsp);
             console.log(rsp);
-        })
-    }
+        });
+    };
 
     useEffect(() => {
         getPosts();
         getComments();
     }, []);
-
-    // Title
-    // Header image (if exists)
-    // Content
-    // Publication date (MM/DD/YYYY)
-    // Author's Display Name
 
     return (
         <Card>
@@ -64,18 +58,27 @@ const Post = () => {
             <CardBody>
                 <p>{post?.content}</p>
                 <br></br>
+                <h4>Tags</h4>
+                <ul>
+                    {post.tags != null
+                        ? post.tags.map((t) => <li>{t.name}</li>)
+                        : null}
+                </ul>
+                {/* <br></br> */}
                 {comments.length != 0 ? <h4>Comments</h4> : null}
                 <ul>
                     {comments != null
                         ? comments.map((c) => (
-                            <li className="commentList">
-                                <Card>
-                                    <h4>{c.subject}</h4>
-                                    <p>{c.content}</p>
-                                    <p>Posted By: {c.userProfile.displayName}</p>
-                                </Card>
-                            </li>
-                        ))
+                              <li className="commentList">
+                                  <Card>
+                                      <h4>{c.subject}</h4>
+                                      <p>{c.content}</p>
+                                      <p>
+                                          Posted By: {c.userProfile.displayName}
+                                      </p>
+                                  </Card>
+                              </li>
+                          ))
                         : null}
                 </ul>
                 {/* <br></br>
@@ -83,6 +86,13 @@ const Post = () => {
                     <strong>{post.title}</strong>
                 </Link> */}
             </CardBody>
+            <Button
+                className="mt-2"
+                color="success"
+                onClick={() => history.push(`../manageTags/${id}`)}
+            >
+                Manage Tags
+            </Button>
             <Button
                 className="mt-2"
                 color="success"

@@ -12,9 +12,8 @@ const DeleteTag = () => {
 
     const history = useHistory();
 
-    useEffect((event) => {
+    useEffect(() => {
         getTag(id).then((res) => {
-            debugger;
             setTag(res);
         });
     }, []);

@@ -1,10 +1,10 @@
-const baseUrl = "/api/post";
+const baseUrl = "/api/postTag";
 
-export const getAllPosts = () => {
+export const getAllPostTags = () => {
     return fetch(baseUrl).then((res) => res.json());
 };
 
-export const addPost = (post) => {
+export const addPostTag = (post) => {
     return fetch(baseUrl, {
         method: "POST",
         headers: {
@@ -14,8 +14,8 @@ export const addPost = (post) => {
     });
 };
 
-export const getBySearch = (q, isSort) => {
-    return fetch(baseUrl + `/search?q=${q}&sortDesc=${isSort}`, {
+export const getPostTag = (postTagId) => {
+    return fetch(`${baseUrl}/${postTagId}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -23,8 +23,8 @@ export const getBySearch = (q, isSort) => {
     }).then((res) => res.json());
 };
 
-export const getPostById = (postId) => {
-    return fetch(baseUrl + `/${postId}`, {
+export const getPostTagsByPostId = (postId) => {
+    return fetch(baseUrl + `/GetPostTags/${postId}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -32,17 +32,21 @@ export const getPostById = (postId) => {
     }).then((resp) => resp.json());
 };
 
-export const getPostsByUserId = (userId) => {
-    return fetch(baseUrl + `/GetPostsByUserId/${userId}`, {
-        method: "GET",
+export const replaceTags = (postTags) => {
+    return fetch(baseUrl + `/ClearPostTags/${postTags[0].postId}`, {
+        method: "DELETE",
         headers: {
             "Content-Type": "application/json",
         },
-    }).then((resp) => resp.json());
+    }).then(() => {
+        postTags.forEach((postTag) => {
+            addPostTag(postTag);
+        });
+    });
 };
 
-export const deletePostById = (postId) => {
-    return fetch(baseUrl + `/${postId}`, {
+export const clearPostTags = (postId) => {
+    return fetch(baseUrl + `/ClearPostTags/${postId}`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
