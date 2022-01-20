@@ -29,6 +29,7 @@ const UpdateUserType = () => {
             {user.userTypeId == 3 ? <p>Are you sure you want to reactivate {user.displayName}?</p> : <p>Are you sure you want to deactivate {user.displayName}?</p>}
             <Button
                 className="btn-add-delete"
+                color="warning"
                 variant="danger"
                 onClick={handleConfirm}
             >
@@ -37,6 +38,7 @@ const UpdateUserType = () => {
             <br />
             <Button
                 className="btn-add-edit"
+                color="primary"
                 variant="secondary"
                 onClick={() => history.push("/users")}
             >

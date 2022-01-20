@@ -24,6 +24,7 @@ import EditCategory from "./Categories/EditCategory";
 import EditPost from "./Posts/EditPost";
 import UpdateUserType from "./Users/UpdateUserType";
 import DeleteComment from "./Comments/DeleteComment";
+import UserPostList from "./Posts/UserPostList";
 
 export default function ApplicationViews({ isLoggedIn, isAdmin }) {
     return (
@@ -118,6 +119,14 @@ export default function ApplicationViews({ isLoggedIn, isAdmin }) {
 
                 <Route path="/updateUserType/:id">
                     <UpdateUserType userparams />
+                </Route>
+
+                <Route path="/userPosts/:id">
+                    {isLoggedIn ? (
+                        <UserPostList useparams />
+                    ) : (
+                        <Redirect to="/login" />
+                    )}
                 </Route>
             </Switch>
         </main>
