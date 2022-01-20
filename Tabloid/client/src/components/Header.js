@@ -48,6 +48,11 @@ export default function Header({ isLoggedIn, isAdmin }) {
                                         Tags
                                     </NavLink>
                                 </NavItem> : null}
+                                {isAdmin ? <NavItem>
+                                    <NavLink tag={RRNavLink} to="/addReaction">
+                                        Reaction
+                                    </NavLink>
+                                </NavItem> : null}
 
                                 {isAdmin ? <NavItem>
                                     <NavLink tag={RRNavLink} to="/categories">
