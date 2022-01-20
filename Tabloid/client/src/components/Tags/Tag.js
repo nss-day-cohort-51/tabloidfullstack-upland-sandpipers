@@ -16,10 +16,10 @@ const Tag = ({ tag }) => {
         <tr>
             <th scope="row">{tag.name}</th>
             <td>
-                <Button color="primary" onClick={handleEdit}>
+                <Button className="mr-2" color="primary" onClick={handleEdit}>
                     edit
                 </Button>
-                <Button color="primary" onClick={handleDelete}>
+                <Button color="danger" onClick={handleDelete}>
                     delete
                 </Button>
             </td>
