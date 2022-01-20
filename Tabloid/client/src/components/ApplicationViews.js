@@ -22,6 +22,7 @@ import RemoveCategory from "./Categories/RemoveCategory";
 import UserDetails from "./Users/UserDetails";
 import EditCategory from "./Categories/EditCategory";
 import EditPost from "./Posts/EditPost";
+import { AddReaction } from "./Reactions/AddReaction"
 
 export default function ApplicationViews({ isLoggedIn, isAdmin }) {
     return (
@@ -43,6 +44,9 @@ export default function ApplicationViews({ isLoggedIn, isAdmin }) {
                 </Route>
                 <Route path="/addTag">
                     <AddTag />
+                </Route>
+                <Route path="/addReaction">
+                    <AddReaction />
                 </Route>
 
                 <Route path="/posts/:id">
