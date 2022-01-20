@@ -31,3 +31,8 @@ export const getCommentById = (commentId) => {
         },
     }).then((resp) => resp.json());
 };
+export const deleteComment = (commentId) => {
+    return fetch(baseUrl + `/${commentId}`, {
+        method: "DELETE"
+    })
+}
