@@ -170,7 +170,6 @@ namespace Tabloid.Repositories
                             },
                         };
                     }
-
                     reader.Close();
 
                     return userProfile;
