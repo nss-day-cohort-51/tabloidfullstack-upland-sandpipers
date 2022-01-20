@@ -49,3 +49,13 @@ export const deletePostById = (postId) => {
         },
     })
 }
+
+export const updatePost = (post) => {
+    return fetch(`${baseUrl}/${post.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(post),
+    });
+}

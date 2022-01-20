@@ -11,7 +11,9 @@ const MyPostsList = () => {
     };
 
     useEffect(() => {
-        getPosts();
+        setTimeout(() => {
+            getPosts();
+        }, 300)
     }, []);
 
     return (
