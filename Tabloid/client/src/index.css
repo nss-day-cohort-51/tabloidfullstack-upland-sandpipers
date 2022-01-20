@@ -38,3 +38,7 @@ p {
 .ManageTags__save {
   width: 80px;
 }
+
+.commentList {
+  list-style-type: none;
+}

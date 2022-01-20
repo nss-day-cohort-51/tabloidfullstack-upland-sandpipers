@@ -89,6 +89,7 @@ namespace Tabloid.Repositories
                 }
             }
         }
+
         public Post GetPublishedPostById(int id)
         {
             using (var conn = Connection)
@@ -197,7 +198,7 @@ namespace Tabloid.Repositories
                     cmd.CommandText = @"
                         INSERT INTO Post (
                             Title, Content, ImageLocation, CreateDateTime, PublishDateTime,
-                            IsApproved, CategoryId, UserProfileId )
+                            IsApproved, CategoryId, UserProfileId)
                         OUTPUT INSERTED.ID
                         VALUES (
                             @Title, @Content, @ImageLocation, @CreateDateTime, @PublishDateTime,
@@ -210,7 +211,6 @@ namespace Tabloid.Repositories
                     cmd.Parameters.AddWithValue("@IsApproved", post.IsApproved);
                     cmd.Parameters.AddWithValue("@CategoryId", post.CategoryId);
                     cmd.Parameters.AddWithValue("@UserProfileId", post.UserProfileId);
-
                     post.Id = (int)cmd.ExecuteScalar();
                 }
             }

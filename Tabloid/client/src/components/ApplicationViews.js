@@ -16,6 +16,9 @@ import ManageTags from "./Tags/ManageTags";
 import { AddTag } from "./Tags/AddTag";
 import { useState } from "react";
 import { useEffect } from "react";
+import AddPost from "./Posts/AddPost";
+import DeletePost from "./Posts/DeletePost";
+import RemoveCategory from "./Categories/RemoveCategory";
 
 export default function ApplicationViews({ isLoggedIn, isAdmin }) {
     return (
@@ -50,6 +53,13 @@ export default function ApplicationViews({ isLoggedIn, isAdmin }) {
                 <Route path="/login">
                     <Login />
                 </Route>
+                <Route path="/deletepost/:id">
+                    {isLoggedIn ? (
+                        <DeletePost useparams />
+                    ) : (
+                        <Redirect to="/login" />
+                    )}
+                </Route>
 
                 <Route path="/register">
                     <Register />
@@ -65,8 +75,15 @@ export default function ApplicationViews({ isLoggedIn, isAdmin }) {
                 <Route path="/myPosts">
                     <MyPostsList />
                 </Route>
+                <Route path="/addPost">
+                    <AddPost />
+                </Route>
                 <Route path="/newComment/:id">
                     <AddComment userparams />
+                </Route>
+
+                <Route path="/removeCategory/:catId">
+                    <RemoveCategory userparams />
                 </Route>
                 <Route path="/editTag/:id">
                     <EditTag userparams />

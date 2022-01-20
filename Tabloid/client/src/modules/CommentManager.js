@@ -15,7 +15,7 @@ export const addComment = (comment) => {
 };
 
 export const getCommentsByPostId = (postId) => {
-    return fetch(baseUrl + `/commentByPost/${postId}`, {
+    return fetch(baseUrl + `/GetCommentsByPostId/${postId}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",

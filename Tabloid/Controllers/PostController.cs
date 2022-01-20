@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Tabloid.Models;
 using Tabloid.Repositories;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -28,7 +29,7 @@ namespace Tabloid.Controllers
             _commentRepository = commentRepository;
             _userProfileRepository = userProfileRepository;
         }
-        
+
         // GET: api/<PostController>
         [HttpGet]
         public IActionResult Index()
@@ -45,7 +46,16 @@ namespace Tabloid.Controllers
             return Ok(post);
         }
 
-        
+
+        [HttpPost]
+        public IActionResult Post(Post post)
+        {
+            post.CreateDateTime = DateTime.Now;
+            post.PublishDateTime = DateTime.Now;
+            _postRepository.Add(post);
+            return NoContent();
+        }
+
         [HttpGet("GetPostsByUserId/{id}")]
         public IActionResult GetByUserId(int id)
         {
@@ -54,10 +64,6 @@ namespace Tabloid.Controllers
         }
 
         // POST api/<PostController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
 
         // PUT api/<PostController>/5
         [HttpPut("{id}")]
@@ -69,6 +75,7 @@ namespace Tabloid.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            _postRepository.Delete(id);
         }
     }
 }
