@@ -32,7 +32,7 @@ const EditTag = () => {
 
         updateTag(tag).then(() => history.push("/tags"));
     };
-
+    console.log(tag.name)
     return (
         <form className="main-content">
             <h2 className="_title">New Vehicle:</h2>
@@ -46,7 +46,6 @@ const EditTag = () => {
                         required
                         autoFocus
                         className="form-control"
-                        placeholder="Name"
                         value={tag.name}
                     />
                 </div>

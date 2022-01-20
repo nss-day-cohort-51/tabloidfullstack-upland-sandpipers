@@ -18,6 +18,7 @@ import { useEffect } from "react";
 import AddPost from "./Posts/AddPost";
 import DeletePost from "./Posts/DeletePost";
 import RemoveCategory from "./Categories/RemoveCategory";
+import EditCategory from "./Categories/EditCategory";
 
 export default function ApplicationViews({ isLoggedIn, isAdmin }) {
     return (
@@ -86,6 +87,9 @@ export default function ApplicationViews({ isLoggedIn, isAdmin }) {
                 </Route>
                 <Route path="/editTag/:id">
                     <EditTag userparams />
+                </Route>
+                <Route path="/editCategory/:id">
+                    <EditCategory userparams />
                 </Route>
                 <Route path="/deleteTag/:id">
                     <DeleteTag userparams />
