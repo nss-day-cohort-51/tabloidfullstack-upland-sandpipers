@@ -14,6 +14,10 @@ const Post = ({ post }) => {
         history.push(`/deletepost/${post.id}`);
     };
 
+    const handleEdit = () => {
+        history.push(`/editPost/${post.id}`);
+    };
+
     return (
         <Card className="post">
             <Link
@@ -35,7 +39,16 @@ const Post = ({ post }) => {
                 </CardBody>
             </Link>
             {userId == post.userProfile.id ? (
-                <Button onClick={handleDelete}>Delete</Button>
+                <Button color="danger" onClick={handleDelete}>
+                    Delete
+                </Button>
+            ) : (
+                <></>
+            )}
+            {userId == post.userProfile.id ? (
+                <Button color="primary" onClick={handleEdit}>
+                    Edit
+                </Button>
             ) : (
                 <></>
             )}

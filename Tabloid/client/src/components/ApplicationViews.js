@@ -12,12 +12,14 @@ import AddComment from "./Comments/AddComment";
 import AddCategory from "./Categories/AddCategory";
 import EditTag from "./Tags/EditTag";
 import DeleteTag from "./Tags/DeleteTag";
+import ManageTags from "./Tags/ManageTags";
 import { AddTag } from "./Tags/AddTag";
 import { useState } from "react";
 import { useEffect } from "react";
 import AddPost from "./Posts/AddPost";
 import DeletePost from "./Posts/DeletePost";
 import RemoveCategory from "./Categories/RemoveCategory";
+import EditPost from "./Posts/EditPost";
 
 export default function ApplicationViews({ isLoggedIn, isAdmin }) {
     return (
@@ -89,6 +91,13 @@ export default function ApplicationViews({ isLoggedIn, isAdmin }) {
                 </Route>
                 <Route path="/deleteTag/:id">
                     <DeleteTag userparams />
+                </Route>
+
+                <Route path="/editPost/:id">
+                    <EditPost userparams />
+                </Route>
+                <Route path="/manageTags/:id">
+                    <ManageTags userparams />
                 </Route>
             </Switch>
         </main>
