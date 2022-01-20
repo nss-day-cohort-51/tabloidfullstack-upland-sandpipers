@@ -5,36 +5,27 @@ import { useParams } from "react-router-dom";
 import { getCommentById, updateComment } from "../../modules/CommentManager";
 
 export const EditComment = () => {
-    const [comment, setComment] = useState({
-        Content: "",
-        Subject: ""
-    })
+    const [comment, setComment] = useState([])
 
     const { id } = useParams();
 
     const history = useHistory();
-    console.log(comment)
+
     useEffect((event) => {
-        getCommentById(id).then((res) => {
-            setComment(res)
-        })
+        getCommentById(id).then(setComment)
     }, []);
 
     const handleControlledInputChange = (event) => {
         const newComment = { ...comment };
         let selectedVal = event.target.value;
-        // forms always provide values as strings. But we want to save the ids as numbers.
-        if (event.target.id.includes("Id")) {
-            selectedVal = parseInt(selectedVal);
-        }
+
         newComment[event.target.id] = selectedVal;
-        // update state
         setComment(newComment);
     };
 
     const handleClickSaveComment = (e) => {
         e.preventDefault();
-        updateComment(comment).then(() => history.goBack());
+        updateComment(id).then(() => history.goBack());
     }
 
 
