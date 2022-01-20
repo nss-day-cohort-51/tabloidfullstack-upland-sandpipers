@@ -42,7 +42,7 @@ export const getPostById = (postId) => {
 };
 
 export const getPostsByUserId = (userId) => {
-    return fetch(baseUrl + `/GetPostByUserId/${userId}`, {
+    return fetch(baseUrl + `/GetPostsByUserId/${userId}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -50,11 +50,11 @@ export const getPostsByUserId = (userId) => {
     }).then((resp) => resp.json());
 };
 
-export const getPostTagsByPostId = (postId) => {
-    return fetch(baseUrl + `/GetPostTags/${postId}`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-        },
-    }).then((resp) => resp.json());
-};
+// export const getPostTagsByPostId = (postId) => {
+//     return fetch(baseUrl + `/GetPostTags/${postId}`, {
+//         method: "GET",
+//         headers: {
+//             "Content-Type": "application/json",
+//         },
+//     }).then((resp) => resp.json());
+// };

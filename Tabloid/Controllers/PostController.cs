@@ -46,7 +46,7 @@ namespace Tabloid.Controllers
         }
 
         
-        [HttpGet("GetPostByUserId/{id}")]
+        [HttpGet("GetPostsByUserId/{id}")]
         public IActionResult GetByUserId(int id)
         {
             var posts = _postRepository.GetPostsByUserId(id);

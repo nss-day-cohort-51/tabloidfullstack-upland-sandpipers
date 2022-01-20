@@ -34,3 +34,7 @@ p {
   display: flex;
   justify-content: flex-end;
 }
+
+.ManageTags__save {
+  width: 80px;
+}

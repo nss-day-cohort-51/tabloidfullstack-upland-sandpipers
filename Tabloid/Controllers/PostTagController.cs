@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Tabloid.Models;
 using Tabloid.Repositories;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -45,8 +46,7 @@ namespace Tabloid.Controllers
             return Ok(postTag);
         }
 
-
-        [HttpGet("GetPostByUserId/{id}")]
+        [HttpGet("GetPostTags/{id}")]
         public IActionResult GetByPostId(int id)
         {
             var postTags = _postTagRepository.GetPostTagsByPostId(id);
@@ -55,20 +55,25 @@ namespace Tabloid.Controllers
 
         // POST api/<PostTagController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post(PostTag postTag)
         {
-        }
-
-        // PUT api/<PostTagController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
+            _postTagRepository.Add(postTag);
+            return NoContent();
         }
 
         // DELETE api/<PostTagController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            _postTagRepository.Delete(id);
+            return NoContent();
+        }
+
+        [HttpDelete("ClearPostTags/{id}")]
+        public IActionResult ClearPostTags(int id)
+        {
+            _postTagRepository.clearPostTagsForPost(id);
+            return NoContent();
         }
     }
 }

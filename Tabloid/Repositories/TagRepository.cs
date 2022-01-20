@@ -150,7 +150,6 @@ namespace Tabloid.Repositories
             }
         }
 
-
         public void Update(Tag tag)
         {
             using (SqlConnection conn = Connection)

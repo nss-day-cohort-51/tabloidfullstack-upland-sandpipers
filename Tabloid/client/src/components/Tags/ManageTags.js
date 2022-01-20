@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
-import Tag from "./Tag";
+import PostTag from "./PostTag";
 import { getAllTags } from "../../modules/TagManager";
-import { Table, Button } from "reactstrap";
-import { useHistory } from "react-router";
+import {
+    getPostTagsByPostId,
+    replaceTags,
+    clearPostTags,
+} from "../../modules/PostTagManager";
+import { Table } from "reactstrap";
 import { useParams } from "react-router-dom";
-import { getPostById } from "../../modules/PostManager";
+import { Button } from "reactstrap";
 
 const ManageTags = () => {
-    const history = useHistory();
     const { id } = useParams();
 
     const [tags, setTags] = useState([]);
-    const [post, setPost] = useState(null);
-    const [tagIds, setTagIds] = useState([]);
+    const [activeTagIds, setActiveTagIds] = useState([]);
 
     let isAdmin = localStorage.getItem("LoggedInUserType") == 1;
     const getTags = () => {
@@ -21,25 +23,35 @@ const ManageTags = () => {
 
     useEffect(() => {
         getTags();
-        getPostById(id).then((post) =>
-            setTagIds(post.Tags.map((tag) => tag.id))
-        );
+        getPostTagsByPostId(id).then((postTags) => {
+            setActiveTagIds(postTags.map((pt) => pt.tagId));
+        });
     }, []);
+
+    const handleSave = () => {
+        if (activeTagIds.length > 0)
+            replaceTags(
+                activeTagIds.map((tagId) => {
+                    return { tagId: tagId, postId: parseInt(id) };
+                })
+            );
+        else clearPostTags(id);
+    };
 
     const handleTagSelected = (event) => {
         event.preventDefault();
-        const newId = event.target.id.split("--")[1];
+        const newId = parseInt(event.target.id.split("--")[1]);
 
-        const tagIdsCopy = [...tagIds];
+        const activeTagIdsCopy = [...activeTagIds];
         // set new list of tags by filtering out a tag that already exists else adding a new id to the list
-        if (tagIdsCopy.includes(newId)) {
-            setTagIds(tagIdsCopy.filter((tag) => tag != newId));
-        } else setTagIds(tagIdsCopy.push(newId));
-    };
-
-    const tagInteractionText = (id) => {
-        if (tagIds.includes(id)) return "Remove Tag";
-        else return "Add Tag";
+        if (activeTagIdsCopy.includes(newId)) {
+            setActiveTagIds([
+                ...activeTagIdsCopy.filter((tag) => tag != newId),
+            ]);
+        } else {
+            activeTagIdsCopy.push(newId);
+            setActiveTagIds(activeTagIdsCopy);
+        }
     };
 
     return (
@@ -53,16 +65,23 @@ const ManageTags = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {tags.map((tag) => (
-                        <>
-                            <Tag tag={tag} key={tag.id} />
-                            <Button id={`manageTags--${tag.id}`}>
-                                {tagInteractionText(tag.id)}
-                            </Button>
-                        </>
+                    {tags.map((postTag) => (
+                        <PostTag
+                            postTag={postTag}
+                            key={postTag.id}
+                            handleTagSelected={handleTagSelected}
+                            activeTagIds={activeTagIds}
+                        />
                     ))}
                 </tbody>
             </Table>
+            <Button
+                color="secondary"
+                className="ManageTags__save"
+                onClick={handleSave}
+            >
+                Save
+            </Button>
         </div>
     );
 };
