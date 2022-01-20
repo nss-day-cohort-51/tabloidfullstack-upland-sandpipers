@@ -106,23 +106,38 @@ namespace Tabloid.Repositories
                               u.FirstName, u.LastName, u.DisplayName, 
                               u.Email, u.CreateDateTime, u.ImageLocation AS AvatarImage,
                               u.UserTypeId, 
-                              ut.[Name] AS UserTypeName
+                              ut.[Name] AS UserTypeName,
+                              t.[Name] AS TagName,
+                              t.Id AS TagId
                          FROM Post p
                               LEFT JOIN Category c ON p.CategoryId = c.id
                               LEFT JOIN UserProfile u ON p.UserProfileId = u.id
                               LEFT JOIN UserType ut ON u.UserTypeId = ut.id
-                        WHERE IsApproved = 1 AND PublishDateTime < SYSDATETIME()
-                              AND p.id = @id;";
-
+                              LEFT JOIN PostTag pt ON pt.PostId = p.id
+                              LEFT JOIN Tag t ON t.Id = pt.TagId
+                         WHERE p.id = @id;";
 
                     cmd.Parameters.AddWithValue("@id", id);
                     var reader = cmd.ExecuteReader();
 
                     Post post = null;
 
-                    if (reader.Read())
+                    while (reader.Read())
                     {
-                        post = NewPostFromReader(reader);
+                        if (post == null)
+                        {
+                            post = NewPostFromReader(reader);
+                        }
+                        if (DbUtils.IsNotDbNull(reader, "TagName"))
+                        {
+                            Tag tag = new Tag()
+                            {
+                                Name = DbUtils.GetString(reader, "TagName"),
+                                Id = DbUtils.GetInt(reader, "TagId"),
+                            };
+
+                            post.Tags.Add(tag);
+                        }
                     }
 
                     reader.Close();
@@ -212,10 +227,13 @@ namespace Tabloid.Repositories
 
                     cmd.CommandText = @"UPDATE Post 
                                            SET Title = @title,
+                                               Content = @content,
                                                ImageLocation = @imageLocation,
+                                               CreateDateTime = @createDateTime,
                                                PublishDateTime = @publishDateTime,
+                                               IsApproved = 1,
                                                CategoryId = @categoryId,
-                                               Content = @content
+                                               UserProfileId = @userProfileId
                                          WHERE id = @id";
 
                     cmd.Parameters.AddWithValue("@title", post.Title);
@@ -227,8 +245,10 @@ namespace Tabloid.Repositories
                     {
                         cmd.Parameters.AddWithValue("@imageLocation", DBNull.Value);
                     }
-                    cmd.Parameters.AddWithValue("@publishDateTime", post.PublishDateTime);
+                    cmd.Parameters.AddWithValue("@publishDateTime", DateTime.Now);
+                    cmd.Parameters.AddWithValue("@createDateTime", post.CreateDateTime);
                     cmd.Parameters.AddWithValue("@categoryId", post.CategoryId);
+                    cmd.Parameters.AddWithValue("@userProfileId", post.UserProfileId);
                     cmd.Parameters.AddWithValue("@content", post.Content);
                     cmd.Parameters.AddWithValue("@id", post.Id);
 
@@ -284,7 +304,8 @@ namespace Tabloid.Repositories
                         Id = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
                         Name = reader.GetString(reader.GetOrdinal("UserTypeName"))
                     }
-                }
+                },
+                Tags = new List<Tag>()
             };
         }
 

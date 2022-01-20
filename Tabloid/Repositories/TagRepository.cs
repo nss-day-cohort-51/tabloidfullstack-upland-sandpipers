@@ -106,10 +106,49 @@ namespace Tabloid.Repositories
                     postTag.Id = id;
                 }
             }
-
-
         }
 
+        public List<PostTag> GetPostTagsByPostId(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                       SELECT pt.Id, pt.PostId, pt.TagId, t.Name 
+                         FROM PostTag pt
+                              LEFT JOIN Tag t ON t.Id = pt.TagId
+                              LEFT JOIN Post p ON p.id= pt.PostId
+                        WHERE p.id = @id";
+
+                    cmd.Parameters.AddWithValue("@id", id);
+                    var reader = cmd.ExecuteReader();
+
+                    List<PostTag> postTags = new List<PostTag> { };
+
+                    while (reader.Read())
+                    {
+                        PostTag postTag = new PostTag()
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            PostId = reader.GetInt32(reader.GetOrdinal("PostId")),
+                            TagId = reader.GetInt32(reader.GetOrdinal("TagId")),
+                            Tag = new Tag()
+                            {
+                                Name = reader.GetString(reader.GetOrdinal("Name")),
+                            }
+                        };
+
+                        postTags.Add(postTag);
+                    }
+
+                    reader.Close();
+
+                    return postTags;
+                }
+            }
+        }
 
         public void Update(Tag tag)
         {

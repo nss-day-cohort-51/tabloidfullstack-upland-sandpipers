@@ -88,6 +88,24 @@ namespace Tabloid.Repositories
             }
         }
 
+        public void Add(PostTag postTag)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"INSERT INTO PostTag (PostId, TagId) OUTPUT INSERTED.ID
+                                                     VALUES (@postId, @tagId)";
+                    cmd.Parameters.AddWithValue("@postId", postTag.PostId);
+                    cmd.Parameters.AddWithValue("@tagId", postTag.TagId);
+
+                    int id = (int)cmd.ExecuteScalar();
+
+                    postTag.Id = id;
+                }
+            }
+        }
         public void Delete(int id)
         {
             using (SqlConnection conn = Connection)
@@ -101,6 +119,22 @@ namespace Tabloid.Repositories
                     cmd.ExecuteNonQuery();
                 }
             }
+        }
+
+        public void clearPostTagsForPost(int postId)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"DELETE FROM PostTag WHERE PostId = @postId";
+                    cmd.Parameters.AddWithValue("@postId", postId);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
         }
 
     }
