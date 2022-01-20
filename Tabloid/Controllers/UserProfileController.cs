@@ -28,6 +28,12 @@ namespace Tabloid.Controllers
             return Ok(_userProfileRepository.GetByFirebaseUserId(firebaseUserId));
         }
 
+        [HttpGet("GetUserProfileByUserId/{id}")]
+        public IActionResult GetUserProfileById(int id)
+        {
+            return Ok(_userProfileRepository.GetUserProfileByUserId(id));
+        }
+
         [HttpGet("DoesUserExist/{firebaseUserId}")]
         public IActionResult DoesUserExist(string firebaseUserId)
         {
@@ -39,11 +45,10 @@ namespace Tabloid.Controllers
             return Ok();
         }
 
-        [HttpGet("UserBy/{id}")]
-        public IActionResult GetUserById(int id)
+        [HttpGet("GetDeactivated")]
+        public IActionResult getDeactivated()
         {
-            var userProfile = _userProfileRepository.GetUserById(id);
-            return Ok(userProfile);
+            return Ok(_userProfileRepository.GetAllDeactivatedUserProfiles());
         }
 
         [HttpPost]
@@ -56,6 +61,22 @@ namespace Tabloid.Controllers
                 nameof(GetUserProfile),
                 new { firebaseUserId = userProfile.FirebaseUserId },
                 userProfile);
+        }
+
+        [HttpPut("aOrD/{userId}")]
+        public IActionResult ActivateOrDeactivate(int userId)
+        {
+            var userTypeId = 3;
+            var user = _userProfileRepository.GetUserProfileByUserId(userId);
+
+            if (user.UserTypeId == 3)
+            {
+                userTypeId = 2;
+            }
+
+            _userProfileRepository.UpdateUserTypeId(userTypeId, userId);
+
+            return NoContent();
         }
     }
 }

@@ -23,6 +23,9 @@ import UserDetails from "./Users/UserDetails";
 import EditCategory from "./Categories/EditCategory";
 import EditPost from "./Posts/EditPost";
 import { AddReaction } from "./Reactions/AddReaction"
+import UpdateUserType from "./Users/UpdateUserType";
+import DeleteComment from "./Comments/DeleteComment";
+import UserPostList from "./Posts/UserPostList";
 
 export default function ApplicationViews({ isLoggedIn, isAdmin }) {
     return (
@@ -108,12 +111,26 @@ export default function ApplicationViews({ isLoggedIn, isAdmin }) {
                 <Route path="/deleteTag/:id">
                     <DeleteTag userparams />
                 </Route>
-
+                <Route path="/deleteComment/:id">
+                    <DeleteComment userparams />
+                </Route>
                 <Route path="/editPost/:id">
                     <EditPost userparams />
                 </Route>
                 <Route path="/manageTags/:id">
                     <ManageTags userparams />
+                </Route>
+
+                <Route path="/updateUserType/:id">
+                    <UpdateUserType userparams />
+                </Route>
+
+                <Route path="/userPosts/:id">
+                    {isLoggedIn ? (
+                        <UserPostList useparams />
+                    ) : (
+                        <Redirect to="/login" />
+                    )}
                 </Route>
             </Switch>
         </main>
