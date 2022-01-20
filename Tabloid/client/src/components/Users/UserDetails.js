@@ -23,8 +23,7 @@ const UserDetails = () => {
     <Card className="d-flex justify-content-sm-around align-items-baseline p-5">
       <div className="ImageDisplayName">
         <p>
-          Display Name:
-          <strong>{user.displayName}</strong>
+          Display Name: <strong>{user.displayName}</strong>
         </p>
         {user.imageLocation ? (
           <div className="userDetails__headerImage">
@@ -36,7 +35,7 @@ const UserDetails = () => {
       </div>
 
       <div className="userDetails__body">
-        <div className="text-left">Full Name:{user?.fullName}</div>
+        <div className="text-left">Full Name: {user?.fullName}</div>
         <div className="text-left ">Creation Date: {user.createDate}</div>
         <div className="text-left">Email: {user.email}</div>
         <div className="text-left">User Type: {user.userType?.name}</div>
