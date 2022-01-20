@@ -45,18 +45,10 @@ namespace Tabloid.Controllers
             return Ok();
         }
 
-<<<<<<< HEAD
         [HttpGet("GetDeactivated")]
         public IActionResult getDeactivated()
         {
             return Ok(_userProfileRepository.GetAllDeactivatedUserProfiles());
-=======
-        [HttpGet("UserBy/{id}")]
-        public IActionResult GetUserById(int id)
-        {
-            var userProfile = _userProfileRepository.GetUserById(id);
-            return Ok(userProfile);
->>>>>>> main
         }
 
         [HttpPost]
@@ -75,9 +67,9 @@ namespace Tabloid.Controllers
         public IActionResult ActivateOrDeactivate(int userId)
         {
             var userTypeId = 3;
-           var user = _userProfileRepository.GetUserProfileByUserId(userId);
+            var user = _userProfileRepository.GetUserProfileByUserId(userId);
 
-            if(user.UserTypeId == 3)
+            if (user.UserTypeId == 3)
             {
                 userTypeId = 2;
             }
