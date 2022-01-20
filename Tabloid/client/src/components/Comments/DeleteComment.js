@@ -11,7 +11,7 @@ const DeleteComment = () => {
 
     const handleConfirm = (event) => {
         event.preventDefault();
-        deleteComment(id).then(() => history.push("/"));
+        deleteComment(id).then(() => history.goBack())
     };
 
     return (
