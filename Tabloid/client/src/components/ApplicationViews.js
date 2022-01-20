@@ -20,6 +20,7 @@ import AddPost from "./Posts/AddPost";
 import DeletePost from "./Posts/DeletePost";
 import RemoveCategory from "./Categories/RemoveCategory";
 import EditPost from "./Posts/EditPost";
+import UpdateUserType from "./Users/UpdateUserType";
 
 export default function ApplicationViews({ isLoggedIn, isAdmin }) {
     return (
@@ -98,6 +99,10 @@ export default function ApplicationViews({ isLoggedIn, isAdmin }) {
                 </Route>
                 <Route path="/manageTags/:id">
                     <ManageTags userparams />
+                </Route>
+
+                <Route path="/updateUserType/:id">
+                    <UpdateUserType userparams />
                 </Route>
             </Switch>
         </main>
