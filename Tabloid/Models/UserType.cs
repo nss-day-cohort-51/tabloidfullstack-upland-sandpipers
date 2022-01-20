@@ -15,6 +15,5 @@ namespace Tabloid.Models
         public static int DEACTIVATED_ID => 3;
         public static int PROPOSED_DEACTIVATE_ID => 4;
         public static int PROPOSED_DEMOTE_ID => 5;
-
     }
 }
