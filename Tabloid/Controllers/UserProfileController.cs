@@ -63,7 +63,7 @@ namespace Tabloid.Controllers
                 userProfile);
         }
 
-        [HttpPut("aOrD/{userId}")]
+        [HttpPut("ActivateOrDeactivate/{userId}")]
         public IActionResult ActivateOrDeactivate(int userId)
         {
             var userTypeId = 3;
@@ -75,6 +75,15 @@ namespace Tabloid.Controllers
             }
 
             _userProfileRepository.UpdateUserTypeId(userTypeId, userId);
+
+            return NoContent();
+        }
+
+        [HttpPut("UpdateUserType/{userId}")]
+        public IActionResult UpdateUserType(UserProfile profile)
+        {
+
+            _userProfileRepository.UpdateUserTypeId(profile.UserTypeId, profile.Id);
 
             return NoContent();
         }
