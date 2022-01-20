@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Tabloid.Models;
 using Tabloid.Repositories;
@@ -36,6 +37,11 @@ namespace Tabloid.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            if (!IsAllowedAuthorPermissions())
+            {
+                return Unauthorized();
+            }
+
             var posts = _postRepository.GetAllPublishedPosts();
             return Ok(posts);
         }
@@ -44,6 +50,11 @@ namespace Tabloid.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
+            if (!IsAllowedAuthorPermissions())
+            {
+                return Unauthorized();
+            }
+
             var post = _postRepository.GetPublishedPostById(id);
             return Ok(post);
         }
@@ -52,6 +63,11 @@ namespace Tabloid.Controllers
         [HttpPost]
         public IActionResult Post(Post post)
         {
+            if (!IsAllowedAuthorPermissions())
+            {
+                return Unauthorized();
+            }
+
             post.CreateDateTime = DateTime.Now;
             post.PublishDateTime = DateTime.Now;
             _postRepository.Add(post);
@@ -61,6 +77,11 @@ namespace Tabloid.Controllers
         [HttpGet("GetPostsByUserId/{id}")]
         public IActionResult GetByUserId(int id)
         {
+            if (!IsAllowedAuthorPermissions())
+            {
+                return Unauthorized();
+            }
+
             var posts = _postRepository.GetPostsByUserId(id);
             return Ok(posts);
         }
@@ -71,6 +92,11 @@ namespace Tabloid.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, Post post)
         {
+            if (!IsAllowedAuthorPermissions() && IsUserWithThisId(id))
+            {
+                return Unauthorized();
+            }
+
             if (id != post.Id)
             {
                 return BadRequest();
@@ -80,13 +106,52 @@ namespace Tabloid.Controllers
             return NoContent();
         }
 
-
-
         // DELETE api/<PostController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            if (!(IsUserWithThisId(id) && IsAllowedAuthorPermissions()) && !IsAllowedAdminPermissions())
+            {
+                return Unauthorized();
+            }
             _postRepository.Delete(id);
+            return NoContent();
         }
+
+        public bool IsAllowedAuthorPermissions()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var currentUserProfile = _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
+            string currentUserType = currentUserProfile.UserType.Name;
+
+            var globalPermissions = new List<string>()
+            {
+                "admin", "author", "proposed_deactivate", "proposed_demote"
+            };
+
+            return globalPermissions.Contains(currentUserType);
+        }
+
+        public bool IsAllowedAdminPermissions()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var currentUserProfile = _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
+            string currentUserType = currentUserProfile.UserType.Name;
+
+            var adminPermissions = new List<string>()
+            {
+                "admin", "proposed_demote"
+            };
+
+            return adminPermissions.Contains(currentUserType);
+        }
+
+        public bool IsUserWithThisId(int id)
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var currentUserProfile = _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
+            return currentUserProfile.Id == id;
+        }
+
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Tabloid.Models;
 using Tabloid.Repositories;
@@ -59,23 +60,62 @@ namespace Tabloid.Controllers
         [HttpPost]
         public IActionResult Post(PostTag postTag)
         {
+            if (!(IsAllowedAuthorPermissions() && IsCurrentUsersPost(postTag.PostId)))
+            {
+                return Unauthorized();
+            }
             _postTagRepository.Add(postTag);
-            return NoContent();
-        }
-
-        // DELETE api/<PostTagController>/5
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
-        {
-            _postTagRepository.Delete(id);
             return NoContent();
         }
 
         [HttpDelete("ClearPostTags/{id}")]
         public IActionResult ClearPostTags(int id)
         {
+            if (!(IsAllowedAuthorPermissions() && IsCurrentUsersPost(id)))
+            {
+                return Unauthorized();
+            }
+
             _postTagRepository.clearPostTagsForPost(id);
             return NoContent();
+        }
+
+        public bool IsAllowedAuthorPermissions()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var currentUserProfile = _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
+            string currentUserType = currentUserProfile.UserType.Name;
+
+            var globalPermissions = new List<string>()
+            {
+                "admin", "author", "proposed_deactivate", "proposed_demote"
+            };
+
+            return globalPermissions.Contains(currentUserType);
+        }
+
+        public bool IsAllowedAdminPermissions()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var currentUserProfile = _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
+            string currentUserType = currentUserProfile.UserType.Name;
+
+            var adminPermissions = new List<string>()
+            {
+                "admin", "proposed_demote"
+            };
+
+            return adminPermissions.Contains(currentUserType);
+        }
+        public bool IsCurrentUsersPost(int postId)
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var currentUserProfile = _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
+            int currentUserId = currentUserProfile.Id;
+
+            Post post = _postRepository.GetPublishedPostById(postId);
+
+            return post.UserProfileId == currentUserId;
         }
     }
 }
