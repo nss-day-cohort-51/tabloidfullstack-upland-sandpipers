@@ -28,7 +28,7 @@ const DeleteComment = () => {
             <Button
                 className="btn-add-edit"
                 color="secondary"
-                onClick={() => history.push(`/posts`)}
+                onClick={() => history.goBack()}
             >
                 Cancel
             </Button>
