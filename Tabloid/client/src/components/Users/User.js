@@ -34,13 +34,18 @@ const User = ({ user }) => {
             <td>{user.email} </td>
             <td>{user.userTypeId == 1 ? 'Admin' : 'Author'} </td>
             <img src={user.imageLocation} alt="Users Picture" />
-            {user.userTypeId == 1 ? null : <Button
-                id={`manageActivated--${user.id}`}
-                onClick={handleUserSelected}
-                color={isDeactivated ? "danger" : "primary"}
-            >
-                {isDeactivated ? "Reactivate" : "Deactivate"}
-            </Button>}
+            <ul className="userListButtons">
+                <li>
+                    {user.userTypeId == 1 ? null : <Button
+                        id={`manageActivated--${user.id}`}
+                        onClick={handleUserSelected}
+                        color={isDeactivated ? "danger" : "warning"}
+                    >
+                        {isDeactivated ? "Reactivate" : "Deactivate"}
+                    </Button>}
+                </li>
+                <li><Button color="info" onClick={() => history.push(`/users/${user.id}`)}>View Details</Button></li>
+            </ul>
         </tbody>
 
     );
