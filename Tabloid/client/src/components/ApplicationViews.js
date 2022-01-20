@@ -22,6 +22,7 @@ import RemoveCategory from "./Categories/RemoveCategory";
 import UserDetails from "./Users/UserDetails";
 import EditCategory from "./Categories/EditCategory";
 import EditPost from "./Posts/EditPost";
+import UpdateUserType from "./Users/UpdateUserType";
 import DeleteComment from "./Comments/DeleteComment";
 
 export default function ApplicationViews({ isLoggedIn, isAdmin }) {
@@ -113,6 +114,10 @@ export default function ApplicationViews({ isLoggedIn, isAdmin }) {
                 </Route>
                 <Route path="/manageTags/:id">
                     <ManageTags userparams />
+                </Route>
+
+                <Route path="/updateUserType/:id">
+                    <UpdateUserType userparams />
                 </Route>
             </Switch>
         </main>
