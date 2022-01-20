@@ -33,7 +33,7 @@ export const getBySearch = (q, isSort) => {
 };
 
 export const getCategoryById = (categoryId) => {
-    return fetch(baseUrl + `/GetCategoryByIdWithComments/${categoryId}`, {
+    return fetch(baseUrl + `/${categoryId}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -46,3 +46,13 @@ export const deleteCategory = (categoryId) => {
         method: "DELETE"
     })
 }
+
+export const updateCategory = (category) => {
+    return fetch(`${baseUrl}/${category.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(category),
+    });
+};

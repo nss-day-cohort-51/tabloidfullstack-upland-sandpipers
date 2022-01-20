@@ -19,6 +19,8 @@ import { useEffect } from "react";
 import AddPost from "./Posts/AddPost";
 import DeletePost from "./Posts/DeletePost";
 import RemoveCategory from "./Categories/RemoveCategory";
+import UserDetails from "./Users/UserDetails";
+import EditCategory from "./Categories/EditCategory";
 import EditPost from "./Posts/EditPost";
 import UpdateUserType from "./Users/UpdateUserType";
 
@@ -47,6 +49,13 @@ export default function ApplicationViews({ isLoggedIn, isAdmin }) {
                 <Route path="/posts/:id">
                     {isLoggedIn ? (
                         <PostDetails useparams />
+                    ) : (
+                        <Redirect to="/login" />
+                    )}
+                </Route>
+                <Route path="/users/:id">
+                    {isLoggedIn ? (
+                        <UserDetails useparams />
                     ) : (
                         <Redirect to="/login" />
                     )}
@@ -89,6 +98,9 @@ export default function ApplicationViews({ isLoggedIn, isAdmin }) {
                 </Route>
                 <Route path="/editTag/:id">
                     <EditTag userparams />
+                </Route>
+                <Route path="/editCategory/:id">
+                    <EditCategory userparams />
                 </Route>
                 <Route path="/deleteTag/:id">
                     <DeleteTag userparams />
