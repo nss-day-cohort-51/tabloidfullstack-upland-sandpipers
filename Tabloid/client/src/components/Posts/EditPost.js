@@ -46,7 +46,7 @@ const EditPost = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        updatePost(post).then(history.push("/myPosts"))
+        updatePost(post).then(history.goBack())
     };
 
     return (
