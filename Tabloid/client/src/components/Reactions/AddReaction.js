@@ -60,7 +60,7 @@ export const AddReaction = () => {
             </Button>
             <Button
                 className="btn-add-edit ml-2"
-                onClick={() => history.push("/reactions")}
+                onClick={() => history.goBack()}
             >
                 Cancel
             </Button>
