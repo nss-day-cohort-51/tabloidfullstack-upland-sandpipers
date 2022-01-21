@@ -43,12 +43,23 @@ const UserDetails = () => {
         <div className="text-left">Email: {user.email}</div>
         <div className="text-left">User Type: {user.userType?.name}</div>
       </div>
-      <Button color="primary" onClick={() => history.push(`/userPosts/${user.id}`)}>
-        View {user.firstName}'s Posts
-      </Button>
-      <Button color="secondary" onClick={() => history.goBack()}>
-        Back
-      </Button>
+      <ul className="userListButtons">
+        {user.userTypeId == 3 ? null : <li>
+          <Button color="primary" onClick={() => history.push(`/userEdit/${user.id}`)}>
+            Edit {user.firstName}'s Profile
+          </Button>
+        </li>}
+        <li>
+          <Button color="primary" onClick={() => history.push(`/userPosts/${user.id}`)}>
+            View {user.firstName}'s Posts
+          </Button>
+        </li>
+        <li>
+          <Button color="secondary" onClick={() => history.goBack()}>
+            Back
+          </Button>
+        </li>
+      </ul>
     </Card>
   );
 };

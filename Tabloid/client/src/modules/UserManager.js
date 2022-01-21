@@ -25,7 +25,7 @@ export const getUserById = (id) => {
 }
 
 export const updateUser = (id) => {
-    return fetch(`${userUrl}/aOrD/${id}`, {
+    return fetch(`${userUrl}/ActivateOrDeactivate/${id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
@@ -34,6 +34,20 @@ export const updateUser = (id) => {
     });
 }
 
-export const getDeactivated = () => {
-    return fetch(userUrl + `/GetDeactivated`).then((res) => res.json());
+export const updateUserType = (profile) => {
+    return fetch(`${userUrl}/UpdateUserType/${profile.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(profile),
+    });
+}
+
+export const getDeactivatedIds = () => {
+    return fetch(userUrl + `/GetDeactivatedIds`).then((res) => res.json());
+};
+
+export const getDeactivatedUserEmails = () => {
+    return fetch(userUrl + `/GetDeactivatedUserEmails`).then((res) => res.json());
 };

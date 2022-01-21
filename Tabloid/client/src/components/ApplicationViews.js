@@ -14,17 +14,18 @@ import EditTag from "./Tags/EditTag";
 import DeleteTag from "./Tags/DeleteTag";
 import ManageTags from "./Tags/ManageTags";
 import { AddTag } from "./Tags/AddTag";
-import { useState } from "react";
-import { useEffect } from "react";
 import AddPost from "./Posts/AddPost";
 import DeletePost from "./Posts/DeletePost";
 import RemoveCategory from "./Categories/RemoveCategory";
 import UserDetails from "./Users/UserDetails";
 import EditCategory from "./Categories/EditCategory";
 import EditPost from "./Posts/EditPost";
+import { AddReaction } from "./Reactions/AddReaction"
 import UpdateUserType from "./Users/UpdateUserType";
 import DeleteComment from "./Comments/DeleteComment";
+import EditComment from "./Comments/EditComment";
 import UserPostList from "./Posts/UserPostList";
+import EditUser from "./Users/UserEdit";
 
 export default function ApplicationViews({ isLoggedIn, isAdmin }) {
     return (
@@ -34,9 +35,6 @@ export default function ApplicationViews({ isLoggedIn, isAdmin }) {
                     {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
                 </Route>
 
-                <Route path="/posts" exact>
-                    {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
-                </Route>
                 <Route path="/users" exact>
                     {isAdmin ? <UserList /> : <Redirect to="/login" />}
                 </Route>
@@ -46,6 +44,9 @@ export default function ApplicationViews({ isLoggedIn, isAdmin }) {
                 </Route>
                 <Route path="/addTag">
                     <AddTag />
+                </Route>
+                <Route path="/addReaction">
+                    <AddReaction />
                 </Route>
 
                 <Route path="/posts/:id">
@@ -110,6 +111,9 @@ export default function ApplicationViews({ isLoggedIn, isAdmin }) {
                 <Route path="/deleteComment/:id">
                     <DeleteComment userparams />
                 </Route>
+                <Route path="/editComment/:id">
+                    <EditComment userparams />
+                </Route>
                 <Route path="/editPost/:id">
                     <EditPost userparams />
                 </Route>
@@ -124,6 +128,14 @@ export default function ApplicationViews({ isLoggedIn, isAdmin }) {
                 <Route path="/userPosts/:id">
                     {isLoggedIn ? (
                         <UserPostList useparams />
+                    ) : (
+                        <Redirect to="/login" />
+                    )}
+                </Route>
+
+                <Route path="/userEdit/:id">
+                    {isLoggedIn ? (
+                        <EditUser useparams />
                     ) : (
                         <Redirect to="/login" />
                     )}

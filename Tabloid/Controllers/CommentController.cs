@@ -41,7 +41,7 @@ namespace Tabloid.Controllers
         [HttpGet("{id}")]
         public IActionResult Index(int id)
         {
-            var posts = _commentRepository.GetAllCommentsByPostId(id);
+            var posts = _commentRepository.GetCommentById(id);
             return Ok(posts);
         }
 
@@ -65,8 +65,15 @@ namespace Tabloid.Controllers
 
         // PUT api/<CommentController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, Comment comment)
         {
+            if (id != comment.Id)
+            {
+                return BadRequest();
+            }
+
+            _commentRepository.Update(comment);
+            return NoContent();
         }
 
         // DELETE api/<CommentController>/5

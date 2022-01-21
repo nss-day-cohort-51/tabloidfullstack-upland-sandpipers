@@ -6,7 +6,7 @@ import { getDeactivated } from "../../modules/UserManager";
 import { Button } from "reactstrap";
 import { useHistory } from "react-router-dom";
 
-const User = ({ user }) => {
+const User = ({ user, deactivatedList }) => {
 
     const history = useHistory();
 
@@ -17,14 +17,12 @@ const User = ({ user }) => {
     }
 
     useEffect(() => {
-        getDeactivated().then(res => {
-            res.forEach(element => {
-                if (element.id == user.id) {
-                    setisDeactivated(true);
-                }
-            });
-        })
-    }, [])
+        deactivatedList.forEach(element => {
+            if (element == user.id) {
+                setisDeactivated(true);
+            }
+        });
+    }, [deactivatedList])
 
     return (
 

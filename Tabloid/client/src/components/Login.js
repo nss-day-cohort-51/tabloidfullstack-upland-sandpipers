@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { useHistory, Link } from "react-router-dom";
 import { login, logout } from "../modules/authManager";
-import { getDeactivated } from "../modules/UserManager";
+import { getDeactivatedUserEmails } from "../modules/UserManager";
 
 export default function Login() {
     const history = useHistory();
@@ -14,9 +14,9 @@ export default function Login() {
     const loginSubmit = (e) => {
         e.preventDefault();
 
-        getDeactivated().then(resp => {
+        getDeactivatedUserEmails().then(resp => {
             resp.forEach(element => {
-                if (element.email == email) {
+                if (element == email) {
                     window.location.reload()
                     alert("This user has been deactivated")
                 }

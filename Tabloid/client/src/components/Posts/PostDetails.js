@@ -101,17 +101,30 @@ const Post = () => {
                                       <p>
                                           Posted By: {c.userProfile.displayName}
                                       </p>
+
                                       {c.userProfile.id == currentUser ? (
-                                          <Button
-                                              color="danger"
-                                              onClick={() =>
-                                                  history.push(
-                                                      `/deletecomment/${c.id}`
-                                                  )
-                                              }
-                                          >
-                                              Delete
-                                          </Button>
+                                          <>
+                                              <Button
+                                                  color="danger"
+                                                  onClick={() =>
+                                                      history.push(
+                                                          `/deletecomment/${c.id}`
+                                                      )
+                                                  }
+                                              >
+                                                  Delete
+                                              </Button>
+                                              <Button
+                                                  color="info"
+                                                  onClick={() =>
+                                                      history.push(
+                                                          `/editcomment/${c.id}`
+                                                      )
+                                                  }
+                                              >
+                                                  Edit
+                                              </Button>
+                                          </>
                                       ) : (
                                           <></>
                                       )}
@@ -121,6 +134,9 @@ const Post = () => {
                         : null}
                 </ul>
             </CardBody>
+            <Button color="info" onClick={() => history.push(`/addReaction`)}>
+                Create New Reaction
+            </Button>
             <Button
                 className="mt-2"
                 color="success"

@@ -45,10 +45,16 @@ namespace Tabloid.Controllers
             return Ok();
         }
 
-        [HttpGet("GetDeactivated")]
-        public IActionResult getDeactivated()
+        [HttpGet("GetDeactivatedIds")]
+        public IActionResult getDeactivatedIds()
         {
-            return Ok(_userProfileRepository.GetAllDeactivatedUserProfiles());
+            return Ok(_userProfileRepository.GetAllDeactivatedUserIds());
+        }
+
+        [HttpGet("GetDeactivatedUserEmails")]
+        public IActionResult getDeactivatedEmails()
+        {
+            return Ok(_userProfileRepository.GetAllDeactivatedUserEmails());
         }
 
         [HttpPost]
@@ -63,7 +69,7 @@ namespace Tabloid.Controllers
                 userProfile);
         }
 
-        [HttpPut("aOrD/{userId}")]
+        [HttpPut("ActivateOrDeactivate/{userId}")]
         public IActionResult ActivateOrDeactivate(int userId)
         {
             var userTypeId = 3;
@@ -75,6 +81,15 @@ namespace Tabloid.Controllers
             }
 
             _userProfileRepository.UpdateUserTypeId(userTypeId, userId);
+
+            return NoContent();
+        }
+
+        [HttpPut("UpdateUserType/{userId}")]
+        public IActionResult UpdateUserType(UserProfile profile)
+        {
+
+            _userProfileRepository.UpdateUserTypeId(profile.UserTypeId, profile.Id);
 
             return NoContent();
         }
