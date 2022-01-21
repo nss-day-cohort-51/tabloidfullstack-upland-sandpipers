@@ -68,3 +68,11 @@ export const updatePost = (post) => {
         body: JSON.stringify(post),
     });
 }
+export const getPostsBySubscription = (subId) => {
+    return fetch(baseUrl + `/GetSubscribedPosts/${subId}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    }).then((resp) => resp.json());
+};

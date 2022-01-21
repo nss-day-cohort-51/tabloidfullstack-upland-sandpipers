@@ -50,7 +50,6 @@ const Post = () => {
     }, [currentUser, post]);
 
     const handleSubscribeClicked = () => {
-        debugger;
         if (!subscription) {
             addSubscription(currentUser, post.userProfile.id).then(
                 getSubscription
@@ -94,43 +93,43 @@ const Post = () => {
                 <ul>
                     {comments != null
                         ? comments.map((c) => (
-                              <li className="commentList">
-                                  <Card>
-                                      <h4>{c.subject}</h4>
-                                      <p>{c.content}</p>
-                                      <p>
-                                          Posted By: {c.userProfile.displayName}
-                                      </p>
+                            <li className="commentList">
+                                <Card>
+                                    <h4>{c.subject}</h4>
+                                    <p>{c.content}</p>
+                                    <p>
+                                        Posted By: {c.userProfile.displayName}
+                                    </p>
 
-                                      {c.userProfile.id == currentUser ? (
-                                          <>
-                                              <Button
-                                                  color="danger"
-                                                  onClick={() =>
-                                                      history.push(
-                                                          `/deletecomment/${c.id}`
-                                                      )
-                                                  }
-                                              >
-                                                  Delete
-                                              </Button>
-                                              <Button
-                                                  color="info"
-                                                  onClick={() =>
-                                                      history.push(
-                                                          `/editcomment/${c.id}`
-                                                      )
-                                                  }
-                                              >
-                                                  Edit
-                                              </Button>
-                                          </>
-                                      ) : (
-                                          <></>
-                                      )}
-                                  </Card>
-                              </li>
-                          ))
+                                    {c.userProfile.id == currentUser ? (
+                                        <>
+                                            <Button
+                                                color="danger"
+                                                onClick={() =>
+                                                    history.push(
+                                                        `/deletecomment/${c.id}`
+                                                    )
+                                                }
+                                            >
+                                                Delete
+                                            </Button>
+                                            <Button
+                                                color="info"
+                                                onClick={() =>
+                                                    history.push(
+                                                        `/editcomment/${c.id}`
+                                                    )
+                                                }
+                                            >
+                                                Edit
+                                            </Button>
+                                        </>
+                                    ) : (
+                                        <></>
+                                    )}
+                                </Card>
+                            </li>
+                        ))
                         : null}
                 </ul>
             </CardBody>
