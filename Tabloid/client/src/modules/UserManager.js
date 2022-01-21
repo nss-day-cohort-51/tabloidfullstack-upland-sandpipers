@@ -51,3 +51,7 @@ export const getDeactivatedIds = () => {
 export const getDeactivatedUserEmails = () => {
     return fetch(userUrl + `/GetDeactivatedUserEmails`).then((res) => res.json());
 };
+
+export const getAdminCount = () => {
+    return fetch(userUrl + `/CountAdmins`).then(res => res.json());
+}

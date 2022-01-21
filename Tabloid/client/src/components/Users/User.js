@@ -30,17 +30,17 @@ const User = ({ user, deactivatedList }) => {
             <td>{user.displayName} </td>
             <td>{user.firstName} {user.lastName} </td>
             <td>{user.email} </td>
-            <td>{user.userTypeId == 1 ? 'Admin' : 'Author'} </td>
+            <td>{user.userTypeId == 1 ? 'Admin' : user.userTypeId == 2 ? 'Author' : 'Deactivated'} </td>
             <img src={user.imageLocation} alt="Users Picture" />
             <ul className="userListButtons">
                 <li>
-                    {user.userTypeId == 1 ? null : <Button
+                    <Button
                         id={`manageActivated--${user.id}`}
                         onClick={handleUserSelected}
                         color={isDeactivated ? "danger" : "warning"}
                     >
                         {isDeactivated ? "Reactivate" : "Deactivate"}
-                    </Button>}
+                    </Button>
                 </li>
                 <li><Button color="info" onClick={() => history.push(`/users/${user.id}`)}>View Details</Button></li>
             </ul>
