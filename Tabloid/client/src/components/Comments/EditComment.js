@@ -11,6 +11,9 @@ export const EditComment = () => {
 
     const history = useHistory();
 
+    console.log(id + " id")
+    console.log(comment + " comment")
+
     useEffect((event) => {
         getCommentById(id).then(setComment)
     }, []);
@@ -25,7 +28,11 @@ export const EditComment = () => {
 
     const handleClickSaveComment = (e) => {
         e.preventDefault();
-        updateComment(id).then(() => history.goBack());
+        updateComment(comment).then(() => history.goBack());
+    }
+    const handleGoBack = (e) => {
+        e.preventDefault();
+        history.goBack()
     }
 
 
@@ -64,7 +71,7 @@ export const EditComment = () => {
             </button>
             <button
                 className="btn-add-edit"
-                onClick={() => history.goBack()}
+                onClick={handleGoBack}
             >
                 Cancel
             </button>

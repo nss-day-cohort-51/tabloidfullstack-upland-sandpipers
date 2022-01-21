@@ -41,7 +41,7 @@ namespace Tabloid.Controllers
         [HttpGet("{id}")]
         public IActionResult Index(int id)
         {
-            var posts = _commentRepository.GetAllCommentsByPostId(id);
+            var posts = _commentRepository.GetCommentById(id);
             return Ok(posts);
         }
 
