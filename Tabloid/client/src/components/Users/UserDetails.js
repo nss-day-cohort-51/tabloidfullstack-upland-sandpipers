@@ -4,9 +4,12 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getUserById } from "../../modules/UserManager";
 import { Button } from "reactstrap";
-// import { useHistory } from "react-router";
+import { useHistory } from "react-router";
 
 const UserDetails = () => {
+
+  const history = useHistory();
+
   const [user, setUser] = useState([]);
 
   const { id } = useParams();
@@ -40,6 +43,23 @@ const UserDetails = () => {
         <div className="text-left">Email: {user.email}</div>
         <div className="text-left">User Type: {user.userType?.name}</div>
       </div>
+      <ul className="userListButtons">
+        {user.userTypeId == 3 ? null : <li>
+          <Button color="primary" onClick={() => history.push(`/userEdit/${user.id}`)}>
+            Edit {user.firstName}'s Profile
+          </Button>
+        </li>}
+        <li>
+          <Button color="primary" onClick={() => history.push(`/userPosts/${user.id}`)}>
+            View {user.firstName}'s Posts
+          </Button>
+        </li>
+        <li>
+          <Button color="secondary" onClick={() => history.goBack()}>
+            Back
+          </Button>
+        </li>
+      </ul>
     </Card>
   );
 };

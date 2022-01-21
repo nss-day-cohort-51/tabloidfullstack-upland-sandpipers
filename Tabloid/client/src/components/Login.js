@@ -1,19 +1,34 @@
 import React, { useState } from "react";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { useHistory, Link } from "react-router-dom";
-import { login } from "../modules/authManager";
+import { login, logout } from "../modules/authManager";
+import { getDeactivatedUserEmails } from "../modules/UserManager";
 
 export default function Login() {
     const history = useHistory();
 
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    const [isDeactivated, setIsDeactivated] = useState(false);
 
     const loginSubmit = (e) => {
         e.preventDefault();
+
+        getDeactivatedUserEmails().then(resp => {
+            resp.forEach(element => {
+                if (element == email) {
+                    window.location.reload()
+                    alert("This user has been deactivated")
+                }
+            });
+        })
+
+
         login(email, password)
             .then(() => history.push("/"))
             .catch(() => alert("Invalid email or password"));
+
+
     };
 
     return (

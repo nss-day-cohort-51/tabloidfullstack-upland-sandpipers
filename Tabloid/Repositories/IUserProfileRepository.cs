@@ -6,8 +6,11 @@ namespace Tabloid.Repositories
     public interface IUserProfileRepository
     {
         void Add(UserProfile userProfile);
+        List<string> GetAllDeactivatedUserEmails();
+        List<int> GetAllDeactivatedUserIds();
         List<UserProfile> GetAllUserProfiles();
         UserProfile GetByFirebaseUserId(string firebaseUserId);
-        UserProfile GetUserById(int id);
+        UserProfile GetUserProfileByUserId(int userId);
+        void UpdateUserTypeId(int userTypeId, int userId);
     }
 }

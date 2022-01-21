@@ -20,8 +20,12 @@ import RemoveCategory from "./Categories/RemoveCategory";
 import UserDetails from "./Users/UserDetails";
 import EditCategory from "./Categories/EditCategory";
 import EditPost from "./Posts/EditPost";
+import { AddReaction } from "./Reactions/AddReaction"
+import UpdateUserType from "./Users/UpdateUserType";
 import DeleteComment from "./Comments/DeleteComment";
 import EditComment from "./Comments/EditComment";
+import UserPostList from "./Posts/UserPostList";
+import EditUser from "./Users/UserEdit";
 
 export default function ApplicationViews({ isLoggedIn, isAdmin }) {
     return (
@@ -43,6 +47,9 @@ export default function ApplicationViews({ isLoggedIn, isAdmin }) {
                 </Route>
                 <Route path="/addTag">
                     <AddTag />
+                </Route>
+                <Route path="/addReaction">
+                    <AddReaction />
                 </Route>
 
                 <Route path="/posts/:id">
@@ -115,6 +122,26 @@ export default function ApplicationViews({ isLoggedIn, isAdmin }) {
                 </Route>
                 <Route path="/manageTags/:id">
                     <ManageTags userparams />
+                </Route>
+
+                <Route path="/updateUserType/:id">
+                    <UpdateUserType userparams />
+                </Route>
+
+                <Route path="/userPosts/:id">
+                    {isLoggedIn ? (
+                        <UserPostList useparams />
+                    ) : (
+                        <Redirect to="/login" />
+                    )}
+                </Route>
+
+                <Route path="/userEdit/:id">
+                    {isLoggedIn ? (
+                        <EditUser useparams />
+                    ) : (
+                        <Redirect to="/login" />
+                    )}
                 </Route>
             </Switch>
         </main>

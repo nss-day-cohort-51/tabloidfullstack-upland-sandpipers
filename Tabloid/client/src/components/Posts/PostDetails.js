@@ -93,6 +93,9 @@ const Post = () => {
                     <strong>{post.title}</strong>
                 </Link> */}
             </CardBody>
+            <Button color="info" onClick={() => history.push(`/addReaction`)}>
+        Create New Reaction
+      </Button>
             <Button
                 className="mt-2"
                 color="success"
@@ -107,7 +110,7 @@ const Post = () => {
             >
                 Add Comment
             </Button>
-        </Card>
+        </Card >
     );
 };
 
