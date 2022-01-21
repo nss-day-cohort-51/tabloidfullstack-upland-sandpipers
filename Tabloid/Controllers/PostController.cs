@@ -93,5 +93,11 @@ namespace Tabloid.Controllers
         {
             _postRepository.Delete(id);
         }
+        [HttpGet("GetSubscribedPosts/{id}")]
+        public IActionResult GetSubscribedPosts(int id)
+        {
+          var posts =  _postRepository.GetAllSubscribedPosts(id);
+            return Ok(posts);
+        }
     }
 }

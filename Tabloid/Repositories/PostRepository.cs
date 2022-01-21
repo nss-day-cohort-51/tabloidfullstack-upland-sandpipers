@@ -360,7 +360,7 @@ namespace Tabloid.Repositories
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"SELECT * From Subscription
-                                        WHERE SubscriberUserProfileId = @currentUserId AND ProviderUserProfileId = @providerId";
+                                        WHERE SubscriberUserProfileId = @currentUserId AND ProviderUserProfileId = @providerId AND EndDateTime IS NULL";
                     cmd.Parameters.AddWithValue("@currentUserId", currentUserId);
                     cmd.Parameters.AddWithValue("@providerId", providerId);
 
@@ -394,7 +394,7 @@ namespace Tabloid.Repositories
                               LEFT JOIN Category c ON p.CategoryId = c.id
                               LEFT JOIN UserProfile u ON p.UserProfileId = u.id
                               LEFT JOIN UserType ut ON u.UserTypeId = ut.id
-                        WHERE IsApproved = 1 AND PublishDateTime < SYSDATETIME() AND s.SubscriberUserProfileId = @id";
+                        WHERE IsApproved = 1 AND PublishDateTime < SYSDATETIME() AND s.SubscriberUserProfileId = @id AND s.EndDateTime IS NULL";
 
                     cmd.Parameters.AddWithValue("@id", userId);
 

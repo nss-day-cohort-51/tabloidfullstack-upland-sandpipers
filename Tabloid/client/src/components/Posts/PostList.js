@@ -32,8 +32,6 @@ const PostList = () => {
         getCategories();
     }, []);
 
-    useEffect(() => {
-    }, [posts])
 
     return (
         <div className="container">
