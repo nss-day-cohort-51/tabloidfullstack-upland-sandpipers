@@ -27,9 +27,10 @@ const PostReactionModal = () => {
         padding: 30,
       }}
     >
-      <Button  onClick={toggle}>
+      <button  onClick={toggle}
+      title="Add a Reaction">
       😊
-      </Button>
+      </button>
       <Modal isOpen={modal} toggle={toggle}>
         <ModalHeader toggle={toggle}>Add a Reaction to this post.</ModalHeader>
         <ModalBody>
