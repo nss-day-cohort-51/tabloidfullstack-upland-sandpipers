@@ -7,22 +7,26 @@ import { getUserById } from "../../modules/UserManager";
 
 const AddPost = () => {
     const [category, setCategories] = useState([]);
+    const [currentUserId, setCurrentUserId] = useState([]);
     const history = useHistory();
-
-    const getLoggedInUser = () => {
-        const userId = localStorage.getItem("LoggedInUserId");
-        return getUserById(userId);
-    };
 
     const [post, setPost] = useState({
         title: "",
         content: "",
         imageLocation: "",
         categoryId: "",
-        isApproved: true,
-        userProfileId: getLoggedInUser().id,
-        userProfile: getLoggedInUser(),
+        isApproved: false,
+        userProfileId: localStorage.getItem("LoggedInUserId"),
+        userProfile: null,
     });
+
+    const getLoggedInUser = () => {
+        getUserById(currentUserId).then((res) => {
+            const newPost = { ...post };
+            newPost["userProfile"] = res;
+            setPost(newPost);
+        });
+    };
 
     const getCategories = () => {
         getAllCategories().then((category) => setCategories(category));
@@ -42,7 +46,12 @@ const AddPost = () => {
 
     useEffect(() => {
         getCategories();
+        setCurrentUserId(localStorage.getItem("LoggedInUserId"));
     }, []);
+
+    useEffect(() => {
+        getLoggedInUser();
+    }, [currentUserId]);
 
     return (
         <form className="main-content">
