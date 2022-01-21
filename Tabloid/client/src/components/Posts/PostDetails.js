@@ -72,13 +72,17 @@ const Post = () => {
                         ? comments.map((c) => (
                             <li className="commentList">
                                 <Card>
+
                                     <h4>{c.subject}</h4>
                                     <p>{c.content}</p>
                                     <p>
                                         Posted By: {c.userProfile.displayName}
                                     </p>
-                                    {c.userProfile.id == currentUser ? <Button color="danger" onClick={() => history.push(`/deletecomment/${c.id}`)}>Delete</Button> : <></>
+
+                                    {c.userProfile.id == currentUser ? <> <Button color="danger" onClick={() => history.push(`/deletecomment/${c.id}`)}>Delete</Button>
+                                        <Button color="info" onClick={() => history.push(`/editcomment/${c.id}`)}>Edit</Button> </> : <></>
                                     }
+
                                 </Card>
                             </li>
                         ))
