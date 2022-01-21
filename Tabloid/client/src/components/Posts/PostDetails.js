@@ -1,40 +1,65 @@
-import React from "react";
-import { Card, CardBody } from "reactstrap";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { Card, CardBody, Button } from "reactstrap";
 import { useParams } from "react-router-dom";
-import { getPostById } from "../../modules/PostManager";
-import { Table, Button } from "reactstrap";
-import DeleteComment from "../Comments/DeleteComment";
 import { useHistory } from "react-router";
+import { getPostById } from "../../modules/PostManager";
 import { getCommentsByPostId } from "../../modules/CommentManager";
+import {
+    addSubscription,
+    cancelSubscription,
+    getUserProviderSubscription,
+} from "../../modules/SubscriptionManager";
+import { SubscribeButton } from "../Utils/SubscribeButton";
 
 const Post = () => {
     const history = useHistory();
-    const currentUser = localStorage.getItem("LoggedInUserId")
+    const currentUser = localStorage.getItem("LoggedInUserId");
     const [post, setPost] = useState([]);
     const [comments, setComments] = useState([]);
-
+    const [subscription, setSubscription] = useState(null);
 
     const { id } = useParams();
 
     const getPosts = () => {
         getPostById(id).then((post) => {
             setPost(post);
-            console.log(post);
         });
     };
 
     const getComments = () => {
         getCommentsByPostId(id).then((rsp) => {
             setComments(rsp);
-            console.log(rsp);
         });
+    };
+
+    const getSubscription = () => {
+        getUserProviderSubscription(currentUser, post.userProfile?.id)?.then(
+            (resp) => setSubscription(resp)
+        );
     };
 
     useEffect(() => {
         getPosts();
         getComments();
     }, []);
+
+    useEffect(() => {
+        if (subscription == null) {
+            getSubscription();
+        }
+    }, [currentUser, post]);
+
+    const handleSubscribeClicked = () => {
+        debugger;
+        if (!subscription) {
+            addSubscription(currentUser, post.userProfile.id).then(
+                getSubscription
+            );
+        } else {
+            cancelSubscription(subscription);
+            setSubscription(null);
+        }
+    };
 
     return (
         <Card>
@@ -65,37 +90,53 @@ const Post = () => {
                         ? post.tags.map((t) => <li>{t.name}</li>)
                         : null}
                 </ul>
-                {/* <br></br> */}
                 {comments.length != 0 ? <h4>Comments</h4> : null}
                 <ul>
                     {comments != null
                         ? comments.map((c) => (
-                            <li className="commentList">
-                                <Card>
+                              <li className="commentList">
+                                  <Card>
+                                      <h4>{c.subject}</h4>
+                                      <p>{c.content}</p>
+                                      <p>
+                                          Posted By: {c.userProfile.displayName}
+                                      </p>
 
-                                    <h4>{c.subject}</h4>
-                                    <p>{c.content}</p>
-                                    <p>
-                                        Posted By: {c.userProfile.displayName}
-                                    </p>
-
-                                    {c.userProfile.id == currentUser ? <> <Button color="danger" onClick={() => history.push(`/deletecomment/${c.id}`)}>Delete</Button>
-                                        <Button color="info" onClick={() => history.push(`/editcomment/${c.id}`)}>Edit</Button> </> : <></>
-                                    }
-
-                                </Card>
-                            </li>
-                        ))
+                                      {c.userProfile.id == currentUser ? (
+                                          <>
+                                              <Button
+                                                  color="danger"
+                                                  onClick={() =>
+                                                      history.push(
+                                                          `/deletecomment/${c.id}`
+                                                      )
+                                                  }
+                                              >
+                                                  Delete
+                                              </Button>
+                                              <Button
+                                                  color="info"
+                                                  onClick={() =>
+                                                      history.push(
+                                                          `/editcomment/${c.id}`
+                                                      )
+                                                  }
+                                              >
+                                                  Edit
+                                              </Button>
+                                          </>
+                                      ) : (
+                                          <></>
+                                      )}
+                                  </Card>
+                              </li>
+                          ))
                         : null}
                 </ul>
-                {/* <br></br>
-                {/* <Link to={`/posts/${post.id}`}>
-                    <strong>{post.title}</strong>
-                </Link> */}
             </CardBody>
             <Button color="info" onClick={() => history.push(`/addReaction`)}>
-        Create New Reaction
-      </Button>
+                Create New Reaction
+            </Button>
             <Button
                 className="mt-2"
                 color="success"
@@ -110,7 +151,12 @@ const Post = () => {
             >
                 Add Comment
             </Button>
-        </Card >
+            <SubscribeButton
+                handleSubscribeClicked={handleSubscribeClicked}
+                isSubscribed={!(subscription == null)}
+                post={post}
+            />
+        </Card>
     );
 };
 
