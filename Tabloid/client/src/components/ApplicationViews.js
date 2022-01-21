@@ -26,6 +26,7 @@ import { AddReaction } from "./Reactions/AddReaction"
 import UpdateUserType from "./Users/UpdateUserType";
 import DeleteComment from "./Comments/DeleteComment";
 import UserPostList from "./Posts/UserPostList";
+import EditUser from "./Users/UserEdit";
 
 export default function ApplicationViews({ isLoggedIn, isAdmin }) {
     return (
@@ -128,6 +129,14 @@ export default function ApplicationViews({ isLoggedIn, isAdmin }) {
                 <Route path="/userPosts/:id">
                     {isLoggedIn ? (
                         <UserPostList useparams />
+                    ) : (
+                        <Redirect to="/login" />
+                    )}
+                </Route>
+
+                <Route path="/userEdit/:id">
+                    {isLoggedIn ? (
+                        <EditUser useparams />
                     ) : (
                         <Redirect to="/login" />
                     )}

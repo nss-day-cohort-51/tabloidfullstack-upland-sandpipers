@@ -25,12 +25,22 @@ export const getUserById = (id) => {
 }
 
 export const updateUser = (id) => {
-    return fetch(`${userUrl}/aOrD/${id}`, {
+    return fetch(`${userUrl}/ActivateOrDeactivate/${id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify(id),
+    });
+}
+
+export const updateUserType = (profile) => {
+    return fetch(`${userUrl}/UpdateUserType/${profile.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(profile),
     });
 }
 
