@@ -18,6 +18,7 @@ const MyPostsList = () => {
 
     return (
         <div className="container">
+            <h1>My Posts</h1>
             <div className="row justify-content-center">
                 {posts.length < 1 ? (
                     <h1>You have no posts</h1>

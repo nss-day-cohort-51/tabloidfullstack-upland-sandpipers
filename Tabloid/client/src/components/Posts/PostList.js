@@ -13,7 +13,10 @@ const PostList = () => {
     const [selectedState, setSelected] = useState(0);
 
     const getPosts = () => {
-        getAllPosts().then((posts) => setPosts(posts));
+        getAllPosts().then((posts) => {
+            console.log(posts);
+            setPosts(posts);
+        });
         setSelected(0);
     };
 
@@ -36,6 +39,7 @@ const PostList = () => {
     return (
         <div className="container">
             <div className="form-group">
+                <h1>Posts</h1>
                 <label htmlFor="category">Filter By Category:</label>
                 <select
                     value={selectedState}

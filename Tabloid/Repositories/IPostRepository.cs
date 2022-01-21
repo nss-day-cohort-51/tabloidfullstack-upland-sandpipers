@@ -9,6 +9,7 @@ namespace Tabloid.Repositories
         void Delete(int id);
         List<Post> GetAllPublishedPosts();
         List<Post> GetAllSubscribedPosts(int userId);
+        List<Post> GetAllUnapprovedPosts();
         bool GetIsSubscribed(int currentUserId, int providerId);
         List<Post> GetPostsByCatId(int id);
         List<Post> GetPostsByUserId(int id);

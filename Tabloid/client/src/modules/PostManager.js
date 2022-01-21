@@ -4,6 +4,10 @@ export const getAllPosts = () => {
     return fetch(baseUrl).then((res) => res.json());
 };
 
+export const getAllUnapprovedPosts = () => {
+    return fetch(baseUrl + `/Unapproved`).then((res) => res.json());
+};
+
 export const addPost = (post) => {
     if (post.userProfile.userType.name == "Admin") {
         post.isApproved = true;
@@ -71,6 +75,7 @@ export const updatePost = (post) => {
         body: JSON.stringify(post),
     });
 };
+
 export const getPostsBySubscription = (subId) => {
     return fetch(baseUrl + `/GetSubscribedPosts/${subId}`, {
         method: "GET",

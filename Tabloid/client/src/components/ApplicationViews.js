@@ -27,6 +27,7 @@ import EditComment from "./Comments/EditComment";
 import UserPostList from "./Posts/UserPostList";
 import EditUser from "./Users/UserEdit";
 import SubscribedPostList from "./Posts/SubsribedPostList"
+import UnapprovedPostList from "./Posts/UnapprovedPostList";
 
 
 export default function ApplicationViews({ isLoggedIn, isAdmin }) {
@@ -42,6 +43,10 @@ export default function ApplicationViews({ isLoggedIn, isAdmin }) {
 
                 <Route path="/users" exact>
                     {isAdmin ? <UserList /> : <Redirect to="/login" />}
+                </Route>
+
+                <Route path="/unapproved" exact>
+                    {isAdmin ? <UnapprovedPostList /> : null}
                 </Route>
 
                 <Route path="/tags" exact>
