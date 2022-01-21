@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import DeletePost from "./DeletePost";
 import { useHistory } from "react-router-dom";
 import { getTextReadTimeString } from "../../Utils/ReadTime";
+import PostReactionModal from "../Reactions/PostReaction";
 
 let userId = parseInt(localStorage.getItem("LoggedInUserId"));
 
@@ -52,6 +53,7 @@ const Post = ({ post }) => {
             ) : (
                 <></>
             )}
+            <PostReactionModal />
         </Card>
     );
 };

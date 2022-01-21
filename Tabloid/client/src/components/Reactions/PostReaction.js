@@ -2,11 +2,20 @@ import React from "react";
 import { Button, Modal, ModalFooter, ModalHeader, ModalBody } from "reactstrap";
 import { useState, useEffect } from "react";
 import Reaction from "./Reaction";
+import {getAllReactions} from "../../modules/ReactionManager"
 
 const PostReactionModal = () => {
   // Modal open state
   const [modal, setModal] = React.useState(false);
+  const [reactions, setReactions] = useState([]);
 
+  const getReactions = () => {
+    getAllReactions().then((reactions) => setReactions(reactions));
+  };
+
+  useEffect(() => {
+    getReactions();
+  }, []);
   // Toggle for Modal
   const toggle = () => setModal(!modal);
 
@@ -24,9 +33,9 @@ const PostReactionModal = () => {
       <Modal isOpen={modal} toggle={toggle}>
         <ModalHeader toggle={toggle}>Add a Reaction to this post.</ModalHeader>
         <ModalBody>
-        {reactions.map((reaction) => (
-                        <Reaction reaction={reaction} key={reaction.id} />
-                    ))}
+          {reactions.map((reaction) => (
+            <Reaction reaction={reaction} key={reaction.id} />
+          ))}
         </ModalBody>
         <ModalFooter>
           <Button color="primary" onClick={toggle}>
