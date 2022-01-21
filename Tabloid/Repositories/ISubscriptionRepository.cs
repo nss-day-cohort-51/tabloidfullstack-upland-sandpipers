@@ -6,5 +6,7 @@ namespace Tabloid.Repositories
     {
         void Add(Subscription subscription);
         void Delete(int id);
+        Subscription GetActiveUserProviderSubscrption(int subscriberUserId, int providerUserId);
+        void Update(Subscription subscription);
     }
 }

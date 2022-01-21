@@ -22,7 +22,7 @@ namespace Tabloid.Controllers
 
         public CommentController(IPostRepository postRepository, IPostTagRepository postTagRepository, ICategoryRepository categoryRepository, ICommentRepository commentRepository, IUserProfileRepository userProfileRepository)
         {
-            _postRepository = postReposi    tory;
+            _postRepository = postRepository;
             _postTagRepository = postTagRepository;
             _categoryRepository = categoryRepository;
             _commentRepository = commentRepository;

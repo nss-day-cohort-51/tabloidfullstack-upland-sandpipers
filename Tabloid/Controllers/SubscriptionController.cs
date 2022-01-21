@@ -36,7 +36,25 @@ namespace Tabloid.Controllers
         [HttpPost]
         public IActionResult Post(Subscription subscription)
         {
+            subscription.BeginDateTime = DateTime.Now;
             _subscriptionRepository.Add(subscription);
+            return NoContent();
+        }
+
+        // POST api/<SubscriptionController>
+        [HttpPut]
+        public IActionResult Put(Subscription subscription)
+        {
+            _subscriptionRepository.Update(subscription);
+            return NoContent();
+        }
+
+        // POST api/<SubscriptionController>
+        [HttpPut("CancelSubscription")]
+        public IActionResult CancelSubscription(Subscription subscription)
+        {
+            subscription.EndDateTime = DateTime.Now;
+            _subscriptionRepository.Update(subscription);
             return NoContent();
         }
 
@@ -46,6 +64,14 @@ namespace Tabloid.Controllers
         {
             _subscriptionRepository.Delete(id);
             return NoContent();
+        }
+
+        // GET api/<SubscriptionController>/IsUserSubscribed/?subscriberUserId=1&providerUserId=2`,
+        [HttpGet("UserProviderSubscription")]
+        public IActionResult UserProviderSubscription(int subscriberUserId, int providerUserId)
+        {
+            var res = _subscriptionRepository.GetActiveUserProviderSubscrption(subscriberUserId, providerUserId);
+            return Ok(res);
         }
     }
 }
