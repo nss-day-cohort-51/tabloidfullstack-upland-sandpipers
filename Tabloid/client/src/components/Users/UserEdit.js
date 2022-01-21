@@ -10,7 +10,7 @@ const EditUser = () => {
 
     const { id } = useParams();
 
-    const [typeId, setTypeId] = useState({
+    const [user, setUser] = useState({
     });
 
 
@@ -19,7 +19,7 @@ const EditUser = () => {
 
     const getUserType = () => {
         getUserById(id).then(resp => {
-            setTypeId(resp);
+            setUser(resp);
         })
     };
 
@@ -28,19 +28,19 @@ const EditUser = () => {
     }, []);
 
     const handleControlledInputChange = (event) => {
-        const newProfile = { ...typeId }
+        const newProfile = { ...user }
 
         const selectedVal = event.target.id
 
         newProfile[selectedVal] = event.target.value;
 
-        setTypeId(newProfile);
+        setUser(newProfile);
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        updateUserType(typeId).then(history.push("/users"));
+        updateUserType(user).then(history.push("/users"));
     };
 
     return (
@@ -51,7 +51,7 @@ const EditUser = () => {
                 <div className="form-group">
                     <label htmlFor="category">User Type:</label>
                     <select
-                        value={typeId.userTypeId}
+                        value={user.userTypeId}
                         name="categoryId"
                         id="userTypeId"
                         onChange={handleControlledInputChange}
