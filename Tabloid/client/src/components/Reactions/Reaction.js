@@ -1,30 +1,30 @@
-// import React from "react";
-// import { useHistory } from "react-router-dom";
-// import { Button } from "reactstrap";
+import React from "react";
+import { useHistory } from "react-router-dom";
+import { Button } from "reactstrap";
 
-// const Tag = ({ tag }) => {
-//     const history = useHistory();
+const Reaction = ({ reaction }) => {
+    const history = useHistory();
 
-//     const handleDelete = () => {
-//         history.push(`/deleteTag/${tag.id}`);
-//     };
-//     const handleEdit = () => {
-//         history.push(`/editTag/${tag.id}`);
-//     };
+    const handleDelete = () => {
+        history.push(`/deleteReaction/${reaction.id}`);
+    };
+    // const handleEdit = () => {
+    //     history.push(`/editReaction/${reaction.id}`);
+    // };
 
-//     return (
-//         <tr>
-//             <th scope="row">{tag.name}</th>
-//             <td>
-//                 <Button className="mr-2" color="primary" onClick={handleEdit}>
-//                     edit
-//                 </Button>
-//                 <Button color="danger" onClick={handleDelete}>
-//                     delete
-//                 </Button>
-//             </td>
-//         </tr>
-//     );
-// };
+    return (
+        <tr>
+            <th scope="row">{reaction.name}</th>
+            <td>
+                <Button className="mr-2" color="primary" onClick={handleEdit}>
+                    edit
+                </Button>
+                <Button color="danger" onClick={handleDelete}>
+                    delete
+                </Button>
+            </td>
+        </tr>
+    );
+};
 
-// export default Tag;
+export default Reaction;

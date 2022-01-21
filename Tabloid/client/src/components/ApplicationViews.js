@@ -27,6 +27,7 @@ import UpdateUserType from "./Users/UpdateUserType";
 import DeleteComment from "./Comments/DeleteComment";
 import UserPostList from "./Posts/UserPostList";
 import EditUser from "./Users/UserEdit";
+import PostReactionModal from "./Reactions/PostReaction";
 
 export default function ApplicationViews({ isLoggedIn, isAdmin }) {
     return (
@@ -51,6 +52,9 @@ export default function ApplicationViews({ isLoggedIn, isAdmin }) {
                 </Route>
                 <Route path="/addReaction">
                     <AddReaction />
+                </Route>
+                <Route path="/postReaction">
+                    <PostReactionModal />
                 </Route>
 
                 <Route path="/posts/:id">
