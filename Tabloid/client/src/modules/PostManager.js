@@ -32,6 +32,15 @@ export const getPostById = (postId) => {
     }).then((resp) => resp.json());
 };
 
+export const getPostsByCategoryId = (catId) => {
+    return fetch(baseUrl + `/GetPostByCategoryId/${catId}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    }).then((resp) => resp.json());
+};
+
 export const getPostsByUserId = (userId) => {
     return fetch(baseUrl + `/GetPostsByUserId/${userId}`, {
         method: "GET",
@@ -59,3 +68,11 @@ export const updatePost = (post) => {
         body: JSON.stringify(post),
     });
 }
+export const getPostsBySubscription = (subId) => {
+    return fetch(baseUrl + `/GetSubscribedPosts/${subId}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    }).then((resp) => resp.json());
+};

@@ -9,17 +9,17 @@ namespace Tabloid.Models
     public class Subscription
     {
         public int Id { get; set; }
+        
         [Required]
-        public string SubscriberUserProfileId { get; set; }
+        public int SubscriberUserProfileId { get; set; }
+        
         [Required]
-
-        public string ProviderUserProfileId { get; set; }
+        public int ProviderUserProfileId { get; set; }
 
         [Required]
         public DateTime BeginDateTime { get; set; }
 
-        [Required]
-        public DateTime EndDateTime { get; set; }
+        public DateTime? EndDateTime { get; set; }
 
     }
 }

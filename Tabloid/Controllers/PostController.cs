@@ -63,6 +63,13 @@ namespace Tabloid.Controllers
             return Ok(posts);
         }
 
+        [HttpGet("GetPostByCategoryId/{id}")]
+        public IActionResult GetPostsByCategoryId(int id)
+        {
+            var posts = _postRepository.GetPostsByCatId(id);
+            return Ok(posts);
+        }
+
         // POST api/<PostController>
 
         // PUT api/<PostController>/5
@@ -85,6 +92,12 @@ namespace Tabloid.Controllers
         public void Delete(int id)
         {
             _postRepository.Delete(id);
+        }
+        [HttpGet("GetSubscribedPosts/{id}")]
+        public IActionResult GetSubscribedPosts(int id)
+        {
+          var posts =  _postRepository.GetAllSubscribedPosts(id);
+            return Ok(posts);
         }
     }
 }

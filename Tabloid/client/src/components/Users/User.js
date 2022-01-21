@@ -6,7 +6,7 @@ import { getDeactivated } from "../../modules/UserManager";
 import { Button } from "reactstrap";
 import { useHistory } from "react-router-dom";
 
-const User = ({ user }) => {
+const User = ({ user, deactivatedList }) => {
 
     const history = useHistory();
 
@@ -17,14 +17,12 @@ const User = ({ user }) => {
     }
 
     useEffect(() => {
-        getDeactivated().then(res => {
-            res.forEach(element => {
-                if (element.id == user.id) {
-                    setisDeactivated(true);
-                }
-            });
-        })
-    }, [])
+        deactivatedList.forEach(element => {
+            if (element == user.id) {
+                setisDeactivated(true);
+            }
+        });
+    }, [deactivatedList])
 
     return (
 
@@ -32,17 +30,17 @@ const User = ({ user }) => {
             <td>{user.displayName} </td>
             <td>{user.firstName} {user.lastName} </td>
             <td>{user.email} </td>
-            <td>{user.userTypeId == 1 ? 'Admin' : 'Author'} </td>
+            <td>{user.userTypeId == 1 ? 'Admin' : user.userTypeId == 2 ? 'Author' : 'Deactivated'} </td>
             <img src={user.imageLocation} alt="Users Picture" />
             <ul className="userListButtons">
                 <li>
-                    {user.userTypeId == 1 ? null : <Button
+                    <Button
                         id={`manageActivated--${user.id}`}
                         onClick={handleUserSelected}
                         color={isDeactivated ? "danger" : "warning"}
                     >
                         {isDeactivated ? "Reactivate" : "Deactivate"}
-                    </Button>}
+                    </Button>
                 </li>
                 <li><Button color="info" onClick={() => history.push(`/users/${user.id}`)}>View Details</Button></li>
             </ul>

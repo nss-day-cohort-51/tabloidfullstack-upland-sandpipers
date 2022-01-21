@@ -45,10 +45,16 @@ namespace Tabloid.Controllers
             return Ok();
         }
 
-        [HttpGet("GetDeactivated")]
-        public IActionResult getDeactivated()
+        [HttpGet("GetDeactivatedIds")]
+        public IActionResult getDeactivatedIds()
         {
-            return Ok(_userProfileRepository.GetAllDeactivatedUserProfiles());
+            return Ok(_userProfileRepository.GetAllDeactivatedUserIds());
+        }
+
+        [HttpGet("GetDeactivatedUserEmails")]
+        public IActionResult getDeactivatedEmails()
+        {
+            return Ok(_userProfileRepository.GetAllDeactivatedUserEmails());
         }
 
         [HttpPost]
@@ -68,15 +74,26 @@ namespace Tabloid.Controllers
         {
             var userTypeId = 3;
             var user = _userProfileRepository.GetUserProfileByUserId(userId);
-
-            if (user.UserTypeId == 3)
+            var adminCount = _userProfileRepository.CountAdmins();
+            
+            if(user.UserTypeId == 1 && adminCount < 2)
+            {
+                return BadRequest();
+            }
+            else if(user.UserTypeId == 3)
             {
                 userTypeId = 2;
+
+                _userProfileRepository.UpdateUserTypeId(userTypeId, userId);
+
+                return NoContent();
             }
+            else
+            {
+                _userProfileRepository.UpdateUserTypeId(userTypeId, userId);
 
-            _userProfileRepository.UpdateUserTypeId(userTypeId, userId);
-
-            return NoContent();
+                return NoContent();
+            }
         }
 
         [HttpPut("UpdateUserType/{userId}")]
@@ -86,6 +103,12 @@ namespace Tabloid.Controllers
             _userProfileRepository.UpdateUserTypeId(profile.UserTypeId, profile.Id);
 
             return NoContent();
+        }
+
+        [HttpGet("CountAdmins")]
+        public IActionResult CountAdmins()
+        {
+            return Ok(_userProfileRepository.CountAdmins());
         }
     }
 }

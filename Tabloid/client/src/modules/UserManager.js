@@ -44,6 +44,14 @@ export const updateUserType = (profile) => {
     });
 }
 
-export const getDeactivated = () => {
-    return fetch(userUrl + `/GetDeactivated`).then((res) => res.json());
+export const getDeactivatedIds = () => {
+    return fetch(userUrl + `/GetDeactivatedIds`).then((res) => res.json());
 };
+
+export const getDeactivatedUserEmails = () => {
+    return fetch(userUrl + `/GetDeactivatedUserEmails`).then((res) => res.json());
+};
+
+export const getAdminCount = () => {
+    return fetch(userUrl + `/CountAdmins`).then(res => res.json());
+}

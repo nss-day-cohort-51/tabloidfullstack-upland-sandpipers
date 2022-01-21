@@ -14,8 +14,6 @@ import EditTag from "./Tags/EditTag";
 import DeleteTag from "./Tags/DeleteTag";
 import ManageTags from "./Tags/ManageTags";
 import { AddTag } from "./Tags/AddTag";
-import { useState } from "react";
-import { useEffect } from "react";
 import AddPost from "./Posts/AddPost";
 import DeletePost from "./Posts/DeletePost";
 import RemoveCategory from "./Categories/RemoveCategory";
@@ -25,21 +23,24 @@ import EditPost from "./Posts/EditPost";
 import { AddReaction } from "./Reactions/AddReaction"
 import UpdateUserType from "./Users/UpdateUserType";
 import DeleteComment from "./Comments/DeleteComment";
+import EditComment from "./Comments/EditComment";
 import UserPostList from "./Posts/UserPostList";
 import EditUser from "./Users/UserEdit";
 import PostReactionModal from "./Reactions/PostReaction";
+import SubscribedPostList from "./Posts/SubsribedPostList"
+
 
 export default function ApplicationViews({ isLoggedIn, isAdmin }) {
     return (
         <main>
             <Switch>
                 <Route path="/" exact>
-                    {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
+                    {isLoggedIn ? <SubscribedPostList /> : <Redirect to="/login" />}
                 </Route>
-
                 <Route path="/posts" exact>
                     {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
                 </Route>
+
                 <Route path="/users" exact>
                     {isAdmin ? <UserList /> : <Redirect to="/login" />}
                 </Route>
@@ -118,6 +119,9 @@ export default function ApplicationViews({ isLoggedIn, isAdmin }) {
                 </Route>
                 <Route path="/deleteComment/:id">
                     <DeleteComment userparams />
+                </Route>
+                <Route path="/editComment/:id">
+                    <EditComment userparams />
                 </Route>
                 <Route path="/editPost/:id">
                     <EditPost userparams />
