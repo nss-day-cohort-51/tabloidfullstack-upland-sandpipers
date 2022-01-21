@@ -38,6 +38,13 @@ namespace Tabloid.Controllers
             return Ok(posts);
         }
 
+        [HttpGet("Unapproved")]
+        public IActionResult GetUnapprovedPosts()
+        {
+            var posts = _postRepository.GetAllUnapprovedPosts();
+            return Ok(posts);
+        }
+
         // GET api/<PostController>/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
@@ -93,6 +100,7 @@ namespace Tabloid.Controllers
         {
             _postRepository.Delete(id);
         }
+
         [HttpGet("GetSubscribedPosts/{id}")]
         public IActionResult GetSubscribedPosts(int id)
         {
