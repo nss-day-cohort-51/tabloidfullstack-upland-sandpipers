@@ -5,6 +5,9 @@ export const getAllPosts = () => {
 };
 
 export const addPost = (post) => {
+    if (post.userProfile.userType.name == "Admin") {
+        post.isApproved = true;
+    }
     return fetch(baseUrl, {
         method: "POST",
         headers: {
@@ -56,8 +59,8 @@ export const deletePostById = (postId) => {
         headers: {
             "Content-Type": "application/json",
         },
-    })
-}
+    });
+};
 
 export const updatePost = (post) => {
     return fetch(`${baseUrl}/${post.id}`, {
@@ -67,7 +70,7 @@ export const updatePost = (post) => {
         },
         body: JSON.stringify(post),
     });
-}
+};
 export const getPostsBySubscription = (subId) => {
     return fetch(baseUrl + `/GetSubscribedPosts/${subId}`, {
         method: "GET",
