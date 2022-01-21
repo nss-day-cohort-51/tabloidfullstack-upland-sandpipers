@@ -1,4 +1,5 @@
 const baseUrl = "/api/Reactions";
+const baseUrl2 = "/api/PostReaction"
 
 export const getAllReactions = () => {
     return fetch(baseUrl).then((res) => res.json());
@@ -14,7 +15,27 @@ export const addReaction = (reaction) => {
     });
 };
 
-// export const updateTag = (tag) => {
+export const addPostReaction = (post) => {
+    return fetch(baseUrl2, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(post),
+    });
+};
+
+export const getPostReactionById = (postId) => {
+    return fetch(`${baseUrl2}/PostReactionsBy/${postId}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    }).then((res) => res.json());
+};
+
+
+// export const updateReaction = (tag) => {
 //     return fetch(`${baseUrl}/${tag.id}`, {
 //         method: "PUT",
 //         headers: {
@@ -24,7 +45,7 @@ export const addReaction = (reaction) => {
 //     });
 // };
 
-// export const deleteTag = (tag) => {
+// export const deleteReaction = (tag) => {
 //     return fetch(`${baseUrl}/${tag.id}`, {
 //         method: "DELETE",
 //         headers: {
@@ -33,7 +54,7 @@ export const addReaction = (reaction) => {
 //     });
 // };
 
-// export const getTag = (id) => {
+// export const getReaction = (id) => {
 //     return fetch(`${baseUrl}/${id}`, {
 //         method: "GET",
 //         headers: {

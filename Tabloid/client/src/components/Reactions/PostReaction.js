@@ -1,10 +1,10 @@
 import React from "react";
 import { Button, Modal, ModalFooter, ModalHeader, ModalBody } from "reactstrap";
 import { useState, useEffect } from "react";
-import Reaction from "./Reaction";
+import Reaction from "./ReactionModal";
 import {getAllReactions} from "../../modules/ReactionManager"
 
-const PostReactionModal = () => {
+const PostReactionModal = ({postId}) => {
   // Modal open state
   const [modal, setModal] = React.useState(false);
   const [reactions, setReactions] = useState([]);
@@ -40,7 +40,11 @@ const PostReactionModal = () => {
         flexWrap: "wrap"
       }}>
           {reactions.map((reaction) => (
-            <Reaction reaction={reaction} key={reaction.id} />
+            <Reaction 
+            reaction={reaction} 
+            key={reaction.id} 
+            postId={postId}
+            />
           ))}
           </div>
         </ModalBody>

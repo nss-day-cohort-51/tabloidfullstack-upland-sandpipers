@@ -26,7 +26,6 @@ import DeleteComment from "./Comments/DeleteComment";
 import EditComment from "./Comments/EditComment";
 import UserPostList from "./Posts/UserPostList";
 import EditUser from "./Users/UserEdit";
-import PostReactionModal from "./Reactions/PostReaction";
 import SubscribedPostList from "./Posts/SubsribedPostList"
 
 
@@ -54,10 +53,6 @@ export default function ApplicationViews({ isLoggedIn, isAdmin }) {
                 <Route path="/addReaction">
                     <AddReaction />
                 </Route>
-                <Route path="/postReaction">
-                    <PostReactionModal />
-                </Route>
-
                 <Route path="/posts/:id">
                     {isLoggedIn ? (
                         <PostDetails useparams />
