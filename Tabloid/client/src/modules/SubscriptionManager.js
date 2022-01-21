@@ -16,6 +16,7 @@ export const addSubscription = (userId, providerUserId) => {
 };
 
 export const cancelSubscription = (subscription) => {
+    debugger;
     return fetch(`${baseUrl}/cancelSubscription/`, {
         method: "PUT",
         headers: {
