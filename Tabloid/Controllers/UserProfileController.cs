@@ -45,10 +45,16 @@ namespace Tabloid.Controllers
             return Ok();
         }
 
-        [HttpGet("GetDeactivated")]
-        public IActionResult getDeactivated()
+        [HttpGet("GetDeactivatedIds")]
+        public IActionResult getDeactivatedIds()
         {
-            return Ok(_userProfileRepository.GetAllDeactivatedUserProfiles());
+            return Ok(_userProfileRepository.GetAllDeactivatedUserIds());
+        }
+
+        [HttpGet("GetDeactivatedUserEmails")]
+        public IActionResult getDeactivatedEmails()
+        {
+            return Ok(_userProfileRepository.GetAllDeactivatedUserEmails());
         }
 
         [HttpPost]

@@ -41,7 +41,6 @@ namespace Tabloid.Repositories
                             users.Add(new UserProfile()
                             {
                                 Id = id,
-                                FirebaseUserId = fireId,
                                 DisplayName = display,
                                 FirstName = fName,
                                 LastName = lName,
@@ -60,7 +59,7 @@ namespace Tabloid.Repositories
             }
         }
 
-        public List<UserProfile> GetAllDeactivatedUserProfiles()
+        public List<int> GetAllDeactivatedUserIds()
         {
             {
                 using (var conn = Connection)
@@ -73,7 +72,7 @@ namespace Tabloid.Repositories
                         WHERE UserTypeId = 3";
 
 
-                        var users = new List<UserProfile>();
+                        var users = new List<int>();
 
                         var reader = cmd.ExecuteReader();
                         while (reader.Read())
@@ -88,18 +87,46 @@ namespace Tabloid.Repositories
                             string imgLoc = reader.GetString(reader.GetOrdinal("imageLocation"));
                             int UTI = reader.GetInt32(reader.GetOrdinal("userTypeId"));
 
-                            users.Add(new UserProfile()
-                            {
-                                Id = id,
-                                FirebaseUserId = fireId,
-                                DisplayName = display,
-                                FirstName = fName,
-                                LastName = lName,
-                                Email = email,
-                                CreateDateTime = cDT,
-                                ImageLocation = imgLoc,
-                                UserTypeId = UTI
-                            });
+                            users.Add(id);
+                        }
+
+                        reader.Close();
+
+                        return users;
+                    }
+                }
+            }
+        }
+
+        public List<string> GetAllDeactivatedUserEmails()
+        {
+            {
+                using (var conn = Connection)
+                {
+                    conn.Open();
+                    using (var cmd = conn.CreateCommand())
+                    {
+                        cmd.CommandText = @"
+                      Select * from UserProfile 
+                        WHERE UserTypeId = 3";
+
+
+                        var users = new List<string>();
+
+                        var reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            int id = reader.GetInt32(reader.GetOrdinal("Id"));
+                            string fireId = reader.GetString(reader.GetOrdinal("firebaseUserId"));
+                            string display = reader.GetString(reader.GetOrdinal("displayName"));
+                            string fName = reader.GetString(reader.GetOrdinal("firstName"));
+                            string lName = reader.GetString(reader.GetOrdinal("lastName"));
+                            string email = reader.GetString(reader.GetOrdinal("email"));
+                            DateTime cDT = reader.GetDateTime(reader.GetOrdinal("createDateTime"));
+                            string imgLoc = reader.GetString(reader.GetOrdinal("imageLocation"));
+                            int UTI = reader.GetInt32(reader.GetOrdinal("userTypeId"));
+
+                            users.Add(email);
                         }
 
                         reader.Close();
