@@ -83,7 +83,7 @@ namespace Tabloid.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                               Select SubscriberUserProfileId, ProviderUserProfileId,           BeginDateTime, EndDateTime
+                               Select SubscriberUserProfileId, ProviderUserProfileId,           BeginDateTime, EndDateTime, Id
                                FROM Subscription
                                WHERE SubscriberUserProfileId = @SubscriberUserProfileId 
                                  AND ProviderUserProfileId = @ProviderUserProfileId
@@ -101,6 +101,7 @@ namespace Tabloid.Repositories
                         {
                             SubscriberUserProfileId = reader.GetInt32(reader.GetOrdinal("SubscriberUserProfileId")),
                             ProviderUserProfileId = reader.GetInt32(reader.GetOrdinal("ProviderUserProfileId")),
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
                             BeginDateTime = reader.GetDateTime(reader.GetOrdinal("BeginDateTime")),
                             EndDateTime = DbUtils.GetNullableDateTime(reader, "EndDateTime")
                         };
