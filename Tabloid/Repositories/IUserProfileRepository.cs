@@ -6,6 +6,7 @@ namespace Tabloid.Repositories
     public interface IUserProfileRepository
     {
         void Add(UserProfile userProfile);
+        int CountAdmins();
         List<string> GetAllDeactivatedUserEmails();
         List<int> GetAllDeactivatedUserIds();
         List<UserProfile> GetAllUserProfiles();

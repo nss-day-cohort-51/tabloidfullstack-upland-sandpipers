@@ -4,15 +4,13 @@ import { getPostById, updatePost } from "../../modules/PostManager";
 import { getAllCategories } from "../../modules/CategoryManager";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getUserById, updateUserType } from "../../modules/UserManager";
+import { getAdminCount, getUserById, updateUserType } from "../../modules/UserManager";
 
 const EditUser = () => {
 
     const { id } = useParams();
 
-    const [user, setUser] = useState({
-    });
-
+    const [user, setUser] = useState({});
 
 
     const history = useHistory();
@@ -69,7 +67,7 @@ const EditUser = () => {
             </button>
             <button
                 className="btn-edit-cancel"
-                onClick={() => history.push(`/`)}
+                onClick={() => history.goBack()}
             >
                 Cancel
             </button>
