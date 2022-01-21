@@ -19,14 +19,18 @@ const SubscribedPostList = () => {
 
     return (
         <div className="container">
-            <h3>Welcome Back!</h3>
             <div className="row justify-content-center">
-                <h2>Subscribed Feed</h2>
                 {posts.length < 1 ? (
-                    <h1>You have no posts</h1>
+                    <div>
+                        <h1 className="text-center">Subscribed Posts</h1>
+                        <h2>You aren't subscribed to any users</h2>
+                    </div>
                 ) : (
-                    posts.map((post) =>
-                        <SubscribedPost post={post} key={post.id} />)
+                    <div>
+                        <h1 className="text-center">Subscribed Posts</h1>
+                        {posts.map((post) =>
+                            <SubscribedPost post={post} key={post.id} />)}
+                    </div>
                 )}
             </div>
         </div >
