@@ -1,7 +1,6 @@
 const baseUrl = "/api/subscription";
 
 export const addSubscription = (userId, providerUserId) => {
-    debugger;
     let subscription = {
         subscriberUserProfileId: parseInt(userId),
         providerUserProfileId: parseInt(providerUserId),

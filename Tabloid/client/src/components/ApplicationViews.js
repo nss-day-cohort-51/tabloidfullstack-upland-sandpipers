@@ -26,12 +26,17 @@ import DeleteComment from "./Comments/DeleteComment";
 import EditComment from "./Comments/EditComment";
 import UserPostList from "./Posts/UserPostList";
 import EditUser from "./Users/UserEdit";
+import SubscribedPostList from "./Posts/SubsribedPostList"
+
 
 export default function ApplicationViews({ isLoggedIn, isAdmin }) {
     return (
         <main>
             <Switch>
                 <Route path="/" exact>
+                    {isLoggedIn ? <SubscribedPostList /> : <Redirect to="/login" />}
+                </Route>
+                <Route path="/posts" exact>
                     {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
                 </Route>
 
