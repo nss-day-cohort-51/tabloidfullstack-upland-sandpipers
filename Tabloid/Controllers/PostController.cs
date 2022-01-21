@@ -63,6 +63,13 @@ namespace Tabloid.Controllers
             return Ok(posts);
         }
 
+        [HttpGet("GetPostByCategoryId/{id}")]
+        public IActionResult GetPostsByCategoryId(int id)
+        {
+            var posts = _postRepository.GetPostsByCatId(id);
+            return Ok(posts);
+        }
+
         // POST api/<PostController>
 
         // PUT api/<PostController>/5
