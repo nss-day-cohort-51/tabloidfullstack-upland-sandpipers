@@ -3,16 +3,18 @@ import { useHistory } from "react-router-dom";
 import { Button } from "reactstrap";
 
 const Reaction = ({ reaction }) => {
-    const history = useHistory();
+  const history = useHistory();
 
-    // const handleReaction = () => {
-        
-    // };
-    
+  // const handleReaction = () => {
 
-    return (
-      <><p>{reaction.name}</p></>
-    );
+  // };
+
+  return (
+    <div className="reaction p-2 d-flex flex-column">
+      <img src={reaction.imageLocation} alt={reaction.name} />
+      <button>{reaction.name}</button>
+    </div>
+  );
 };
 
 export default Reaction;

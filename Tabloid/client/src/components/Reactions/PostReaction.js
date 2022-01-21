@@ -27,15 +27,21 @@ const PostReactionModal = () => {
         padding: 30,
       }}
     >
-      <Button color="danger" onClick={toggle}>
-        Reactions
+      <Button  onClick={toggle}>
+      😊
       </Button>
       <Modal isOpen={modal} toggle={toggle}>
         <ModalHeader toggle={toggle}>Add a Reaction to this post.</ModalHeader>
         <ModalBody>
+        <div className="grid-container"
+        style={{
+        display: "flex",
+        flexWrap: "wrap"
+      }}>
           {reactions.map((reaction) => (
             <Reaction reaction={reaction} key={reaction.id} />
           ))}
+          </div>
         </ModalBody>
         <ModalFooter>
           <Button color="primary" onClick={toggle}>
