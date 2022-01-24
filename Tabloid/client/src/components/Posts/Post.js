@@ -5,6 +5,8 @@ import DeletePost from "./DeletePost";
 import { useHistory } from "react-router-dom";
 import { getTextReadTimeString } from "../../Utils/ReadTime";
 
+
+
 let userId = parseInt(localStorage.getItem("LoggedInUserId"));
 
 const Post = ({ post }) => {

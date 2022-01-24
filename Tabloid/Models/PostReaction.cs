@@ -11,13 +11,13 @@ namespace Tabloid.Models
     {
         public int Id { get; set; }
         [Required]
-        [DisplayName("Reaction")]
+        [DisplayName("ReactionId")]
         public int ReactionId { get; set; }
-        [Required]
-        [DisplayName("Reaction")]
+       
         public Reaction Reaction { get; set; }
         public int PostId { get; set; }
         public Post Post { get; set; }
+        public int UserProfileId { get; set; }
 
     }
 }

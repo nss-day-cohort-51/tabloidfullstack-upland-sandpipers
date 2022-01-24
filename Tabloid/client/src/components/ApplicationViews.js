@@ -53,7 +53,6 @@ export default function ApplicationViews({ isLoggedIn, isAdmin }) {
                 <Route path="/addReaction">
                     <AddReaction />
                 </Route>
-
                 <Route path="/posts/:id">
                     {isLoggedIn ? (
                         <PostDetails useparams />

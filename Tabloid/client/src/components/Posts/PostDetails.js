@@ -10,6 +10,8 @@ import {
     getUserProviderSubscription,
 } from "../../modules/SubscriptionManager";
 import { SubscribeButton } from "../Utils/SubscribeButton";
+import PostReactionModal from "../Reactions/PostReaction";
+import DisplayReaction from "../Reactions/ReactionsDisplay"
 
 const Post = () => {
     const history = useHistory();
@@ -89,6 +91,8 @@ const Post = () => {
                         ? post.tags.map((t) => <li>{t.name}</li>)
                         : null}
                 </ul>
+                <DisplayReaction postId={id} />
+                <PostReactionModal postId={id} />
                 {comments.length != 0 ? <h4>Comments</h4> : null}
                 <ul>
                     {comments != null
