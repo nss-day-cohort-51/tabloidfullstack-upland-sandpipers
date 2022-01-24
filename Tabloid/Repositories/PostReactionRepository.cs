@@ -94,7 +94,7 @@ namespace Tabloid.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                       SELECT pr.Id, pr.PostId, pr.ReactionId, pr.UserProfileId, r.Name
+                       SELECT pr.Id, pr.PostId, pr.ReactionId, pr.UserProfileId, r.Name, r.ImageLocation
                          FROM PostReaction pr
                               LEFT JOIN Reaction r ON r.Id = pr.ReactionId
                               LEFT JOIN Post p ON p.id= pr.PostId
@@ -115,6 +115,7 @@ namespace Tabloid.Repositories
                             Reaction = new Reaction()
                             {
                                 Name = reader.GetString(reader.GetOrdinal("Name")),
+                                ImageLocation = reader.GetString(reader.GetOrdinal("ImageLocation")),
                             }
                         };
 
